@@ -16,7 +16,7 @@ int check=sdao.isStoreAdmin(id,pass);
 if(check==1){
 	session.setAttribute("id", id);
 	session.setAttribute("pass", pass);
-	response.sendRedirect("storeMenu.jsp");
+	response.sendRedirect("../store/storeMain.jsp");
 }else if(check==-1){%>
 	<script type="text/javascript">
 	alert('비밀번호가 일치하지 않습니다.');
