@@ -1,7 +1,18 @@
 package store;
 
+import java.sql.Timestamp;
+
 public class StoreBean {
 	private String name, address, id, pass, ad_id, email;
+	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
+
+	public Timestamp getReg_date() {
+		return reg_date;
+	}
+
+	public void setReg_date(Timestamp reg_date) {
+		this.reg_date = reg_date;
+	}
 
 	public String getEmail() {
 		return email;

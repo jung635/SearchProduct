@@ -1,6 +1,7 @@
 package store;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+
 
 
 public class StoreDAO {
@@ -78,7 +81,7 @@ public class StoreDAO {
 				num=rs.getInt(1);
 			}*/
 			
-			sql = "insert into stores(name, address, id, pass, ad_id) values(?,?,?,?,?);";
+			sql = "insert into stores(name, address, id, pass, ad_id, email, reg_date) values(?,?,?,?,?,?,?);";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1, sb.getName());
@@ -86,6 +89,9 @@ public class StoreDAO {
 			pstmt.setString(3, sb.getId());
 			pstmt.setString(4, sb.getPass());
 			pstmt.setString(5, sb.getAd_id());
+			pstmt.setString(6, sb.getEmail());
+			pstmt.setTimestamp(7, sb.getReg_date());
+			
 			
 			
 			pstmt.executeUpdate();
@@ -114,6 +120,45 @@ public class StoreDAO {
 			}
 		}
 	}
+	
+	//아이디 중복 확인
+	public boolean storeIdDupCheck(String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="";
+		boolean check=false;//아이디 중복
+		try{
+			con = getConnection();
+			sql= "select * from stores where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				return check;//아이디 중복
+			}else if(rs.next()==false){
+				check=true;//아이디 중복 안됨
+				return check;
+			}
+			
+		}catch(Exception e){
+			System.out.println("DB연결 실패"+e);
+			
+		}finally{
+			//객체생성닫기
+			try{
+			con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		System.out.println(check);
+		return check;
+		
+		
+	}	
 	
 	
 	//스토어 로그인
@@ -178,6 +223,122 @@ public class StoreDAO {
 		
 		return check;
 	}
+	
+	
+	//로그인 정보
+		public StoreBean infoStore(String id){
+
+
+			Connection con = null;
+			PreparedStatement pstmt=null;
+			String sql="";
+			StoreBean sb = null;
+			ResultSet rs = null;
+			
+			try{
+				sb = new StoreBean();
+				con=getConnection();
+				sql = "select * from stores where id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				while(rs.next()){
+					sb.setName(rs.getString("name"));
+					sb.setAddress(rs.getString("address"));
+					sb.setId(rs.getString("id"));
+					sb.setPass(rs.getString("pass"));
+					sb.setAd_id(rs.getString("ad_id"));
+					sb.setEmail(rs.getString("email"));
+					sb.setReg_date(rs.getTimestamp("reg_date"));
+					
+				}
+				
+				return sb;
+				
+			}catch(Exception e){
+				System.out.println("DB연결 실패"+e);
+			}finally{
+				//객체생성닫기
+				if(rs!=null){
+					try{
+						rs.close();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+				}
+				if(pstmt!=null){
+					try {
+						pstmt.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if(con!=null){
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			
+			return null;
+		}
+		
+		//스토어 업데이트
+		public void updateStore(StoreBean sb){
+			//2단계 디비연결 => Connection con 객체 저장
+			Connection con = null;
+			PreparedStatement pstmt=null;
+			String sql="";
+			ResultSet rs = null;
+			int check = 1;//성공
+			try{
+				
+				sql = "update member set name=?, address=? pass=? ad_id=?, email=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, sb.getName());
+				pstmt.setString(2, sb.getAd_id());
+				pstmt.setString(3, sb.getPass());
+				pstmt.setString(4, sb.getAd_id());
+				pstmt.setString(5, sb.getEmail());
+				
+				pstmt.executeUpdate();
+				
+				
+				
+				
+			}catch(Exception e){
+				System.out.println("DB연결 실패"+e);
+			}finally{
+				//객체생성닫기
+				if(rs!=null){
+					try{
+						rs.close();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+				}
+				if(pstmt!=null){
+					try {
+						pstmt.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if(con!=null){
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			
+		}
+		
 	
 	
 	//상품 등록

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class MemberBean {
 	private String name, id, pass, email, address, phone;
+	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
 
 	public String getName() {
 		return name;
@@ -47,7 +48,7 @@ public class MemberBean {
 	public void setReg_date(Timestamp reg_date) {
 		this.reg_date = reg_date;
 	}
-	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
+
 	
 	
 

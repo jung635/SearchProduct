@@ -59,6 +59,7 @@
 // selected.
 
 var place_id="";
+var place_address="";
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -33.8688, lng: 151.2195},
@@ -106,6 +107,7 @@ function initMap() {
         place.formatted_address);
     infowindow.open(map, marker);
     place_id=place.place_id;
+    place_address=place.formatted_address;
     
   });
 }
@@ -113,6 +115,7 @@ function fun(){
 	//alert(place_id);
 	//window.close();
 	window.opener.fr.ad_id.value=place_id;
+	window.opener.fr.address.value=place_address;
 	window.close();
 	//location.href="storeJoinForm.jsp?placeId="+place_id;
 	

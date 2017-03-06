@@ -1,4 +1,4 @@
-<%@page import="store.MemberDAO"%>
+<%@page import="store.StoreDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,9 +11,9 @@
 <%request.setCharacterEncoding("utf-8");
 String id = request.getParameter("id");
 
-MemberDAO mdao = new MemberDAO();
+StoreDAO sdao = new StoreDAO();
 //System.out.println(id);
-if(mdao.storeIdDupCheck(id)){%>
+if(sdao.storeIdDupCheck(id)){%>
 	<script>
 	alert('아이디 사용 가능');
 	window.close();

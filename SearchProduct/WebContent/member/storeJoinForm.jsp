@@ -72,12 +72,7 @@
  		return false;
  	}
  	
- 	//////다시 입력 이메일 체크
- 	if(document.fr.email2.value==""){
- 		alert("이메일을 다시 입력해 주세요!");
- 		document.fr.name.focus();
- 		return false;
- 	}
+
  	
 
 
@@ -161,9 +156,9 @@
 <label>E-Mail</label>
 <input type="email" name="email"><br>
 <label>Address</label>
-<input type="text" name="address"><br>
+<input type="text" name="address"><input type="button" value="주소 찾기" onclick='window.open("idFinder.jsp", "idfinder", "width=600,height=500");'><br>
 <label>address id</label>
-<input type="text" name="ad_id" value="<%=place%>"><input type="button" value="id 찾기" onclick='window.open("idFinder.jsp", "idfinder", "width=600,height=500");'>
+<input type="text" name="ad_id">
 <!-- 'location.href="idFinder.jsp"' -->
 <!-- window.open("idFinder.jsp", "idfinder", "width=600,height=500"); -->
 

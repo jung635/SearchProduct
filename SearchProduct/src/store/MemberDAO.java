@@ -58,7 +58,7 @@ public class MemberDAO {
 		}
 		
 	}
-	//회원가입(스토어)
+/*	//회원가입(스토어)
 	public void insertStoreMember(StoreBean sb){
 		
 		Connection con = null;
@@ -91,7 +91,7 @@ public class MemberDAO {
 			
 		}
 		
-	}
+	}*/
 	
 	
 	//아이디 중복확인
@@ -133,43 +133,7 @@ public boolean idDupCheck(String id){
 		
 		
 	}
-public boolean storeIdDupCheck(String id){
-	
-	Connection con = null;
-	PreparedStatement pstmt=null;
-	ResultSet rs=null;
-	String sql="";
-	boolean check=false;//아이디 중복
-	try{
-		con = getConnection();
-		sql= "select * from stores where id=?";
-		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, id);
-		rs = pstmt.executeQuery();
-		
-		if(rs.next()){
-			return check;//아이디 중복
-		}else if(rs.next()==false){
-			check=true;//아이디 중복 안됨
-			return check;
-		}
-		
-	}catch(Exception e){
-		System.out.println("DB연결 실패"+e);
-		
-	}finally{
-		//객체생성닫기
-		try{
-		con.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	System.out.println(check);
-	return check;
-	
-	
-}	
+
 	
 		//아이디 비밀번호 비교
 	public int idCheck(String id, String pass){

@@ -1,5 +1,4 @@
 <%@page import="java.sql.Timestamp"%>
-<%@page import="store.MemberDAO"%>
 <%@page import="store.StoreDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,11 +13,12 @@
 <jsp:useBean id="sb" class="store.StoreBean"></jsp:useBean>
 <jsp:setProperty property="*" name="sb"/>
 <% 
-MemberDAO mdao = new MemberDAO();
-mdao.insertStoreMember(sb);%>
+sb.setReg_date(new Timestamp(System.currentTimeMillis()));
+StoreDAO sdao = new StoreDAO();
+sdao.insertStore(sb);%>
 <script type="text/javascript">
 alert('가입 완료!');
-location.href="clientLoginForm.jsp";
+location.href="storeLoginForm.jsp";
 </script>
 </body>
 </html>

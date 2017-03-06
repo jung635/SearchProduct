@@ -198,4 +198,9 @@ repeat-x center center*/
 #store_menu{
 	text-align: center;
 }
-
+#store_info{
+	text-align: center;
+}
+#store_info_table{
+	margin: auto;
+}
