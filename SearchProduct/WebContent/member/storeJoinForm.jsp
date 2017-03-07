@@ -68,7 +68,13 @@
  	//////이메일 체크
  	if(document.fr.email.value==""){
  		alert("이메일을 입력해 주세요!");
- 		document.fr.name.focus();
+ 		document.fr.eamil.focus();
+ 		return false;
+ 	}
+ 	//////주소 체크
+ 	if(document.fr.address.value==""||document.fr.ad_id.value==""){
+ 		alert("주소를 입력해 주세요!");
+ 		document.fr.address.focus();
  		return false;
  	}
  	
@@ -167,7 +173,7 @@
 <div class="clear"></div>
 <div id="buttons">
 <input type="button" value="Submit" class="submit" onclick="submit()">
-<input type="button" value="Cancel" class="cancel">
+<input type="button" value="Cancel" class="cancel" onclick="history.back()">
 </div>
 </form>
 </article>

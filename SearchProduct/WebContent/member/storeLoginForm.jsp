@@ -33,7 +33,7 @@
 <!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
 <ul>
-<li><a href="#">Join us</a></li>
+<li><a href="storeJoinForm.jsp">Join us</a></li>
 <li><a href="#">Privacy policy</a></li>
 </ul>
 </nav>
@@ -52,7 +52,7 @@
 <div class="clear"></div>
 <div id="buttons">
 <input type="submit" value="Submit" class="submit">
-<input type="button" value="Cancel" class="cancel">
+<input type="button" value="Cancel" class="cancel" onclick="history.back()">
 </div>
 </form>
 </article>

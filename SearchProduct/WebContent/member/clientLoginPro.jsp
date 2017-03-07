@@ -19,12 +19,12 @@ if(check==1){
 	response.sendRedirect("../main/main.jsp");
 }else if(check==-1){%>
 	<script type="text/javascript">
-	alert('아이디를 다시 확인해 주세요.');
+	alert('비밀번호를 다시 확인해 주세요.');
 	history.back();
 	</script>
 <%}else if(check==0){%>
 	<script type="text/javascript">
-	alert('비밀번호를 다시 확인해 주세요.');
+	alert('아이디를 다시 확인해 주세요.');
 	history.back();
 	</script>
 <%}

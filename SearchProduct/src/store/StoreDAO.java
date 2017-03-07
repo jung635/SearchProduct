@@ -59,7 +59,7 @@ public class StoreDAO {
 		
 		return num;
 	}*/
-	
+	//////////////////////////////////////////////스토어 계정
 	//스토어 등록
 	public void insertStore(StoreBean sb){
 
@@ -154,7 +154,6 @@ public class StoreDAO {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(check);
 		return check;
 		
 		
@@ -168,19 +167,10 @@ public class StoreDAO {
 		ResultSet rs = null;
 		String sql="";
 		int check=1;//성공
-		//int num=0;
-		//int readcount=0;
 		
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
-/*			sql="select count(num) from stores";
-			
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				num=rs.getInt(1);
-			}*/
+
 			
 			sql = "select pass from stores where id=?";
 			pstmt=con.prepareStatement(sql);
@@ -220,7 +210,6 @@ public class StoreDAO {
 			}
 			}
 		}
-		
 		return check;
 	}
 	
@@ -295,14 +284,16 @@ public class StoreDAO {
 			ResultSet rs = null;
 			int check = 1;//성공
 			try{
-				
-				sql = "update member set name=?, address=? pass=? ad_id=?, email=?";
+				con=getConnection();
+				sql = "update stores set name=?, address=?, pass=?, ad_id=?, email=? where id=?";
 				pstmt = con.prepareStatement(sql);
+				
 				pstmt.setString(1, sb.getName());
-				pstmt.setString(2, sb.getAd_id());
+				pstmt.setString(2, sb.getAddress());
 				pstmt.setString(3, sb.getPass());
 				pstmt.setString(4, sb.getAd_id());
 				pstmt.setString(5, sb.getEmail());
+				pstmt.setString(6, sb.getId());
 				
 				pstmt.executeUpdate();
 				
@@ -339,63 +330,54 @@ public class StoreDAO {
 			
 		}
 		
-	
-	
-	//상품 등록
-		public void insertGoods(String id, GoodsBean gb){
-
+		//스토어 삭제
+		public void deleteStore(String id){
+			//2단계 디비연결 => Connection con 객체 저장
 			Connection con = null;
 			PreparedStatement pstmt=null;
-			ResultSet rs = null;
 			String sql="";
-
-			
+			ResultSet rs = null;
+			int check = 1;//성공
 			try{
-				Class.forName("com.mysql.jdbc.Driver");
-				con = getConnection();
-/*				
-				sql = "select ad_id from stores where id=?";
-				pstmt=con.prepareStatement(sql);
+				con=getConnection();
+				sql = "delete from stores where id=?";
+				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, id);
-				rs=pstmt.executeQuery();
-				if(rs.next()){
-					gb.setId(rs.getString(1));
-				
-				}*/
-				sql = "insert into goods(product, price, id) values(?,?,?);";
-				pstmt=con.prepareStatement(sql);
-				
-				pstmt.setString(1, gb.getProduct());
-				pstmt.setInt(2, gb.getPrice());
-				pstmt.setString(3, id);
-				
-				
 				pstmt.executeUpdate();
-				
-			}catch(Exception e){
-				e.printStackTrace();
-			}finally{
-				try{
-					con.close();
 				}catch(Exception e){
-					e.printStackTrace();
+					System.out.println("DB연결 실패"+e);
+				}finally{
+					//객체생성닫기
+					if(rs!=null){
+						try{
+							rs.close();
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+					}
+					if(pstmt!=null){
+						try {
+							pstmt.close();
+						} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+						if(con!=null){
+							try {
+								con.close();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+						
+					}
+					
 				}
-				if(pstmt!=null){
-				try{
-					pstmt.close();
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				}
-				if(rs!=null){
-				try{
-					rs.close();
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				}
-			}
-		}
+		
+	
+		//////////////////////////////////////////////스토어 상품 관련
+		
+
 	
 /*		//주소 아이디 찾기
 		public String searchAd_id(String id){

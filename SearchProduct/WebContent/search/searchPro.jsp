@@ -53,7 +53,7 @@ List list = sdao.StoreList(product);
 	<%for(int i=0; i<list.size(); i++){
 	StoreBean sb = (StoreBean)list.get(i);
 	%>
-	<tr><td><a href="#" onclick='window.open("mapId.jsp?ad_id=<%=sb.getAd_id() %>", "mapId", "width=600,height=500")' id="ad_href"><%=sb.getName() %></a>
+	<tr><td><a href="#" onclick='location.href="map.jsp?ad_id=<%=sb.getAd_id() %>&address=<%=sb.getAddress() %>"' id="ad_href"><%=sb.getName() %></a>
 	</td>
 	<td><%=sb.getAddress() %></td>
 	<td><%=sb.getAd_id()%></td>

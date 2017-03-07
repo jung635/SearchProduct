@@ -1,3 +1,4 @@
+<%@page import="store.GoodsDAO"%>
 <%@page import="store.StoreDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -16,9 +17,9 @@
 <%
 String id=(String)session.getAttribute("id");
 
-StoreDAO sdao = new StoreDAO();
-sdao.insertGoods(id,gb);
-//response.sendRedirect("list.jsp");
+GoodsDAO gdao = new GoodsDAO();
+gdao.insertGoods(id,gb);
+response.sendRedirect("goodsList.jsp");
 %>
 </body>
 </html>

@@ -138,43 +138,55 @@ public boolean idDupCheck(String id){
 		//아이디 비밀번호 비교
 	public int idCheck(String id, String pass){
 		
-		//2단계 디비연결 => Connection con 객체 저장
-		String dbUrl="jdbc:mysql://localhost:3306/jspdb2";
-		String dbId = "jspid";
-		String dbPass = "jsppass";
 		Connection con = null;
 		PreparedStatement pstmt=null;
+		ResultSet rs = null;
 		String sql="";
-		int check=-1;
+		int check=1;//성공
+		
 		try{
-			//1단계 드라이버 로더
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(dbUrl, dbId, dbPass);
-			sql = "select pass from member where id=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()){
-			if(pass.equals(rs.getString("pass"))){
-				check=1;
-				return check;//모두 일치
-			}else{
-				check=0;
-				return check;//비밀번호 틀림
-			}
-			}
-		}catch(Exception e){
-			System.out.println("DB연결 실패"+e);
+			con = getConnection();
+
 			
+			sql = "select pass from member where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				if(pass.equals(rs.getString(1))){
+				}else{
+					check=-1;//비밀번호 없음
+				}
+			}else{
+				check=0;//아이디 없음
+			}
+	
+
+			
+		}catch(Exception e){
+			e.printStackTrace();
 		}finally{
-			//객체생성닫기
 			try{
-			con.close();
+				con.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			if(pstmt!=null){
+			try{
+				pstmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			}
+			if(rs!=null){
+			try{
+				rs.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			}
 		}
-		return check;//아이디 없음
+		return check;
 		
 	}	
 	/*	

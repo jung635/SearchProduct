@@ -28,12 +28,28 @@
 
 </head>
 <body>
+<%request.setCharacterEncoding("utf-8"); %>
 <div id="wrap">
+
 <jsp:include page="../inc/top.jsp"/>
+<!-- 서브페이지 메인이미지 -->
+<div id="sub_img"></div>
+<!-- 서브페이지 메인이미지 -->
+<!-- 왼쪽메뉴 -->
+
+
+<nav id="sub_menu">
+<ul>
+<li><a href="goodsList.jsp">상품 목록</a></li>
+<li><a href="regGoodsForm.jsp">상품 등록</a></li>
+</ul>
+</nav>
+<!-- 왼쪽메뉴 -->
 <!-- 본문 들어가는 곳 -->
  <%
  String id=(String)session.getAttribute("id");
  %>
+
 <form action="regGoodsPro.jsp" name="fr">
 <table>
 <tr>
