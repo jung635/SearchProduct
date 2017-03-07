@@ -215,7 +215,7 @@ public class BoardDAO {
 			try{
 				con=getConnection();
 				
-				sql = "select * from comment where re_ref=? order by re_seq asc";
+				sql = "select * from comment where re_ref=? order by re_seq desc";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs=pstmt.executeQuery();
@@ -418,8 +418,9 @@ public class BoardDAO {
 		int max=0;
 		
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
+			
 			con = getConnection();
+			System.out.println("check");
 			sql="select max(re_seq) from comment where re_ref=?;";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, cb.getRe_ref());
