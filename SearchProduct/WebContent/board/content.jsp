@@ -63,7 +63,7 @@ if(bb.getFile()==null){
 	</table>
 
 
-<form action="rewritePro.jsp">
+<form action="rewritePro.jsp?num=<%=num%>&pageNum=<%=pageNum%>">
 <input type="hidden" name="re_lev" value="<%=bb.getRe_lev() %>">
 <input type="hidden" name="re_seq" value="<%=bb.getRe_seq()%>">
 <input type="hidden" name="re_ref" value="<%=bb.getRe_ref()%>">

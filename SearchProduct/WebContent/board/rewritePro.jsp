@@ -16,7 +16,9 @@ DAO"%>
 int re_lev = Integer.parseInt(request.getParameter("re_lev"));
 int re_seq = Integer.parseInt(request.getParameter("re_seq"));
 int re_ref = Integer.parseInt(request.getParameter("re_ref"));
-
+int num = Integer.parseInt(request.getParameter("num"));
+String pageNum = (String)request.getParameter("pageNum");
+System.out.println("check");
 %>
 
 
@@ -27,7 +29,9 @@ cb.setRe_seq(re_seq);
 cb.setRe_ref(re_ref);
 BoardDAO bdao = new BoardDAO();
 bdao.insertreBoard(cb);
-response.sendRedirect("content.jsp?num=2&pageNum=1");
 %>
+<script>
+location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum %>";
+</script>
 </body>
 </html>

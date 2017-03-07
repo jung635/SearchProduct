@@ -210,3 +210,33 @@ repeat-x center center*/
 #map_ad{
 	text-align: center;
 }
+#qa_write_table{
+	margin: auto;
+}
+#qa_write_btn{
+	text-align: center;
+}
+#qa_list{
+
+    width: 660px;
+    padding-right: 150px;
+
+}
+
+#qa_content{
+	margin: auto;
+}
+#qa_reply_content{
+	margin: auto;
+	margin-top: 100px;
+}
+#content_btn{
+	text-align: right;
+	padding-right: 50px;
+    margin-top: 100px;
+}
+
+#reply_form{
+	padding-left: 250px;
+	margin-top: 100px;
+}

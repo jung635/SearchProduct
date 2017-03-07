@@ -21,12 +21,7 @@ public class CommentBean {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+
 	public int getRe_ref() {
 		return re_ref;
 	}
@@ -51,7 +46,7 @@ public class CommentBean {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
-	private String name, pass, content, ip;
+	private String name, pass, content;
 	private int re_ref, re_lev, re_seq;
 	private Timestamp date;
 

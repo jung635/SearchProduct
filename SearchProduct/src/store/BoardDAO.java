@@ -82,9 +82,8 @@ public class BoardDAO {
 			}
 			
 			sql = "insert into board(num, name, pass, subject,"
-					+ " content, readcount, re_ref, re_lev, "
-							+ "re_seq, date, ip, file)"
-							+ " values(?,?,?,?,?,?,?,?,?,now(),?,?);";
+					+ " content, readcount,date, file)"
+							+ " values(?,?,?,?,?,?,date_format(now(),'%Y-%m-%d'),?);";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setInt(1, num);
@@ -93,11 +92,7 @@ public class BoardDAO {
 			pstmt.setString(4, bb.getSubject());
 			pstmt.setString(5, bb.getContent());
 			pstmt.setInt(6, readcount);
-			pstmt.setInt(7, num); // 답변글 그룹
-			pstmt.setInt(8, 0); //답변글 들여쓰기
-			pstmt.setInt(9, 0); //답변글 순서
-			pstmt.setString(10, bb.getIp());
-			pstmt.setString(11, bb.getFile());
+			pstmt.setString(7, bb.getFile());
 			
 			pstmt.executeUpdate();
 			
@@ -139,7 +134,7 @@ public class BoardDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			con=getConnection();
 			
-			sql = "select * from board order by re_ref desc, re_seq asc limit ?,?;";
+			sql = "select * from board order by num desc limit ?,?;";
 			//sql = "select * from board where num>=? and num<=? group by re_ref order by re_ref desc, re_seq asc;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, start);
@@ -154,10 +149,6 @@ public class BoardDAO {
 				bb.setReadcount(rs.getInt("readcount"));
 				bb.setDate(rs.getTimestamp("date"));
 				bb.setFile(rs.getString("file"));
-				bb.setIp(rs.getString("ip"));
-				bb.setRe_lev(rs.getInt("re_lev"));
-				bb.setRe_ref(rs.getInt("re_ref"));
-				bb.setRe_seq(rs.getInt("re_seq"));
 				bb.setReadcount(rs.getInt("readcount"));
 				
 				list.add(bb);
@@ -196,9 +187,6 @@ public class BoardDAO {
 				bb.setName(rs.getString("name"));
 				bb.setSubject(rs.getString("subject"));
 				bb.setContent(rs.getString("content"));
-				bb.setRe_lev(rs.getInt("re_lev"));
-				bb.setRe_seq(rs.getInt("re_seq"));
-				bb.setRe_ref(rs.getInt("re_ref"));
 				bb.setFile(rs.getString("file"));
 			}
 			
@@ -222,26 +210,24 @@ public class BoardDAO {
 			PreparedStatement pstmt=null;
 			ResultSet rs = null;
 			String sql = "";
-			BoardBean bb = null;
+			CommentBean cb = null;
 			List<Object> relist = new ArrayList<Object>();
 			try{
-				Class.forName("com.mysql.jdbc.Driver");
 				con=getConnection();
 				
-				sql = "select * from comment where re_ref=?";
+				sql = "select * from comment where re_ref=? order by re_seq asc";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs=pstmt.executeQuery();
 				while(rs.next()){
-					System.out.println(rs.getString("name"));
-					bb = new BoardBean();
-					bb.setName(rs.getString("name"));
-					bb.setContent(rs.getString("content"));
-					bb.setRe_lev(rs.getInt("re_lev"));
-					bb.setRe_seq(rs.getInt("re_seq"));
-					bb.setRe_ref(rs.getInt("re_ref"));
+					cb = new CommentBean();
+					cb.setName(rs.getString("name"));
+					cb.setContent(rs.getString("content"));
+					cb.setRe_lev(rs.getInt("re_lev"));
+					cb.setRe_seq(rs.getInt("re_seq"));
+					cb.setRe_ref(rs.getInt("re_ref"));
 					
-					relist.add(bb);
+					relist.add(cb);
 				}
 				
 			
@@ -427,32 +413,33 @@ public class BoardDAO {
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		String sql="";
-		int num=0;
 		int readcount=0;
 		int re_seq=0;
+		int max=0;
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
-			sql="select max(num) from board;";
+			sql="select max(re_seq) from comment where re_ref=?;";
 			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, cb.getRe_ref());
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-				num=rs.getInt(1)+1;
+				max=rs.getInt(1);
 			}
 			
-			//답글 순서 재배치
+/*			//답글 순서 재배치
 			sql="update comment set re_seq=re_seq+1 where re_ref=? and re_seq>?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, cb.getRe_ref());
 			pstmt.setInt(2, cb.getRe_seq());
-			pstmt.executeUpdate();
+			pstmt.executeUpdate();*/
 			
 			
 			sql = "insert into comment(name, pass,"
 					+ " content, re_ref, re_lev, "
-							+ "re_seq, date, ip)"
-							+ " values(?,?,?,?,?,?,now(),?);";
+							+ "re_seq, date)"
+							+ " values(?,?,?,?,?,?,now());";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1, cb.getName());
@@ -460,8 +447,7 @@ public class BoardDAO {
 			pstmt.setString(3, cb.getContent());
 			pstmt.setInt(4, cb.getRe_ref()); // 답변글 그룹
 			pstmt.setInt(5, cb.getRe_lev()+1); //답변글 들여쓰기
-			pstmt.setInt(6, cb.getRe_seq()+1); //답변글 순서
-			pstmt.setString(7, cb.getIp());
+			pstmt.setInt(6, max+1); //답변글 순서
 			
 			
 			pstmt.executeUpdate();
