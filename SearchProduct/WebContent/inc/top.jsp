@@ -21,7 +21,7 @@ if(id==null){%>
 	<li><a href="../company/welcome.jsp">COMPANY</a></li>
 	<li><a href="#">SOLUTIONS</a></li>
 	<li><a href="../Q&A/list.jsp">Q&A</a></li>
-	<li><a href="#">CONTACT US</a></li>
+	<li><a href="../contact/contact.jsp">CONTACT US</a></li>
 </ul>
 </nav>
 </header>

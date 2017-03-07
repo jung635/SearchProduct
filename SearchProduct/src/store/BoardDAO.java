@@ -420,7 +420,6 @@ public class BoardDAO {
 		try{
 			
 			con = getConnection();
-			System.out.println("check");
 			sql="select max(re_seq) from comment where re_ref=?;";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, cb.getRe_ref());
