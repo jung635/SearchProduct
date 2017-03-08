@@ -482,7 +482,7 @@ public class StoreDAO {
 		}*/
 		
 	//상품 찾기
-		public List<Object> StoreList(String product){
+		public List<Object> storeList(String product){
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -543,6 +543,64 @@ public class StoreDAO {
 			return list;
 			
 		}
+		
+		//스토어 찾기
+				public List<Object> storeSearchList(String store){
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = "";
+					List<Object> list = new ArrayList<Object>();
+					StoreBean sb = null;
+					
+					try{
+						
+						Class.forName("com.mysql.jdbc.Driver");
+						con=getConnection();
+						
+						sql = "select * from stores where name=?;";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, store);
+						rs = pstmt.executeQuery();
+
+						
+						while(rs.next()){
+							
+							sb=new StoreBean();
+							sb.setAd_id(rs.getString("ad_id"));
+							sb.setId(rs.getString("id"));
+							sb.setAddress(rs.getString("address"));
+							sb.setName(rs.getString("name"));
+							sb.setPass("pass");
+							list.add(sb);
+							
+						}
+					}catch(Exception e){
+						e.printStackTrace();
+					}finally{
+						try{
+							con.close();
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						if(pstmt!=null){
+						try{
+							pstmt.close();
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						}
+						if(rs!=null){
+						try{
+							rs.close();
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						}
+					}
+					return list;
+					
+				}
 		
 /*	//글목록
 	public List<Object> boardList(int start, int pageSize){

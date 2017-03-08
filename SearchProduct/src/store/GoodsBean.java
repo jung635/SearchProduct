@@ -1,6 +1,10 @@
 package store;
 
 public class GoodsBean {
+	
+	String product, id, pic;
+	int price;
+
 
 	public String getProduct() {
 		return product;
@@ -20,7 +24,11 @@ public class GoodsBean {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	String product, id;
-	int price;
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 
 }

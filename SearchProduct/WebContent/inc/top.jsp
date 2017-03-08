@@ -15,7 +15,7 @@ if(id==null||type==null){%>
 <nav id="top_menu">
 <ul>
 	<li><a href="../main/main.jsp">HOME</a></li>
-	<li><a href="../company/welcome.jsp">COMPANY</a></li>
+	<li><a href="../search/stores.jsp">STORES</a></li>
 	<li><a href="../client/clientInfo.jsp">MY INFO</a></li>
 	<li><a href="../Q&A/list.jsp">Q&A</a></li>
 	<li><a href="../contact/contact.jsp">CONTACT US</a></li>
@@ -35,7 +35,7 @@ if(type.equals("client")){
 <nav id="top_menu">
 <ul>
 	<li><a href="../main/main.jsp">HOME</a></li>
-	<li><a href="../company/welcome.jsp">COMPANY</a></li>
+	<li><a href="../search/stores.jsp.jsp">STORES</a></li>
 	<li><a href="../client/clientInfo.jsp">MY INFO</a></li>
 	<li><a href="../Q&A/list.jsp">Q&A</a></li>
 	<li><a href="../contact/contact.jsp">CONTACT US</a></li>

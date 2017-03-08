@@ -42,7 +42,7 @@
 <%
 String product = request.getParameter("product");
 StoreDAO sdao = new StoreDAO();
-List list = sdao.StoreList(product);
+List list = sdao.storeList(product);
 
 %>
 <!--테이블-->
