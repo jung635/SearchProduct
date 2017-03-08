@@ -16,7 +16,7 @@ if(id==null||type==null){%>
 <ul>
 	<li><a href="../main/main.jsp">HOME</a></li>
 	<li><a href="../company/welcome.jsp">COMPANY</a></li>
-	<li><a href="#">MY INFO</a></li>
+	<li><a href="../client/clientInfo.jsp">MY INFO</a></li>
 	<li><a href="../Q&A/list.jsp">Q&A</a></li>
 	<li><a href="../contact/contact.jsp">CONTACT US</a></li>
 </ul>
@@ -36,7 +36,7 @@ if(type.equals("client")){
 <ul>
 	<li><a href="../main/main.jsp">HOME</a></li>
 	<li><a href="../company/welcome.jsp">COMPANY</a></li>
-	<li><a href="#">MY INFO</a></li>
+	<li><a href="../client/clientInfo.jsp">MY INFO</a></li>
 	<li><a href="../Q&A/list.jsp">Q&A</a></li>
 	<li><a href="../contact/contact.jsp">CONTACT US</a></li>
 </ul>
