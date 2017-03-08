@@ -2,7 +2,15 @@ package store;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -34,7 +42,7 @@ public class MemberDAO {
 		try{
 			con=getConnection();
 			
-			sql = "insert into member(name, id, pass, email, address, phone, reg_date) values (?,?,?,?,?,?,?)";
+			sql = "insert into member(name, id, pass, email, address, phone, reg_date, postcode) values (?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mb.getName());
 			pstmt.setString(2, mb.getId());
@@ -43,6 +51,7 @@ public class MemberDAO {
 			pstmt.setString(5, mb.getAddress());
 			pstmt.setString(6, mb.getPhone());
 			pstmt.setTimestamp(7, mb.getReg_date());
+			pstmt.setString(8, mb.getPostcode());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e){
@@ -189,6 +198,50 @@ public boolean idDupCheck(String id){
 		return check;
 		
 	}	
+	
+	
+	//메일 보내기
+	public void sendMail(List<String> list) throws MessagingException{
+		
+		final String id="sunju635";
+		final String pass="Tjswn635*";
+		int port=25;
+		//String host="localhost";
+		//String host="smtp.naver.com";
+		String from=list.get(0);
+		String to=list.get(1);
+		String subject=list.get(2);
+		String content=list.get(3);
+		
+		Properties props = new Properties();
+		
+		props.put("mail.stmp.starttls.enable","true");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.host", "127.0.0.1");
+		props.put("mail.smtp.port", port);
+		//
+		//
+		
+		
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator(){
+			protected PasswordAuthentication getPasswordAuthentication(){
+				return new PasswordAuthentication(id, pass);
+			}
+		});
+		session.setDebug(true);
+		
+		Message message = new MimeMessage(session);
+		message.setFrom(new InternetAddress(from));
+		message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		message.setSubject(subject);
+		message.setContent(content,"text/html; charset=EUC-KR");
+		message.setText(content);
+		
+		Transport.send(message);
+		System.out.println("E-mail successfully sent!");
+	}
+	
+	
 	/*	
 	//회원정보수정
 	public int updateMember(MemberBean mb,String changePass){

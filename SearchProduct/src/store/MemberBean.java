@@ -3,7 +3,14 @@ package store;
 import java.sql.Timestamp;
 
 public class MemberBean {
-	private String name, id, pass, email, address, phone;
+	private String name, id, pass, email, address, phone, postcode;
+
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
 	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
 
 	public String getName() {
