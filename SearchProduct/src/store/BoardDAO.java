@@ -56,6 +56,38 @@ public class BoardDAO {
 		return num;
 	}
 	
+	//search 글 개수
+	public int getListCount(String search){
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="";
+		int num=0;
+		
+		try{
+			con=getConnection();
+			sql="select count(num) from board where subject like ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				num=rs.getInt(1);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		return num;
+	}
+	
 	//글 등록
 	public void insertBoard(BoardBean bb){
 		/*
@@ -83,7 +115,7 @@ public class BoardDAO {
 			
 			sql = "insert into board(num, name, pass, subject,"
 					+ " content, readcount,date, file)"
-							+ " values(?,?,?,?,?,?,date_format(now(),'%Y-%m-%d'),?);";
+							+ " values(?,?,?,?,?,?,now(),?);";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setInt(1, num);
@@ -147,7 +179,54 @@ public class BoardDAO {
 				bb.setPass(rs.getString("pass"));
 				bb.setSubject(rs.getString("subject"));
 				bb.setReadcount(rs.getInt("readcount"));
-				bb.setDate(rs.getTimestamp("date"));
+				bb.setDate(rs.getDate("date"));
+				bb.setFile(rs.getString("file"));
+				bb.setReadcount(rs.getInt("readcount"));
+				
+				list.add(bb);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return list;
+		
+	}
+	
+	//search 글목록
+	public List<Object> boardList(int start, int pageSize, String search){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		List<Object> list = new ArrayList<Object>();
+		BoardBean bb = null;
+		try{
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			con=getConnection();
+			
+			sql = "select * from board where subject like ? order by num desc limit ?,? ;";
+			//sql = "select * from board where num>=? and num<=? group by re_ref order by re_ref desc, re_seq asc;";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, pageSize);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				bb = new BoardBean();
+				bb.setNum(rs.getInt("num"));
+				bb.setName(rs.getString("name"));
+				bb.setPass(rs.getString("pass"));
+				bb.setSubject(rs.getString("subject"));
+				bb.setReadcount(rs.getInt("readcount"));
+				bb.setDate(rs.getDate("date"));
 				bb.setFile(rs.getString("file"));
 				bb.setReadcount(rs.getInt("readcount"));
 				

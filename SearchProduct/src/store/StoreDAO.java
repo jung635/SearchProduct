@@ -81,7 +81,7 @@ public class StoreDAO {
 				num=rs.getInt(1);
 			}*/
 			
-			sql = "insert into stores(name, address, id, pass, ad_id, email, reg_date) values(?,?,?,?,?,?,?);";
+			sql = "insert into stores(name, address, id, pass, ad_id, email, reg_date, type) values(?,?,?,?,?,?,?,?);";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1, sb.getName());
@@ -91,6 +91,7 @@ public class StoreDAO {
 			pstmt.setString(5, sb.getAd_id());
 			pstmt.setString(6, sb.getEmail());
 			pstmt.setTimestamp(7, sb.getReg_date());
+			pstmt.setString(8, sb.getType());
 			
 			
 			
@@ -160,6 +161,7 @@ public class StoreDAO {
 	}	
 	
 	
+	
 	//스토어 로그인
 	public int isStoreAdmin(String id, String pass){
 		Connection con = null;
@@ -213,6 +215,57 @@ public class StoreDAO {
 		return check;
 	}
 	
+	//typeCheck
+		public String typeCheck(String id){
+			
+			Connection con = null;
+			PreparedStatement pstmt=null;
+			ResultSet rs = null;
+			String sql="";
+			String type="";
+			
+			try{
+				con = getConnection();
+
+				
+				sql = "select type from stores where id=?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs=pstmt.executeQuery();
+				if(rs.next()){
+					type=rs.getString(1);
+				}else{
+					type="";//아이디 없음
+				}
+		
+
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				try{
+					con.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				if(pstmt!=null){
+				try{
+					pstmt.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				}
+				if(rs!=null){
+				try{
+					rs.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				}
+			}
+			return type;
+			
+		}	
 	
 	//로그인 정보
 		public StoreBean infoStore(String id){

@@ -3,7 +3,15 @@ package store;
 import java.sql.Timestamp;
 
 public class StoreBean {
-	private String name, address, id, pass, ad_id, email;
+	private String name, address, id, pass, ad_id, email, type;
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
 
 	public Timestamp getReg_date() {

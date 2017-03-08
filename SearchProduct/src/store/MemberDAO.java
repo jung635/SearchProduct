@@ -42,7 +42,7 @@ public class MemberDAO {
 		try{
 			con=getConnection();
 			
-			sql = "insert into member(name, id, pass, email, address, phone, reg_date, postcode) values (?,?,?,?,?,?,?,?)";
+			sql = "insert into member(name, id, pass, email, address, phone, reg_date, postcode, type) values (?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mb.getName());
 			pstmt.setString(2, mb.getId());
@@ -52,6 +52,7 @@ public class MemberDAO {
 			pstmt.setString(6, mb.getPhone());
 			pstmt.setTimestamp(7, mb.getReg_date());
 			pstmt.setString(8, mb.getPostcode());
+			pstmt.setString(9, mb.getType());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e){
@@ -198,26 +199,75 @@ public boolean idDupCheck(String id){
 		return check;
 		
 	}	
+	//typeCheck
+	public String typeCheck(String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		String sql="";
+		String type="";
+		
+		try{
+			con = getConnection();
+
+			
+			sql = "select type from member where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				type=rs.getString(1);
+			}else{
+				type="";//아이디 없음
+			}
+	
+
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				con.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			if(pstmt!=null){
+			try{
+				pstmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			}
+			if(rs!=null){
+			try{
+				rs.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			}
+		}
+		return type;
+		
+	}	
 	
 	
 	//메일 보내기
-	public void sendMail(List<String> list) throws MessagingException{
+	public void sendMail(String email, String content) throws MessagingException{
+		
+	
 		
 		final String id="sunju635";
 		final String pass="Tjswn635*";
 		int port=25;
-		//String host="localhost";
-		//String host="smtp.naver.com";
-		String from=list.get(0);
-		String to=list.get(1);
-		String subject=list.get(2);
-		String content=list.get(3);
+		String host="smtp.naver.com";
+		String from="sunju635@naver.com";
 		
 		Properties props = new Properties();
 		
 		props.put("mail.stmp.starttls.enable","true");
 		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.host", "127.0.0.1");
+		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", port);
 		//
 		//
@@ -232,8 +282,8 @@ public boolean idDupCheck(String id){
 		
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(from));
-		message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
-		message.setSubject(subject);
+		message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+		message.setSubject("인증메일입니다");
 		message.setContent(content,"text/html; charset=EUC-KR");
 		message.setText(content);
 		

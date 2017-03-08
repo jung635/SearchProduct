@@ -31,7 +31,7 @@
 <%request.setCharacterEncoding("utf-8"); %>
 <div id="wrap">
 
-<jsp:include page="../inc/top.jsp"/>
+<jsp:include page="../inc/storetop.jsp"/>
 <!-- 서브페이지 메인이미지 -->
 <div id="sub_img"></div>
 <!-- 서브페이지 메인이미지 -->

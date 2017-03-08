@@ -1,6 +1,6 @@
 package store;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class BoardBean {
 	public String getName() {
@@ -46,18 +46,19 @@ public class BoardBean {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
 
+
+
 	private String name, pass, subject, content, file;
 	private int num, readcount;
-	private Timestamp date;
+	private Date date;
 
 	
 

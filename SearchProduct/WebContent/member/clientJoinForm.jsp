@@ -21,13 +21,42 @@
 
  </script>
  <![endif]-->
+ 
+<%request.setCharacterEncoding("utf-8"); 
+StringBuffer buffer = new StringBuffer();
+for(int i=0; i<=6; i++){
+	int num = (int)(Math.random()*10);
+	buffer.append(num);
+}
+
+String authNum = buffer.toString();
+
+
+%>
  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
  <script type="text/javascript">
+ function sendmail(){
+	 var email=document.fr.email.value;
+	 var authNum=<%=authNum%>
+	 var url = "mailPro.jsp?email="+email+"&authNum="+authNum;
+	 window.open(url,'sendmail',"height=400 width=400");
+}
+
+function authCheck(){
+	var authInputNum = document.fr.authInputNum.value;
+	if(authInputNum==<%=authNum%>){
+		alert('인증성공!');
+	}else{
+		alert('인증실패!');
+	}
+}
+
  function idDupCheck(){
 	 var id=document.fr.id.value;
 	 var url = "dupIdCheck.jsp?id="+id;
 	 window.open(url,'idCheck',"height=400 width=400");
  }
+
  
  function submitCheck(){
 	
@@ -164,6 +193,8 @@
  </script>
 </head>
 <body>
+
+
 <div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 
@@ -183,6 +214,7 @@
 <article>
 <h1>Join Us</h1>
 <form action="clientJoinPro.jsp" id="join" name="fr" onsubmit="return submitCheck()">
+<input type="hidden" name="type" value="client">
 <fieldset>
 <legend>Basic Info</legend>
 <label>User ID</label>
@@ -195,11 +227,12 @@
 <input type="password" name="pass2"  onkeyup="passCheck()"><span id="passCheckDisplay"></span><br>
 <label>Name</label>
 <input type="text" name="name"><br>
+
 <label>E-Mail</label>
-<input type="email" name="email"><br>
-
+<input type="email" name="email"><input type="button" value="인증메일 발송" onclick="sendmail()"><br>
+<label></label>
+<input type="text" name="authInputNum"><input type="button" value="인증확인" onclick="authCheck()"><br>
 </fieldset>
-
 <fieldset>
 <legend>Optional</legend>
 <label>Address</label>

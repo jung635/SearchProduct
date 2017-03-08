@@ -14,8 +14,10 @@ String pass = request.getParameter("pass");
 StoreDAO sdao = new StoreDAO();
 int check=sdao.isStoreAdmin(id,pass);
 if(check==1){
+	String type=sdao.typeCheck(id);
 	session.setAttribute("id", id);
 	session.setAttribute("pass", pass);
+	session.setAttribute("type", type);
 	response.sendRedirect("../store/storeMain.jsp");
 }else if(check==-1){%>
 	<script type="text/javascript">

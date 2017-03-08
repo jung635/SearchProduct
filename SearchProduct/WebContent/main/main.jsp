@@ -1,3 +1,6 @@
+<%@page import="store.BoardBean"%>
+<%@page import="java.util.List"%>
+<%@page import="store.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -81,16 +84,22 @@ quis ante......</dd>
 <div id="news_notice">
 <h3 class="brown">News &amp; Notice</h3>
 <table>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
+<%//전체글 개수
+//1,5 최근글 5개 가져오기
+//for
+BoardDAO bdao = new BoardDAO();
+int count = bdao.getListCount();
+List<?> list = bdao.boardList(1, 5);
+%>
+   <%
+for(int i=0; i<list.size(); i++){
+	BoardBean bb = (BoardBean)list.get(i);
+%>
+<tr>
+<td><a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=1%>"><%=bb.getSubject() %></a></td>
+<td><%=bb.getName() %></td><td><%=bb.getDate() %></td><td><%=bb.getReadcount() %></td>
+</tr>
+<%} %>  
 </table>
 </div>
 </article>

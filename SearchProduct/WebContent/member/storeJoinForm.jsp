@@ -147,6 +147,7 @@
 <article>
 <h1>Join Us</h1>
 <form action="storeJoinPro.jsp" id="join" name="fr" onsubmit="return submitCheck()">
+<input type="hidden" name="type" value="store">
 <fieldset>
 <legend>Basic Info</legend>
 <label>User ID</label>

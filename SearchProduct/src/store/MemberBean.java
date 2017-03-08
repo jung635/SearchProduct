@@ -3,8 +3,14 @@ package store;
 import java.sql.Timestamp;
 
 public class MemberBean {
-	private String name, id, pass, email, address, phone, postcode;
+	private String name, id, pass, email, address, phone, postcode, type;
 
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getPostcode() {
 		return postcode;
 	}
