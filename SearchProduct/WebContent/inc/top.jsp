@@ -16,21 +16,21 @@ if(id==null||type==null){%>
   <a href="../main/main.jsp">HOME</a>
   <a href="../news/list.jsp">NEWS</a>
   <div class="dropdown">
-    <button class="dropbtn">SEARCH</button>
+    <button class="dropbtn">SEARCH▼</button>
     <div class="dropdown-content">
-      <a href="../search/stores.jsp.jsp">STORES</a>
-      <a href="../search/stores.jsp.jsp">PRODUCTS</a>
+      <a href="../search/stores.jsp">STORES</a>
+      <a href="../search/products.jsp">PRODUCTS</a>
     </div>
   </div> 
   <a href="../client/clientInfo.jsp">MY INFO</a>
-  <a href="../Q&A/list.jsp">Q&A</a>
+  <a href="../Q&A/list.jsp">BOARD</a>
   <a href="../contact/contact.jsp">CONTACT US</a>
 </div>
 
 </header>
 <!-- 헤더파일들어가는 곳 -->
 <%}else{
-if(type.equals("client")){
+if(type.equals("client")||type.equals("admin")){
 %>
 
 <div id="login"><%=id %>님 환영합니다! | <a href="../member/logout.jsp">logout</a></div>
@@ -40,16 +40,16 @@ if(type.equals("client")){
 <!-- 로고들어가는 곳 -->
 <div class="nav_container">
   <a href="../main/main.jsp">HOME</a>
-  <a href="#news">NEWS</a>
+  <a href="../news/list.jsp">NEWS</a>
   <div class="dropdown">
     <button class="dropbtn">SEARCH</button>
     <div class="dropdown-content">
       <a href="../search/stores.jsp">STORES</a>
-      <a href="../search/stores.jsp">PRODUCTS</a>
+      <a href="../search/products.jsp">PRODUCTS</a>
     </div>
   </div> 
   <a href="../client/clientInfo.jsp">MY INFO</a>
-  <a href="../Q&A/list.jsp">Q&A</a>
+  <a href="../Q&A/list.jsp">BOARD</a>
   <a href="../contact/contact.jsp">CONTACT US</a>
 </div>
 </header>
@@ -69,5 +69,4 @@ if(type.equals("client")){
 </header>
 <!-- 헤더파일들어가는 곳 -->
 <%}}%>
-
 

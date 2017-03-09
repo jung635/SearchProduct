@@ -67,10 +67,11 @@ background-position: left 15px;}
 margin: 15px 0 0 20px}
 /*정렬 왼쪽 너비 420px 밖여백 15px 0 0 20px */
 #sec_news h3,#news_notice h3{font-family: seo;
-font-size: 14px;font-style: italic;font-weight: normal;
+font-size: 15px;font-style: italic;font-weight: normal;
 width: 420px;height: 24px;
 background-image: url("../images/h3_back.jpg");
-background-repeat: no-repeat;padding: 5px 0 0 22px;}
+background-repeat: no-repeat;
+padding: 5px 0 0 49px;}
 /*글자체 seo 크기 14px
 스타일 italic 굵기 normal 너비 420px 높이 24px
 배경이미지h3_back.jpg 반복no-repeat 안여백 5px 0 0 22px*/
@@ -83,16 +84,16 @@ font-size: 16px; margin: 5px 0; color: #F00}
  밖여백 5px 0 글자색 #F00*/
 #sec_news dd{margin-left: 0;color: #333;}
 /*밖왼쪽 여백 0 글자색 #333*/
-#news_notice table{width: 400px;
+#news_notice table, #sec_news table{width: 400px;
 border-collapse: collapse; text-align: center;}
 /*너비 400px 여백없애기 글자정렬 가운데*/
-#news_notice td{padding: 6px 4px;
+#news_notice td, #sec_news td{padding: 6px 4px;
 border-bottom-width: 1px; border-bottom-style: dotted;
 border-bottom-color: #999}
 /*안여백 6px 4px 
 테두리아래너비 1px 테두리아래스타일 dotted
 테두리아래색 #999 */
-#news_notice td.contxt{
+#news_notice td.contxt , #sec_news td.context{
 	background-image: url("../images/tr_back.gif");
 	background-repeat: no-repeat;
 	background-position: left center;
@@ -100,9 +101,9 @@ border-bottom-color: #999}
 /*배경이미지 tr_back.gif
 반복 no repeat 위치 left center 안왼쪽여백 15px
 글자정렬 왼쪽 글자색 #333*/
-#news_notice a{color: #333;text-decoration: none;}
+#news_notice a , #sec_news a{color: #333;text-decoration: none;}
 /*글자색 #333 밑줄 없음*/
-#news_notice a:hover{color: #F90;
+#news_notice a:hover, #sec_news a:hover{color: #F90;
 text-decoration: none;}/*글자색 #F90 밑줄 none*/
 
 

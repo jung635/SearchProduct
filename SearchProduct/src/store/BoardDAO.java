@@ -305,6 +305,7 @@ public class BoardDAO {
 					cb.setRe_lev(rs.getInt("re_lev"));
 					cb.setRe_seq(rs.getInt("re_seq"));
 					cb.setRe_ref(rs.getInt("re_ref"));
+					cb.setDate(rs.getTimestamp("date"));
 					
 					relist.add(cb);
 				}

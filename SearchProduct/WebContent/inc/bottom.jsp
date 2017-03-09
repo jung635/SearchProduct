@@ -13,6 +13,8 @@ String id=(String)session.getAttribute("id");
 String pass=(String)session.getAttribute("pass");
 if(id==null){%>
 <div id="login"><a href="../member/storeLoginForm.jsp">store login</a> | <a href="../member/storeJoinForm.jsp">store join</a></div>
+<div class="clear"></div>
+<div id="login" style="margin: -8px 64px 0 0;"><a href="../member/adminLoginForm.jsp">admin login</a></div>
 <%}else{%>
 
 <%}%>

@@ -78,7 +78,7 @@ footer #social img{margin: 0 7px}/*밖여백 0 7px*/
     overflow: hidden;
     font-family: Arial;
     margin-top: 70px;
-    width: 500px;
+    width: 550px;
     padding-left: 93px;
 }
 
@@ -101,7 +101,7 @@ footer #social img{margin: 0 7px}/*밖여백 0 7px*/
     border: none;
     outline: none;
     color: #333;
-    padding: 14px 16px;
+    padding: 10px 16px;
     background-color: inherit;
 }
 

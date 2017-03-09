@@ -1,3 +1,5 @@
+<%@page import="store.NewsBean"%>
+<%@page import="store.NewsDAO"%>
 <%@page import="store.BoardBean"%>
 <%@page import="java.util.List"%>
 <%@page import="store.BoardDAO"%>
@@ -67,22 +69,28 @@
 </div>
 <div class="clear"></div>
 <div id="sec_news">
-<h3><span class="orange">Security</span> News</h3>
-<dl>
-<dt>Vivamus id ligula....</dt>
-<dd>Proin quis ante Proin quis anteProin 
-quis anteProin quis anteProin quis anteProin 
-quis ante......</dd>
-</dl>
-<dl>
-<dt>Vivamus id ligula....</dt>
-<dd>Proin quis ante Proin quis anteProin 
-quis anteProin quis anteProin quis anteProin 
-quis ante......</dd>
-</dl>
+<h3 class="orange">News</h3>
+<table>
+<%//전체글 개수
+//1,5 최근글 5개 가져오기
+//for
+NewsDAO ndao = new NewsDAO();
+int newsCount = ndao.getListCount();
+List<?> news_list = ndao.boardList(1, 5);
+%>
+   <%
+for(int i=0; i<news_list.size(); i++){
+	NewsBean bb = (NewsBean)news_list.get(i);
+%>
+<tr>
+<td><a href="../news/content.jsp?num=<%=bb.getNum()%>&pageNum=<%=1%>"><%=bb.getSubject() %></a></td>
+<td><%=bb.getName() %></td><td><%=bb.getDate() %></td><td><%=bb.getReadcount() %></td>
+</tr>
+<%} %>  
+</table>
 </div>
 <div id="news_notice">
-<h3 class="brown">News &amp; Notice</h3>
+<h3 class="brown">Board</h3>
 <table>
 <%//전체글 개수
 //1,5 최근글 5개 가져오기
@@ -96,7 +104,7 @@ for(int i=0; i<list.size(); i++){
 	BoardBean bb = (BoardBean)list.get(i);
 %>
 <tr>
-<td><a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=1%>"><%=bb.getSubject() %></a></td>
+<td><a href="../Q&A/content.jsp?num=<%=bb.getNum()%>&pageNum=<%=1%>"><%=bb.getSubject() %></a></td>
 <td><%=bb.getName() %></td><td><%=bb.getDate() %></td><td><%=bb.getReadcount() %></td>
 </tr>
 <%} %>  

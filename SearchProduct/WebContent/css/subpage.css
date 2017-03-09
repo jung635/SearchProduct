@@ -201,6 +201,7 @@ repeat-x center center*/
 #qa_reply_content{
 	margin: auto;
 	margin-top: 100px;
+	text-align: center;
 }
 #content_btn{
 	text-align: right;
@@ -218,4 +219,28 @@ repeat-x center center*/
 }
 .text_center{
 	text-align: center;
+}
+.border_table{
+	margin: auto;
+	width: 500px;
+	height: 500px;
+	margin-top: 100px;
+}
+
+.border_table td{
+	background: #E3E3E3;
+	text-align: center;
+}
+.write_btn{
+	padding: 2px;
+    margin: 0 0 0 5px;
+    width: 90px;
+    height: 23px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    color: #FFF;
+    background-image: url(../images/center/t_back.jpg);
+    background-repeat: repeat-x;
+    background-position: center center;
+    float: right;
 }
