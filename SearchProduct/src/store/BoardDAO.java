@@ -389,39 +389,25 @@ public class BoardDAO {
 		
 	}*/
 	//글 수정
-	public int updateBoard(BoardBean bb){
+	public void updateBoard(BoardBean bb){
 		Connection con=null;
 		PreparedStatement pstmt=null;
-		ResultSet rs =null;
 		String sql = "";
-		int check=-1;
 		
 		
 		
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
-			sql = "select pass from board where num=? ";
+			sql = "update board set subject=?, content=?, file=? where num=? ";
+			
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, bb.getNum());
-			rs=pstmt.executeQuery();
-		
-			if(rs.next()){
-				if(rs.getString("pass").equals(bb.getPass())){
-					check=1;
-					sql = "update board set name=?, subject=?, content=? where num=? ";
-					pstmt=con.prepareStatement(sql);
-					pstmt.setString(1,bb.getName() );
-					pstmt.setString(2, bb.getSubject());
-					pstmt.setString(3, bb.getContent());
-					pstmt.setInt(4, bb.getNum());
-					pstmt.executeUpdate();
-				}else{
-					check=0;
-				}
-			}else{
-				check=-1;
-			}
+			pstmt.setString(1, bb.getSubject());
+			pstmt.setString(2, bb.getContent());
+			pstmt.setString(3, bb.getFile());
+			pstmt.setInt(4, bb.getNum());
+			pstmt.executeUpdate();
+			
+	
 			
 			
 		}catch(Exception e){
@@ -434,35 +420,22 @@ public class BoardDAO {
 			}
 			
 		}
-		return check;
 	}
 	
 	//글 삭제
-	public int deleteBoard(int num, String pass){
+	public void deleteBoard(int num){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		String sql = "";
 		ResultSet rs = null;
 		int check = 1;
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
-			sql = "select pass from board where num=? ";
+			sql = "delete from board where num=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				if(rs.getString("pass").equals(pass)){
-					sql = "delete from board where num=?";
-					pstmt=con.prepareStatement(sql);
-					pstmt.setInt(1, num);
-					pstmt.executeUpdate();
-				}else{
-					check=0;
-				}
-			}else{
-				check=-1;
-			}
+			pstmt.executeUpdate();
+		
 			
 			
 		}catch(Exception e){
@@ -476,7 +449,7 @@ public class BoardDAO {
 			
 		}
 		
-		return check;
+		
 		
 	}
 	
