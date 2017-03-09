@@ -12,15 +12,21 @@ if(id==null||type==null){%>
 <!-- 로고들어가는 곳 -->
 <div id="logo"><img src="../images/logo.gif" width="265" height="62" alt="Fun Web"></div>
 <!-- 로고들어가는 곳 -->
-<nav id="top_menu">
-<ul>
-	<li><a href="../main/main.jsp">HOME</a></li>
-	<li><a href="../search/stores.jsp">STORES</a></li>
-	<li><a href="../client/clientInfo.jsp">MY INFO</a></li>
-	<li><a href="../Q&A/list.jsp">Q&A</a></li>
-	<li><a href="../contact/contact.jsp">CONTACT US</a></li>
-</ul>
-</nav>
+<div class="nav_container">
+  <a href="../main/main.jsp">HOME</a>
+  <a href="#news">News</a>
+  <div class="dropdown">
+    <button class="dropbtn">SEARCH</button>
+    <div class="dropdown-content">
+      <a href="../search/stores.jsp.jsp">STORES</a>
+      <a href="../search/stores.jsp.jsp">PRODUCTS</a>
+    </div>
+  </div> 
+  <a href="../client/clientInfo.jsp">MY INFO</a>
+  <a href="../Q&A/list.jsp">Q&A</a>
+  <a href="../contact/contact.jsp">CONTACT US</a>
+</div>
+
 </header>
 <!-- 헤더파일들어가는 곳 -->
 <%}else{
@@ -32,15 +38,20 @@ if(type.equals("client")){
 <!-- 로고들어가는 곳 -->
 <div id="logo"><img src="../images/logo.gif" width="265" height="62" alt="Fun Web"></div>
 <!-- 로고들어가는 곳 -->
-<nav id="top_menu">
-<ul>
-	<li><a href="../main/main.jsp">HOME</a></li>
-	<li><a href="../search/stores.jsp.jsp">STORES</a></li>
-	<li><a href="../client/clientInfo.jsp">MY INFO</a></li>
-	<li><a href="../Q&A/list.jsp">Q&A</a></li>
-	<li><a href="../contact/contact.jsp">CONTACT US</a></li>
-</ul>
-</nav>
+<div class="nav_container">
+  <a href="../main/main.jsp">HOME</a>
+  <a href="#news">News</a>
+  <div class="dropdown">
+    <button class="dropbtn">SEARCH</button>
+    <div class="dropdown-content">
+      <a href="../search/stores.jsp">STORES</a>
+      <a href="../search/stores.jsp">PRODUCTS</a>
+    </div>
+  </div> 
+  <a href="../client/clientInfo.jsp">MY INFO</a>
+  <a href="../Q&A/list.jsp">Q&A</a>
+  <a href="../contact/contact.jsp">CONTACT US</a>
+</div>
 </header>
 <!-- 헤더파일들어가는 곳 -->
 <%}else if(type.equals("store")){%>
@@ -49,15 +60,12 @@ if(type.equals("client")){
 <!-- 로고들어가는 곳 -->
 <div id="logo"><img src="../images/logo.gif" width="265" height="62" alt="Fun Web"></div>
 <!-- 로고들어가는 곳 -->
-<nav id="top_menu">
-<ul>
-	<li><a href="../main/main.jsp">HOME</a></li>
-	<li><a href="../store/storeMain.jsp">STORE MENU</a></li>
-	<li><a href="../store/goodsList.jsp">MY PRODUCT</a></li>
-	<li><a href="../store/storeInfo.jsp">MY INFO</a></li>
-	<li><a href="../contact/mailForm.jsp">CONTACT US</a></li>
-</ul>
-</nav>
+<div class="nav_container">
+  <a href="../store/storeMain.jsp">STORE HOME</a>
+  <a href="../store/goodsList.jsp">MY PRODUCT</a>
+  <a href="../store/storeInfo.jsp">MY INFO</a>
+  <a href="../contact/contact.jsp">CONTACT US</a>
+</div>
 </header>
 <!-- 헤더파일들어가는 곳 -->
 <%}}%>

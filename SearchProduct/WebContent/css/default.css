@@ -72,7 +72,67 @@ float: right;}
 정렬 오른쪽*/
 footer #social img{margin: 0 7px}/*밖여백 0 7px*/
 
+/*네비바*/
 
+.nav_container {
+    overflow: hidden;
+    font-family: Arial;
+    margin-top: 70px;
+    width: 500px;
+    padding-left: 93px;
+}
 
+.nav_container a {
+    float: left;
+    font-size: 13px;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
 
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 13px;    
+    border: none;
+    outline: none;
+    color: #333;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.nav_container a:hover, .dropdown:hover .dropbtn {
+    background-color: rgba(0, 140, 255, 0.66);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 140, 255, 0.29);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #e4e4e4;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/*네비바*/
 
