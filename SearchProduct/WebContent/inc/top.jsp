@@ -14,7 +14,7 @@ if(id==null||type==null){%>
 <!-- 로고들어가는 곳 -->
 <div class="nav_container">
   <a href="../main/main.jsp">HOME</a>
-  <a href="#news">News</a>
+  <a href="../news/list.jsp">NEWS</a>
   <div class="dropdown">
     <button class="dropbtn">SEARCH</button>
     <div class="dropdown-content">
@@ -40,7 +40,7 @@ if(type.equals("client")){
 <!-- 로고들어가는 곳 -->
 <div class="nav_container">
   <a href="../main/main.jsp">HOME</a>
-  <a href="#news">News</a>
+  <a href="#news">NEWS</a>
   <div class="dropdown">
     <button class="dropbtn">SEARCH</button>
     <div class="dropdown-content">
