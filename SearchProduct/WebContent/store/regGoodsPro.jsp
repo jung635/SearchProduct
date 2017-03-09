@@ -1,3 +1,6 @@
+<%@page import="store.GoodsBean"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="store.GoodsDAO"%>
 <%@page import="store.StoreDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,13 +12,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%request.setCharacterEncoding("utf-8"); %>
-<jsp:useBean id="gb" class="store.GoodsBean"></jsp:useBean>
-<jsp:setProperty property="*" name="gb"/>
-
-
 <%
+request.setCharacterEncoding("utf-8"); 
 String id=(String)session.getAttribute("id");
+String realfilePath = request.getRealPath("/upload"); 
+
+int maxSize = 5*1024*1024; //5M(메가바이트)
+MultipartRequest multi = new MultipartRequest(request, realfilePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+
+GoodsBean gb = new GoodsBean();
+gb.setId(multi.getParameter("id"));
+gb.setPic(multi.getFilesystemName("file"));
+gb.setPrice(Integer.parseInt(multi.getParameter("price")));
+gb.setProduct(multi.getParameter("product"));
 
 GoodsDAO gdao = new GoodsDAO();
 gdao.insertGoods(id,gb);

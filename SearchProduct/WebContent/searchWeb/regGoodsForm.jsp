@@ -19,6 +19,8 @@
 <td>가격 <input type="text" name="price"></td>
 </tr>
 <tr>
+<td>파일 <input type="file" name="file"></td>
+</tr>
 </table>
 <input type="submit" value="등록">
 <input type="button" value="취소" onclick="history.back()">

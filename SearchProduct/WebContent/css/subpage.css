@@ -191,31 +191,6 @@ color: #fff;
 배경이미지 images/member/cancel_back.jpg
 repeat-x center center*/
 
-#ad_table{
-	margin: auto;
-}
-
-#store_menu{
-	text-align: center;
-}
-#store_info{
-	text-align: center;
-}
-#store_info_table{
-	margin: auto;
-}
-#map{
-	text-align: center;
-}
-#map_ad{
-	text-align: center;
-}
-#qa_write_table{
-	margin: auto;
-}
-#qa_write_btn{
-	text-align: center;
-}
 #qa_list{
 
     width: 660px;
@@ -223,9 +198,6 @@ repeat-x center center*/
 
 }
 
-#qa_content{
-	margin: auto;
-}
 #qa_reply_content{
 	margin: auto;
 	margin-top: 100px;
@@ -239,4 +211,11 @@ repeat-x center center*/
 #reply_form{
 	padding-left: 250px;
 	margin-top: 100px;
+}
+
+.center_table{
+	margin: auto;	
+}
+.text_center{
+	text-align: center;
 }

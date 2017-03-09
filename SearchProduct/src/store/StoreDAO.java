@@ -173,7 +173,6 @@ public class StoreDAO {
 		try{
 			con = getConnection();
 
-			
 			sql = "select pass from stores where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -427,6 +426,42 @@ public class StoreDAO {
 					
 				}
 		
+		//스토어 아이디 찾기
+		
+		public String searchStoreId(String ad_id, String address){
+			
+			Connection con = null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql="";
+			String id="";//아이디 중복
+			try{
+				con = getConnection();
+				sql= "select id from stores where ad_id=? and address=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, ad_id);
+				pstmt.setString(2, address);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					id=rs.getString(1);
+				}
+				
+			}catch(Exception e){
+				System.out.println("DB연결 실패"+e);
+				
+			}finally{
+				//객체생성닫기
+				try{
+				con.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			return id;
+			
+			
+		}	
 	
 		//////////////////////////////////////////////스토어 상품 관련
 		

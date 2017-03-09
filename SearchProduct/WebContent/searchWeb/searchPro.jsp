@@ -13,7 +13,7 @@
 <%
 String product = request.getParameter("product");
 StoreDAO sdao = new StoreDAO();
-List list = sdao.StoreList(product);
+List list = sdao.storeList(product);
 %>
 	<table border="1">
 	<th>스토어 이름</th><th>주소</th><th>주소 아이디</th>

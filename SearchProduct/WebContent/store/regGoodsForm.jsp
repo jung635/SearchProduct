@@ -50,7 +50,7 @@
  String id=(String)session.getAttribute("id");
  %>
 
-<form action="regGoodsPro.jsp" name="fr">
+<form action="regGoodsPro.jsp" name="fr" enctype="multipart/form-data" method="POST">
 <table>
 <tr>
 <td>상품 이름 <input type="text" name="product"></td>
@@ -59,6 +59,8 @@
 <td>가격 <input type="text" name="price"></td>
 </tr>
 <tr>
+<td>파일 <input type="file" name="file"></td>
+</tr>
 </table>
 <input type="submit" value="등록">
 <input type="button" value="취소" onclick="history.back()">

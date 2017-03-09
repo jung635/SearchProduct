@@ -48,7 +48,7 @@ List list = sdao.storeList(product);
 <!--테이블-->
 
 
-	<table border="1" id="ad_table">
+	<table border="1" class="center_table">
 	<th>스토어 이름</th><th>주소</th><th>주소 아이디</th>
 	<%for(int i=0; i<list.size(); i++){
 	StoreBean sb = (StoreBean)list.get(i);
