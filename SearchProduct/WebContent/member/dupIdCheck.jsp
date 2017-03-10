@@ -10,18 +10,21 @@
 <body>
 <%request.setCharacterEncoding("utf-8");
 String id = request.getParameter("id");
-
 MemberDAO mdao = new MemberDAO();
 //System.out.println(id);
-if(mdao.idDupCheck(id)){%>
+if(mdao.idDupCheck(id)){
+%>
 	<script>
+	window.opener.fr.idDubOk.value="ok";
 	alert('아이디 사용 가능');
 	window.close();
 	</script>
 
 
-<%}else{%>
+<%}else{
+%>
 	<script>
+	window.opener.fr.idDubOk.value="no";
 	alert('다른 아이디를 입력해주세요');
 	window.close();
 	</script>

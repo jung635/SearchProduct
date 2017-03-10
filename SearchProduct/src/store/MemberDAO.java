@@ -381,16 +381,17 @@ public boolean idDupCheck(String id){
 	
 	
 	//메일 보내기
-	public void sendMail(String email, String content) throws MessagingException{
+	public boolean sendMail(String email, String content) throws MessagingException{
 		
 	
-		
+		boolean check=false;
+	
 		final String id="sunju635";
 		final String pass="Tjswn635*";
 		int port=25;
 		String host="smtp.naver.com";
 		String from="sunju635@naver.com";
-		
+		try{
 		Properties props = new Properties();
 		
 		props.put("mail.stmp.starttls.enable","true");
@@ -415,8 +416,15 @@ public boolean idDupCheck(String id){
 		message.setContent(content,"text/html; charset=EUC-KR");
 		message.setText(content);
 		
+		
 		Transport.send(message);
-		System.out.println("E-mail successfully sent!");
+			check=true;
+		}catch(Exception e){
+			check=false;
+		}
+		
+		return check;
+		
 	}
 	
 	

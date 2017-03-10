@@ -21,7 +21,44 @@
  </script>
  <![endif]-->
  <script type="text/javascript">
+ var authMailClicked=false;
+ var authCheckChecked=false;
+ var authNumCheck=false;
+ var idDubClicked=false;
+ var id_reg=  /^(?=.*[a-zA-Z])(?=.*[0-9]).{5,10}$/;
+ var pass_reg =/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[~,!,@,#,$,*,(,),=,+,_,.,|]).{10,20}$/;
+ var authnum =(Math.floor)(Math.random()*1000000);
+ //이메일 전송
+ function sendmail(){
+	 authMailClicked=true;
+	 var email=document.fr.email.value;
+	 var url = "mailPro.jsp?email="+email+"&authNum="+authnum;
+	 window.open(url,'sendmail',"height=400 width=400");
+}
+
+ //이메일 인증 체크
+function authCheck(){
+ 	authCheckChecked=true;
+	authInputNum = document.fr.authInputNum.value;
+ 	if(authInputNum==authnum){
+		alert('인증성공!');
+		authNumCheck=true;
+	}else{
+		alert('인증실패!'); 
+		authNumCheck=false;
+
+	}  
+/* 	if(authCheckChecked==true){
+		alert(authNumCheck);
+	}else{
+		alert("hi2");
+	} */
+	
+}
+ 
+ //아이디 중복 체크
  function idDupCheck(){
+	 idDubClicked = true;
 	 var id=document.fr.id.value;
 	 var url = "dupStoreIdCheck.jsp?id="+id;
 	 window.open(url,'idCheck',"height=400 width=400");
@@ -29,48 +66,74 @@
  
  function submitCheck(){
 	
- 	//////아이디 체크
- 	if(document.fr.id.value==""){
- 		alert("아이디를 입력해 주세요!");
- 		document.fr.id.focus();
- 		return false;
- 	}else if(document.fr.id.value.length<6||document.fr.id.value.length>11){
- 		alert("아이디는 5자이상 10자 이하로 해주세요");
- 		document.fr.id.focus();
- 		return false;
- 	}
- 	
- 	//////비밀번호 체크
- 	if(document.fr.pass.value==""){
- 		alert("비밀번호를 입력해 주세요!");
- 		document.fr.pass.focus();
- 		return false;
- 	}
- 	else if(document.fr.id.value.length<6||document.fr.id.value.length>11){
- 		alert("아이디는 5자이상 10자 이하로 해주세요");
- 		document.fr.id.focus();
- 		return false;
- 	}
- 	
- 	if(document.fr.pass2.value==""){
- 		alert("비밀번호를 확인해 주세요!");
- 		document.fr.pass2.focus();
- 		return false;
- 	}
- 	
- 	
- 	//////이름 체크
- 	if(document.fr.name.value==""){
- 		alert("이름을 입력해 주세요!");
- 		document.fr.name.focus();
- 		return false;
- 	}
- 	//////이메일 체크
- 	if(document.fr.email.value==""){
- 		alert("이메일을 입력해 주세요!");
- 		document.fr.eamil.focus();
- 		return false;
- 	}
+	 	//////아이디 체크
+	 	if(document.fr.id.value==""){
+	 		alert("아이디를 입력해 주세요!");
+	 		document.fr.id.focus();
+	 		return false;
+	 	}else if(!id_reg.test(document.fr.id.value)){
+			alert("아이디는 영어,숫자조합 5-10자리로 구성해주세요");
+			document.fr.id.focus();
+			return false;
+
+		}else if(!idDubClicked){
+			alert("아이디 중복확인을 해주세요");
+			return false;
+		}else if(document.fr.idDubOk.value=="no"){
+			alert("중복된 아이디는 사용 할 수 없습니다");
+			document.fr.id.focus();
+			return false;
+		} 
+	 	
+	 	//////비밀번호 유형 체크
+	 	if(document.fr.pass.value==""){
+	 		alert("비밀번호를 입력해 주세요!");
+	 		document.fr.pass.focus();
+	 		return false;
+	 	}else if(!pass_reg.test(document.fr.pass.value)){
+	 		alert("비밀번호는 영어대, 소문자, 숫자, 특수문자 조합 10-20자리로 구성해주세요.");
+	 		document.fr.pass.focus();
+	 		return false;
+	 	}
+		//////비밀번호 일치 체크
+	 	if(document.fr.pass2.value==""){
+	 		alert("비밀번호를 확인해 주세요!");
+	 		document.fr.pass2.focus();
+	 		return false;
+	 	}if(document.fr.pass.value!=document.fr.pass2.value){
+	 		alert("비밀번호가 일치하지 않습니다!");
+	 		document.fr.pass2.focus();
+	 		return false;
+	 	}
+	 	
+	 	
+	 	//////이름 체크
+	 	if(document.fr.name.value==""){
+	 		alert("이름을 입력해 주세요!");
+	 		document.fr.name.focus();
+	 		return false;
+	 	}
+		//////이메일 체크
+	 	if(document.fr.email.value==""){
+	 		alert("이메일을 입력해 주세요!");
+	 		document.fr.name.focus();
+	 		return false;
+	 	}else if(!authMailClicked){
+			alert("메일 인증을 해주세요");
+			return false;
+	 	}else if(document.fr.authInputNum.value==""){
+	 		document.fr.authInputNum.focus();
+			alert("메일 인증번호를 입력해주세요");
+			return false;
+	 	}else if(!authCheckChecked){
+			alert("인증번호를 확인해주세요");
+			return false;
+		}else if(!authNumCheck){
+			alert("인증번호가 맞지 않습니다.");
+			document.fr.authInputNum.focus();
+			return false;
+		}
+	 	
  	//////주소 체크
  	if(document.fr.address.value==""||document.fr.ad_id.value==""){
  		alert("주소를 입력해 주세요!");
@@ -79,46 +142,42 @@
  	}
  	
 
- 	
-
-
  }
 
 
- function passCheck(){
- 	
- 	
- 	if(document.fr.pass.value==document.fr.pass2.value){
- 		document.getElementById("passCheckDisplay").innerHTML="비밀번호가 일치합니다";
- 	}else{
- 		document.getElementById("passCheckDisplay").innerHTML="비밀번호가 일치하지 않습니다.";
- 	
- }	
- }
+	//비밀번호 일치 체크 디스플레이
+	 function passCheck(){
+	 	if(document.fr.pass.value==document.fr.pass2.value){
+	 		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치합니다";
+	 	}else{
+	 		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치하지 않습니다.";
+	 	
+	 }	
+	 }
 
- function passFormCheck(){
- 	var pwd=document.fr.pass.value;
- 	reg =/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[~,!,@,#,$,*,(,),=,+,_,.,|]).{10,20}$/;
- 	if(!reg.test(pwd)){
- 		document.getElementById("passCheckDisplay").innerHTML="비밀번호는 영어대, 소문자, 숫자로 10-20자리로 구성해주세요.";	
- 	}else{
- 		document.getElementById("passCheckDisplay").innerHTML="OK!";	
- 		
- 	}
- }
+	//비밀번호 유형 체크 디스플레이
+	 function passFormCheck(){
+	 	var pwd=document.fr.pass.value;
+	 	
+	 	if(!pass_reg.test(pwd)){
+	 		document.getElementById("passCheckDisplay").innerHTML="비밀번호는 영어대, 소문자, 숫자, 특수문자 조합 10-20자리로 구성해주세요.";	
+	 	}else{
+	 		document.getElementById("passCheckDisplay").innerHTML="OK!";	
+	 		
+	 	}
+	 }
 
+	//아이디 유형 체크 디스플레이
+	 function idCheck(){
+	 	var id=document.fr.id.value;
+	 		if(!id_reg.test(id)){
+	 			document.getElementById("idCheckDisplay").innerHTML="아이디는 영어,숫자조합 5-10자리로 구성해주세요";
 
- function idCheck(){
- 	var id=document.fr.id.value;
- 	reg=  /^(?=.*[a-zA-Z])(?=.*[0-9]).{5,10}$/;
- 		if(!reg.test(id)){
- 			document.getElementById("idCheckDisplay").innerHTML="아이디는 영어,숫자조합 5-10자리로 구성해주세요";
-
- 		}else{
- 			document.getElementById("idCheckDisplay").innerHTML="OK!";
- 		}
- 	
- }
+	 		}else{
+	 			document.getElementById("idCheckDisplay").innerHTML="OK!";
+	 		}
+	 	
+	 }
 
  </script>
 </head>
@@ -147,6 +206,7 @@
 <article>
 <h1>Join Us</h1>
 <form action="storeJoinPro.jsp" id="join" name="fr" onsubmit="return submitCheck()">
+<input type="hidden" name="idDubOk">
 <input type="hidden" name="type" value="store">
 <fieldset>
 <legend>Basic Info</legend>
@@ -155,13 +215,15 @@
 <input type="button" value="dup. check" class="dup" onclick="idDupCheck()"><span id="idCheckDisplay"></span><br>
 
 <label>Password</label>
-<input type="password" name="pass" onkeyup="passFormCheck()"><br>
+<input type="password" name="pass" onkeyup="passFormCheck()"><span id="passCheckDisplay"></span><br>
 <label>Retype Password</label>
-<input type="password" name="pass2"  onkeyup="passCheck()"><span id="passCheckDisplay"></span><br>
+<input type="password" name="pass2"  onkeyup="passCheck()"><span id="passdbCheckDisplay"></span><br>
 <label>Name</label>
 <input type="text" name="name"><br>
 <label>E-Mail</label>
-<input type="email" name="email"><br>
+<input type="email" name="email"><input type="button" value="인증메일 발송" onclick="sendmail()"><br>
+<label></label>
+<input type="text" name="authInputNum"><input type="button" value="인증확인" onclick="authCheck()"><br>
 <label>Address</label>
 <input type="text" name="address"><input type="button" value="주소 찾기" onclick='window.open("idFinder.jsp", "idfinder", "width=600,height=500");'><br>
 <label>address id</label>
@@ -173,7 +235,7 @@
 
 <div class="clear"></div>
 <div id="buttons">
-<input type="button" value="Submit" class="submit" onclick="submit()">
+<input type="submit" value="Submit" class="submit">
 <input type="button" value="Cancel" class="cancel" onclick="history.back()">
 </div>
 </form>

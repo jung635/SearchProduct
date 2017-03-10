@@ -46,8 +46,25 @@ public class CommentBean {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+	public int getRenum() {
+		return renum;
+	}
+	public void setRenum(int renum) {
+		this.renum = renum;
+	}
+
 	private String name, pass, content;
-	private int re_ref, re_lev, re_seq;
+	private int re_ref, re_lev, re_seq, renum, board_num;
+	
+
+
+	public int getBoard_num() {
+		return board_num;
+	}
+	public void setBoard_num(int board_num) {
+		this.board_num = board_num;
+	}
+
 	private Timestamp date;
 
 }

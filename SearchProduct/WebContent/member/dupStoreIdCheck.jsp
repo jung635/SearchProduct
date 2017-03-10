@@ -15,6 +15,7 @@ StoreDAO sdao = new StoreDAO();
 //System.out.println(id);
 if(sdao.storeIdDupCheck(id)){%>
 	<script>
+	window.opener.fr.idDubOk.value="ok";
 	alert('아이디 사용 가능');
 	window.close();
 	</script>
@@ -22,6 +23,7 @@ if(sdao.storeIdDupCheck(id)){%>
 
 <%}else{%>
 	<script>
+	window.opener.fr.idDubOk.value="no";
 	alert('다른 아이디를 입력해주세요');
 	window.close();
 	</script>
