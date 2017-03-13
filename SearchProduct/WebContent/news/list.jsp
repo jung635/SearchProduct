@@ -139,8 +139,12 @@ for(int i=startPage; i<=endPage; i++){
 
 %>
 
-<%if(type.equals("admin")){ %>
+<%
+try{
+if(type.equals("admin")){ %>
 <input type="button" value="글쓰기" class="write_btn" onclick="location.href='write.jsp'">
+<%}}catch(Exception e){%>
+
 <%} %>
 count: <%=count %>
 start: <%=start %>

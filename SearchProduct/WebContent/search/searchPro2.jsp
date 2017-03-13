@@ -44,7 +44,9 @@
 String product = request.getParameter("product");
 StoreDAO sdao = new StoreDAO();
 List list = sdao.storeList(product);
-
+List adId_list = new ArrayList();
+List ad_list = new ArrayList();
+String ad = "부산역";
 %>
 <!--테이블-->
 
@@ -58,12 +60,19 @@ List list = sdao.storeList(product);
 	<td><%=sb.getAddress() %></td>
 	<td><%=sb.getAd_id()%></td>
 	<td><input type="button" value="방문하기" onclick="map('<%=sb.getAd_id()%>','<%=sb.getAddress()%>')"></td>
-	
+	<td><input type="button" value="테스트" onclick="list()"></td>
+	<%adId_list.add(sb.getAd_id()); %>
+	<%ad_list.add(sb.getAddress()); %>
+
 	</tr>
 <%} %>
-
+<%
+System.out.println(ad);
+%>
 	</table>
-	
+	<div id="map_view2" class="text_center">
+	<embed type="text/html" src="mapId3.jsp?address=<%=ad %> "  height="400px" width="500px">
+	</div>
 	<div id="map_view"></div>
 	<script>
 	
@@ -75,10 +84,21 @@ List list = sdao.storeList(product);
 			      document.getElementById("map_view").innerHTML = this.responseText;
 			    }
 			  };
-		xhttp.open("GET", "map.jsp?ad_id="+ad_id+"&address="+address, true);
+		xhttp.open("GET", "map2.jsp?ad_id="+ad_id+"&address="+address, true);
 		xhttp.send();
 		}
-	
+		
+		function list(){
+			alert("hi");
+		/*var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      //document.getElementById("map_view").innerHTML = this.responseText;
+			    }
+			  };
+		xhttp.open("GET", "map2.jsp?adId_list="+adId_list, true);
+		xhttp.send();*/
+		}
 	
 	
 	

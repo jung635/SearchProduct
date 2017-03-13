@@ -32,13 +32,16 @@
 <body>
 <%String ad_id= request.getParameter("ad_id");
 String address=request.getParameter("address");
-System.out.println(address);
+
 %>
 
 <%-- <iframe src="mapId2.jsp?ad_id=<%=ad_id %>" height="400px" width="500px"></iframe> --%>
-<div class="text_center"><embed type="text/html" src="mapId.jsp?ad_id=<%=ad_id %>"  height="400px" width="500px">
+<div class="text_center"><embed type="text/html" src="mapId2.jsp?ad_id=<%=ad_id %>"  height="400px" width="500px">
 </div>
 <div class="text_center">주소: <%=address %></div>
+
+
+
 
 </body>
 </html>
