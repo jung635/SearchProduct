@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="store.CommentBean"%>
 <%@page import="store.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -22,22 +23,29 @@ cb.setBoard_num(num);
 cb.setContent(request.getParameter("content"));
 cb.setName(id);
 cb.setPass(pass);
-System.out.println(cb.getRenum());
-if(id==null){%>
-	<script>
-	alert('로그인을 해주세요');
-	location.href="../member/clientLoginForm.jsp"
-	</script>
-	
-<%}else{
 BoardDAO bdao = new BoardDAO();
 bdao.insertRereBoard(cb);
+List list = bdao.getRereDetail(num, cb.getRenum());
+
+
 %>
-<script>
-window.close();
-opener.location.reload();
-//location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
-</script>
-<%}%>
+<table>
+<%
+for(int i=0; i<list.size(); i++){
+	cb = (CommentBean)list.get(i);
+	
+	%>
+<tr>
+<td><%=cb.getName() %></td>
+<td><%=cb.getContent() %></td>
+<td><%=cb.getDate() %></td>
+
+</tr>
+<%} %>
+
+</table>
+<div class="clear"></div>
+
+
 </body>
 </html>

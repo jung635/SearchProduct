@@ -36,7 +36,16 @@
     });
 }); 
  
-
+ function re_view(board_num, renum){
+		var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      document.getElementById("re_re_detail"+renum).innerHTML = this.responseText;
+			    }
+			  };
+			xhttp.open("GET", "re_redetail.jsp?board_num="+board_num+"&renum="+renum, true);
+			xhttp.send();
+		}
 </script>
 
 
@@ -104,32 +113,39 @@ if(bb.getFile()==null){
 	<td><%=cb.getName() %></td>
 	<td><%=cb.getContent() %></td>
 	<td><%=cb.getDate() %></td>
+	<td><%=cb.getRenum() %></td>
 	<td><input type="button" id="re_reply_button" value="댓글달기" alt="<%=cb.getRenum()%>" onclick="re_view(<%=cb.getBoard_num()%>,<%=cb.getRenum()%>)"></td>
 	</tr>
 	<tr id="re_reply_content<%=cb.getRenum()%>" style="display: none;">
-	<td colspan="4"><div id="re_re_detail<%=cb.getRenum()%>" style="padding-left: 57px;"></div></td>
-	<!-- <td colspan="4"><textarea cols="60" rows="2" id="re_re_text"></textarea><input type="button" id="re_reply_content" value="댓글등록"
-	onclick="re_reply()"> -->
-	</td>
+	<td colspan="4"><div id="re_re_detail<%=cb.getRenum()%>" style="padding-left: 57px;"></div>
+	<textarea cols="60" rows="2" id="re_re_text<%=cb.getRenum()%>"></textarea><input type="button" id="re_reply_content" value="댓글등록"
+	onclick="re_reply(<%=cb.getRenum()%>)">
+	</td>	
 	</tr>
 	
 
 	<script>
-	function re_reply(){
-		text = document.getElementById('re_re_text').value;
-		window.open("re_rewritePro.jsp?num=<%=num %>&re_seq=<%=cb.getRe_seq() %>&pageNum=<%=pageNum %>&re_lev=<%=cb.getRe_lev() %>&renum=<%=cb.getRenum() %>&board_num=<%=cb.getBoard_num() %>&content="+text);
+	function re_reply(renum){
+		var text = document.getElementById('re_re_text'+renum).value;
+		
+	if(text==""){
+		alert("내용을 입력해 주세요");
+	}else{
+		//window.open("re_rewritePro.jsp?num=<%=num %>&re_seq=<%=cb.getRe_seq() %>&pageNum=<%=pageNum %>&renum="+renum+"&content="+text);
+		
+		var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      document.getElementById("re_re_detail"+renum).innerHTML = this.responseText;
+			    }
+			  };
+		xhttp.open("GET", "re_rewrite.jsp?num=<%=num %>&re_seq=<%=cb.getRe_seq() %>&pageNum=<%=pageNum %>&renum="+renum+"&content="+text, true);
+		xhttp.send();
+		document.getElementById('re_re_text'+renum).value="";
+	}
 	}
 	
-	function re_view(board_num, renum){
-	var xhttp = new XMLHttpRequest();
-		  xhttp.onreadystatechange = function() {
-		    if (this.readyState == 4 && this.status == 200) {
-		      document.getElementById("re_re_detail"+renum).innerHTML = this.responseText;
-		    }
-		  };
-		xhttp.open("GET", "re_redetail.jsp?board_num="+board_num+"&renum="+renum, true);
-		xhttp.send();
-	}
+	
 	</script>
 	 
 

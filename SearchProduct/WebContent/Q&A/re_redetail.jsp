@@ -11,7 +11,6 @@
 </head>
 <body>
 <%request.setCharacterEncoding("utf-8");
-System.out.println("되나요?");
 CommentBean cb = new CommentBean();
 int renum=Integer.parseInt(request.getParameter("renum"));
 int board_num=Integer.parseInt(request.getParameter("board_num"));
@@ -26,7 +25,6 @@ List list = bdao.getRereDetail(board_num, renum);
 for(int i=0; i<list.size(); i++){
 	cb = (CommentBean)list.get(i);
 	
-	System.out.println("check2: "+cb.getContent());
 	%>
 <tr>
 <td><%=cb.getName() %></td>
@@ -35,8 +33,7 @@ for(int i=0; i<list.size(); i++){
 
 </tr>
 <%} %>
-<td colspan="4"><textarea cols="60" rows="2" id="re_re_text"></textarea><input type="button" id="re_reply_content" value="댓글등록"
-	onclick="re_reply()">
+
 </table>
 <div class="clear"></div>
 
