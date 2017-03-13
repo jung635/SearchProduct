@@ -505,7 +505,7 @@ public class BoardDAO {
 		}
 	}
 	//대댓글 쓰기
-	public void insertrereBoard(CommentBean cb){
+	public void insertRereBoard(CommentBean cb){
 	
 		Connection con = null;
 		PreparedStatement pstmt=null;
@@ -518,35 +518,36 @@ public class BoardDAO {
 		try{
 			
 			con = getConnection();
-			sql="select max(renum) from comment where re_ref=?;";
+			sql="select max(re_seq) from comment where renum=?;";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, cb.getRe_ref());
+			pstmt.setInt(1, cb.getRenum());
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				max=rs.getInt(1)+1;
 			}
 			
-						//답글 순서 재배치
+/*						//답글 순서 재배치
 			sql="update comment set re_seq=re_seq+1 where re_ref=? and re_seq>?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, cb.getRe_ref());
 			pstmt.setInt(2, cb.getRe_seq());
-			pstmt.executeUpdate();
+			pstmt.executeUpdate();*/
 			
 			
 			sql = "insert into comment(name, pass,"
-					+ " content, re_ref, re_lev, "
-					+ "re_seq, date, renum)"
-					+ " values(?,?,?,?,?,?,now(),?);";
+					+ " content, re_lev, "
+					+ "re_seq, renum, board_num, date, re_ref)"
+					+ " values(?,?,?,?,?,?,?,now(),?);";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1, cb.getName());
 			pstmt.setString(2, cb.getPass());
 			pstmt.setString(3, cb.getContent());
-			pstmt.setInt(4, cb.getRe_ref()); // 답변글 그룹
-			pstmt.setInt(5, cb.getRe_lev()+1); //답변글 들여쓰기
-			pstmt.setInt(6, cb.getRe_seq()+1); //답변글 순서
-			pstmt.setInt(7, max); //답변글 순서
+			pstmt.setInt(4, 0); //답변글 들여쓰기
+			pstmt.setInt(5, max); //답변글 순서
+			pstmt.setInt(6, cb.getRenum()); //답변글 순서
+			pstmt.setInt(7, cb.getBoard_num());
+			pstmt.setInt(8, 0); //답변글 들여쓰기
 			
 			
 			pstmt.executeUpdate();
@@ -593,7 +594,7 @@ public class BoardDAO {
 				try{
 					con=getConnection();
 					
-					sql = "select * from comment where board_num=? order by renum desc, re_seq asc";
+					sql = "select * from comment where board_num=? and re_seq=0 order by renum desc, re_seq asc";
 					pstmt=con.prepareStatement(sql);
 					pstmt.setInt(1, num);
 					rs=pstmt.executeQuery();
@@ -604,6 +605,8 @@ public class BoardDAO {
 						cb.setRe_lev(rs.getInt("re_lev"));
 						cb.setRe_seq(rs.getInt("re_seq"));
 						cb.setRe_ref(rs.getInt("re_ref"));
+						cb.setRenum(rs.getInt("renum"));
+						cb.setBoard_num(rs.getInt("board_num"));
 						cb.setDate(rs.getTimestamp("date"));
 						
 						relist.add(cb);
@@ -623,6 +626,49 @@ public class BoardDAO {
 				return relist;
 			}
 		
+			//대댓글내용
+			public List<Object> getRereDetail(int board_num, int renum){
+				Connection con=null;
+				PreparedStatement pstmt=null;
+				ResultSet rs = null;
+				String sql = "";
+				CommentBean cb = null;
+				List<Object> relist = new ArrayList<Object>();
+				try{
+					con=getConnection();
+					
+					sql = "select * from comment where board_num=? and renum=? and re_seq>0 order by re_seq desc ";
+					pstmt=con.prepareStatement(sql);
+					pstmt.setInt(1, board_num);
+					pstmt.setInt(2, renum);
+					
+					rs=pstmt.executeQuery();
+					while(rs.next()){
+						cb = new CommentBean();
+						cb.setName(rs.getString("name"));
+						cb.setContent(rs.getString("content"));
+						cb.setRe_seq(rs.getInt("re_seq"));
+						cb.setBoard_num(rs.getInt("board_num"));
+						cb.setRenum(rs.getInt("renum"));
+						cb.setDate(rs.getTimestamp("date"));
+						
+						relist.add(cb);
+					}
+					
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}finally{
+					try{
+						con.close();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+				}
+				
+				return relist;
+			}
+			
 
 
 }

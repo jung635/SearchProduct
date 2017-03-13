@@ -19,6 +19,8 @@ String pass=(String)session.getAttribute("pass");
 CommentBean cb = new CommentBean();
 cb.setRe_lev(Integer.parseInt(request.getParameter("re_lev")));
 cb.setRe_seq(Integer.parseInt(request.getParameter("re_seq")));
+cb.setRenum(Integer.parseInt(request.getParameter("renum")));
+cb.setBoard_num(Integer.parseInt(request.getParameter("board_num")));
 cb.setContent(request.getParameter("content"));
 cb.setRe_ref(num);
 cb.setName(id);
@@ -31,7 +33,7 @@ if(id==null){%>
 	
 <%}else{
 BoardDAO bdao = new BoardDAO();
-bdao.insertrereBoard(cb);
+bdao.insertRereBoard(cb);
 %>
 <script>
 location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
