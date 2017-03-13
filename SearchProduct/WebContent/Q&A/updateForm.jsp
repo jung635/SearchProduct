@@ -57,6 +57,7 @@ history.back();
 <input type="hidden" name="pass" value="<%=pass%>">
 <input type="hidden" name="num" value="<%=num%>">
 <input type="hidden" name="pageNum" value="<%=pageNum%>">
+<input type="hidden" name="ori_file" value="<%=bb.getFile() %>">
 <table class="center_table">
 <tr>
 <td>제목 <input type="text" name="subject" value="<%=bb.getSubject()%>"></td>
@@ -65,7 +66,8 @@ history.back();
 <td>내용 <textarea name="content" cols="60" rows="15"><%=bb.getContent()%></textarea></td>
 </tr>
 <tr>
-<td>파일 <input type="file" name="file" value=""<%=bb.getFile() %>></td>
+
+<tr><td>파일 <input type="file" name="file" value="<%=bb.getFile() %>"></td>
 </tr>
 </table>
 <div class="text_center">

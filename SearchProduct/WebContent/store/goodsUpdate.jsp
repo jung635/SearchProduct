@@ -30,6 +30,7 @@
 <body>
 <%request.setCharacterEncoding("utf-8");
 String product = request.getParameter("product");
+String pic = request.getParameter("pic");
 int price = Integer.parseInt(request.getParameter("price"));
 %>
 <div id="wrap">
@@ -55,6 +56,7 @@ int price = Integer.parseInt(request.getParameter("price"));
 
 <form action="goodsUpdatePro.jsp" name="fr" enctype="multipart/form-data" method="POST">
 <input type="hidden" name="ori_product" value="<%=product%>">
+<input type="hidden" name="ori_pic" value="<%=pic %>">
 <table>
 <tr>
 <td>상품 이름 <input type="text" name="product" value="<%=product%>"></td>

@@ -20,6 +20,8 @@ int maxSize = 5*1024*1024; //5M(메가바이트)
 //파일이름이 동일 할 때 파일이름을 변경 DefalutFileRenamePolicy()
 MultipartRequest multi = new MultipartRequest(request, realfilePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 //자바빈 생성
+String ori_file = multi.getParameter("ori_file");
+String file = multi.getFilesystemName("file");
 BoardBean bb = new BoardBean();
 //set 메서드호출 폼 => 자바빈 멤버변수 저장 (수동으로 해야함)
 
@@ -28,7 +30,13 @@ bb.setPass(multi.getParameter("pass"));
 bb.setSubject(multi.getParameter("subject"));
 bb.setContent(multi.getParameter("content"));
 //upload폴더에 올라간 파일이름
-bb.setFile(multi.getFilesystemName("file"));
+System.out.println("ori: "+ori_file);
+System.out.println("file: "+file);
+if(file==null){
+	bb.setFile(ori_file);
+}else{
+	bb.setFile(file);
+}
 bb.setNum(Integer.parseInt(multi.getParameter("num")));
 
 int pageNum = Integer.parseInt(multi.getParameter("pageNum"));

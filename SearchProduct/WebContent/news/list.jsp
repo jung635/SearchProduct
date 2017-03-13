@@ -27,6 +27,7 @@
 </head>
 <body>
 <%
+String type=(String)session.getAttribute("type");
 NewsDAO ndao = new NewsDAO();
 
 //전체 글의 개수 구하기
@@ -138,8 +139,9 @@ for(int i=startPage; i<=endPage; i++){
 
 %>
 
-
+<%if(type.equals("admin")){ %>
 <input type="button" value="글쓰기" class="write_btn" onclick="location.href='write.jsp'">
+<%} %>
 count: <%=count %>
 start: <%=start %>
 end: <%=end %>

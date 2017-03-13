@@ -36,6 +36,7 @@
 
 <!-- 본문들어가는 곳 -->
 <%
+String type=(String)session.getAttribute("type");
 int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
 NewsDAO ndao = new NewsDAO();
@@ -60,12 +61,14 @@ NewsBean nb = ndao.getDetail(num);
 <td style="height: 300px;">내용 </td><td colspan="3"><%=nb.getContent() %></td>
 </tr>
 </table>
+
+<%if(type.equals("admin")){ %>
 <div id="content_btn">
 <input type="button" value="글수정" onclick="location.href='updateForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>'">
-<input type="button" value="글삭제" onclick="location.href='deleteForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>'">
+<input type="button" value="글삭제" onclick="location.href='deleteForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>">
 <input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%=pageNum%>'">
 </div> 
-
+<%} %>
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

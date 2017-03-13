@@ -20,8 +20,14 @@ String id=(String)session.getAttribute("id");
 //String id = multi.getParameter("id");
 //String pass = multi.getParameter("pass");
 String ori_product=multi.getParameter("ori_product");
+String ori_pic = multi.getParameter("ori_pic");
+String pic = multi.getFilesystemName("file");
 GoodsBean gb = new GoodsBean();
-gb.setPic(multi.getFilesystemName("file"));
+if(pic==null){
+	gb.setPic(ori_pic);
+}else{
+	gb.setPic(pic);
+}
 gb.setId(id);
 gb.setPrice(Integer.parseInt(multi.getParameter("price")));
 gb.setProduct(multi.getParameter("product"));

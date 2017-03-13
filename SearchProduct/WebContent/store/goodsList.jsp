@@ -69,7 +69,7 @@ list=gdao.goodsList(sessionId);%>
  	if(i==0||i%4==0){%>
  		<tr>
  		<%}%>
- 	<td><a href="goodsUpdate.jsp?product=<%=gb.getProduct()%>&price=<%=gb.getPrice()%>"><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></a><br>
+ 	<td><a href="goodsUpdate.jsp?product=<%=gb.getProduct()%>&price=<%=gb.getPrice()%>&pic=<%=gb.getPic()%>"><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></a><br>
  	상품명: <%=gb.getProduct() %><br>
  	가격: <%=gb.getPrice() %></td>
  	

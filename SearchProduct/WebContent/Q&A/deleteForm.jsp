@@ -36,7 +36,19 @@ request.setCharacterEncoding("utf-8");
 String sessionId=(String)session.getAttribute("id");
 int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
-%>
+String name = request.getParameter("name");
+if(sessionId==null){%>
+<script>
+alert('로그인을 해주세요');
+location.href="../member/clientLoginForm.jsp"
+</script>
+
+<%}else if(sessionId.equals(name)==false){%>
+<script>
+alert('글쓴이가 아닙니다');
+history.back();
+</script>
+<%}%>
 <div class="text_center">
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>
 <form action="deletePro.jsp" method="post" name="fr">
