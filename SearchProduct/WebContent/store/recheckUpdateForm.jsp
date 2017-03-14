@@ -56,7 +56,6 @@ String sessionPass=(String)session.getAttribute("pass");
 <form action="recheckUpdatePro.jsp" id="join">
 <input type="hidden" name="name" value="<%=sb.getName()%>">
 <input type="hidden" name="address" value="<%=sb.getAddress()%>">
-<input type="hidden" name="ad_id" value="<%=sb.getAd_id()%>">
 <input type="hidden" name="email" value="<%=sb.getEmail()%>">
 <fieldset>
 <legend>Login Info</legend>

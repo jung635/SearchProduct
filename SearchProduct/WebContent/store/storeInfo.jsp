@@ -48,7 +48,7 @@ StoreBean sb = sdao.infoStore(id);
 <nav id="sub_menu">
 <ul>
 <li><a href="storeInfo.jsp">회원 정보 확인</a></li>
-<li><a href="storeInfoUpdate.jsp?id=<%=id%>&name=<%=sb.getName()%>&address=<%=sb.getAddress()%>&ad_id=<%=sb.getAd_id()%>&email=<%=sb.getEmail()%>">회원 정보 수정</a></li>
+<li><a href="storeInfoUpdate.jsp?id=<%=id%>&name=<%=sb.getName()%>&address=<%=sb.getAddress()%>&email=<%=sb.getEmail()%>">회원 정보 수정</a></li>
 <li><a href="storeInfoDeleteForm.jsp">회원 탈퇴</a></li>
 </ul>
 </nav>
@@ -67,7 +67,6 @@ StoreBean sb = sdao.infoStore(id);
 <tr><td>이름</td><td><%=sb.getName()%></td></tr>
 <tr><td>가입 날짜</td><td><%=sb.getReg_date()%></td></tr>
 <tr><td>주소</td><td><%=sb.getAddress()%></td></tr>
-<tr><td>주소 아이디</td><td><%=sb.getAd_id()%></td></tr>
 <tr><td>email</td><td><%=sb.getEmail()%></td></tr>
 </table>
 </div>

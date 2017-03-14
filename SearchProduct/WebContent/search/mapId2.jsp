@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="java.util.List"%>
 <%@page import="store.StoreDAO"%>
@@ -18,7 +20,7 @@
     </style>
        <%
        System.out.println("test");
-   List adId_list = (List)request.getAttribute("adId_list");
+ 	  List adId_list = (List)request.getAttribute("adId_list");
        System.out.println("test2");
        System.out.println(adId_list.size());
        

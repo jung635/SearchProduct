@@ -76,8 +76,10 @@
 //for
 NewsDAO ndao = new NewsDAO();
 int newsCount = ndao.getListCount();
-List<?> news_list = ndao.boardList(1, 5);
+List<?> news_list = ndao.boardList(0, 5);
 %>
+   <%if(news_list.size()==0)%>
+   글이 없습니다
    <%
 for(int i=0; i<news_list.size(); i++){
 	NewsBean bb = (NewsBean)news_list.get(i);
@@ -97,7 +99,7 @@ for(int i=0; i<news_list.size(); i++){
 //for
 BoardDAO bdao = new BoardDAO();
 int count = bdao.getListCount();
-List<?> list = bdao.boardList(1, 5);
+List<?> list = bdao.boardList(0, 5);
 %>
    <%
 for(int i=0; i<list.size(); i++){

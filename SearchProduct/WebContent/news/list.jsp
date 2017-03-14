@@ -73,7 +73,9 @@ int end=0;
     <th class="twrite">Writer</th>
     <th class="tdate">Date</th>
     <th class="tread">Read</th></tr>
-    <%
+   <%if(list == null){%>
+<tr><td colspan="4">글이 없습니다</td><td>
+   <%}else{
 for(int i=0; i<list.size(); i++){
 	NewsBean nb = (NewsBean)list.get(i);
 %>
@@ -83,7 +85,7 @@ for(int i=0; i<list.size(); i++){
 <a href="content.jsp?num=<%=nb.getNum()%>&pageNum=<%=pageNum%>"><%=nb.getSubject() %></a></td>
 <td><%=nb.getName() %></td><td><%=nb.getDate() %></td><td><%=nb.getReadcount() %></td>
 </tr>
-<%} %>  
+<%} }%>  
 </table>
 <div id="table_search">
 <form action="news_search.jsp">
@@ -146,9 +148,6 @@ if(type.equals("admin")){ %>
 <%}}catch(Exception e){%>
 
 <%} %>
-count: <%=count %>
-start: <%=start %>
-end: <%=end %>
 </div>
 </article>
 <!-- 게시판 -->

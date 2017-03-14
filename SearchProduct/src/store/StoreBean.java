@@ -3,7 +3,7 @@ package store;
 import java.sql.Timestamp;
 
 public class StoreBean {
-	private String name, address, id, pass, ad_id, email, type;
+	private String name, address, id, pass, email, type;
 	public String getType() {
 		return type;
 	}
@@ -38,13 +38,6 @@ public class StoreBean {
 		this.pass = pass;
 	}
 
-	public String getAd_id() {
-		return ad_id;
-	}
-
-	public void setAd_id(String ad_id) {
-		this.ad_id = ad_id;
-	}
 
 	public String getId() {
 		return id;

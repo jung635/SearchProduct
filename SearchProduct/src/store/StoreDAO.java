@@ -71,7 +71,6 @@ public class StoreDAO {
 		//int readcount=0;
 		
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
 /*			sql="select count(num) from stores";
 			
@@ -81,17 +80,16 @@ public class StoreDAO {
 				num=rs.getInt(1);
 			}*/
 			
-			sql = "insert into stores(name, address, id, pass, ad_id, email, reg_date, type) values(?,?,?,?,?,?,?,?);";
+			sql = "insert into stores(name, address, id, pass, email, reg_date, type) values(?,?,?,?,?,?,?);";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1, sb.getName());
 			pstmt.setString(2, sb.getAddress());
 			pstmt.setString(3, sb.getId());
 			pstmt.setString(4, sb.getPass());
-			pstmt.setString(5, sb.getAd_id());
-			pstmt.setString(6, sb.getEmail());
-			pstmt.setTimestamp(7, sb.getReg_date());
-			pstmt.setString(8, sb.getType());
+			pstmt.setString(5, sb.getEmail());
+			pstmt.setTimestamp(6, sb.getReg_date());
+			pstmt.setString(7, sb.getType());
 			
 			
 			
@@ -288,7 +286,6 @@ public class StoreDAO {
 					sb.setAddress(rs.getString("address"));
 					sb.setId(rs.getString("id"));
 					sb.setPass(rs.getString("pass"));
-					sb.setAd_id(rs.getString("ad_id"));
 					sb.setEmail(rs.getString("email"));
 					sb.setReg_date(rs.getTimestamp("reg_date"));
 					
@@ -337,15 +334,14 @@ public class StoreDAO {
 			int check = 1;//성공
 			try{
 				con=getConnection();
-				sql = "update stores set name=?, address=?, pass=?, ad_id=?, email=? where id=?";
+				sql = "update stores set name=?, address=?, pass=?, email=? where id=?";
 				pstmt = con.prepareStatement(sql);
 				
 				pstmt.setString(1, sb.getName());
 				pstmt.setString(2, sb.getAddress());
 				pstmt.setString(3, sb.getPass());
-				pstmt.setString(4, sb.getAd_id());
-				pstmt.setString(5, sb.getEmail());
-				pstmt.setString(6, sb.getId());
+				pstmt.setString(4, sb.getEmail());
+				pstmt.setString(5, sb.getId());
 				
 				pstmt.executeUpdate();
 				
@@ -428,7 +424,7 @@ public class StoreDAO {
 		
 		//스토어 아이디 찾기
 		
-		public String searchStoreId(String ad_id, String address){
+	/*	public String searchStoreId(String , String address){
 			
 			Connection con = null;
 			PreparedStatement pstmt=null;
@@ -461,7 +457,7 @@ public class StoreDAO {
 			return id;
 			
 			
-		}	
+		}	*/
 	
 		//////////////////////////////////////////////스토어 상품 관련
 		
@@ -527,8 +523,6 @@ public class StoreDAO {
 			GoodsBean gb = null;
 			
 			try{
-				
-				Class.forName("com.mysql.jdbc.Driver");
 				con=getConnection();
 				
 				sql = "select id from goods where product=?;";
@@ -544,7 +538,6 @@ public class StoreDAO {
 					
 					while(rs2.next()){
 					sb=new StoreBean();
-					sb.setAd_id(rs2.getString("ad_id"));
 					sb.setId(rs2.getString("id"));
 					sb.setAddress(rs2.getString("address"));
 					sb.setName(rs2.getString("name"));
@@ -602,7 +595,6 @@ public class StoreDAO {
 						while(rs.next()){
 							
 							sb=new StoreBean();
-							sb.setAd_id(rs.getString("ad_id"));
 							sb.setId(rs.getString("id"));
 							sb.setAddress(rs.getString("address"));
 							sb.setName(rs.getString("name"));

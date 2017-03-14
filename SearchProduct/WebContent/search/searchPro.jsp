@@ -56,8 +56,7 @@ List list = sdao.storeList(product);
 	%>
 	<tr><td><a href="#" id="ad_href"><%=sb.getName() %></a></td>
 	<td><%=sb.getAddress() %></td>
-	<td><%=sb.getAd_id()%></td>
-	<td><input type="button" value="방문하기" onclick="map('<%=sb.getAd_id()%>','<%=sb.getAddress()%>')"></td>
+	<td><input type="button" value="방문하기" onclick="map('<%=sb.getAddress()%>')"></td>
 	
 	</tr>
 <%} %>
@@ -75,7 +74,7 @@ List list = sdao.storeList(product);
 			      document.getElementById("map_view").innerHTML = this.responseText;
 			    }
 			  };
-		xhttp.open("GET", "map.jsp?ad_id="+ad_id+"&address="+address, true);
+		xhttp.open("GET", "map.jsp?address="+address, true);
 		xhttp.send();
 		}
 	

@@ -1,3 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.StringTokenizer"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="java.util.List"%>
 <%@page import="store.StoreDAO"%>
@@ -21,15 +25,35 @@
   </head>
   <body>
         <%request.setCharacterEncoding("utf-8");
-       	String ad_list = (String)request.getParameter("address");
-            System.out.println("mapId:"+ad_list);
+       	String ad_list = request.getParameter("ad_list");
+         System.out.println("ad_list:"+ad_list);
+         List<String> list = new ArrayList<String>();
+
+         StringTokenizer tokenizer = new StringTokenizer(ad_list, ",");
+         int count=tokenizer.countTokens();
    %>
+   <script>
+   var address2 = [];
+   var i =0;
+   <% while(tokenizer.hasMoreTokens()){
+       //System.out.println("Token is : "+ tokenizer.nextToken());
+   		list.add(tokenizer.nextToken());    
+   }%>
+   for(i=0; i<<%=count%>; i++){
+	   address2[i]=<%=list.get(1)%>;
+   }
+   
+
+
+   </script>
    <div id="floating-panel">
-      <input id="address" type="textbox" value="<%=ad_list%>">
+      <input id="address" type="textbox" value="부산역">
       <input id="submit" type="button" value="Geocode">
     </div>
     <div id="map"></div>
     <script>
+
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
@@ -44,7 +68,9 @@ function initMap() {
 
 function geocodeAddress(geocoder, resultsMap) {
 	var address = document.getElementById('address').value;
+	
 
+	alert(address2[1]);
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       resultsMap.setCenter(results[0].geometry.location);
@@ -56,6 +82,7 @@ function geocodeAddress(geocoder, resultsMap) {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
+
 }
 
     </script>

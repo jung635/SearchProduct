@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="store.StoreDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="store.StoreBean"%>
@@ -27,7 +28,23 @@
  </script>
  <![endif]-->
 <title>Insert title here</title>
+	<script>
+	
 
+		function map(address){
+		var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      document.getElementById("map_view2").innerHTML = this.responseText;
+			    }
+			  };
+		xhttp.open("GET", "map4.jsp?address="+address, true);
+		xhttp.send();
+		}
+	
+	
+	
+	</script>
 </head>
 <body>
 <div id="wrap">
@@ -43,25 +60,29 @@
 String store = request.getParameter("store");
 StoreDAO sdao = new StoreDAO();
 List list = sdao.storeSearchList(store);
-
+List<Object> ad_list = new ArrayList<Object>();
 %>
 <!--테이블-->
 
 
 	<table border="1" class="center_table">
-	<th>스토어 이름</th><th>주소</th><th>주소 아이디</th>
+	<th>스토어 이름</th><th>주소</th>
 	<%for(int i=0; i<list.size(); i++){
 	StoreBean sb = (StoreBean)list.get(i);
 	%>
-	<tr><td><a href="#" onclick='location.href="storeSearchMain.jsp?ad_id=<%=sb.getAd_id() %>&address=<%=sb.getAddress() %>"' id="ad_href"><%=sb.getName() %></a>
+	<tr><td><a href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>" id="ad_href"><%=sb.getName() %></a>
 	</td>
 	<td><%=sb.getAddress() %></td>
-	<td><%=sb.getAd_id()%></td>
+	<td><input type="button" value="위치보기" onclick="map('<%=sb.getAddress()%>')"></td>
+	<td><input type="button" value="방문하기" onclick='location.href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>"'></td>
+	<%ad_list.add(sb.getAddress()); %>
 	</tr>
 
 <%} %>
 	</table>
-
+	<div id="map_view2" class="text_center">
+	<embed type="text/html" src="mapId5.jsp?ad_list=<%=ad_list %>" id ="map_view2"  height="400px" width="500px">
+	</div>
 <!--테이블-->
 <!-- 내용 -->
 <!-- 본문 들어가는 곳 -->

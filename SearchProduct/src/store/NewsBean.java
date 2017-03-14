@@ -22,12 +22,7 @@ public class NewsBean {
 		this.content = content;
 	}
 
-	public String getFile() {
-		return file;
-	}
-	public void setFile(String file) {
-		this.file = file;
-	}
+
 	public int getNum() {
 		return num;
 	}
@@ -50,7 +45,7 @@ public class NewsBean {
 
 
 
-	private String name, subject, content, file;
+	private String name, subject, content;
 	private int num, readcount;
 	private Date date;
 

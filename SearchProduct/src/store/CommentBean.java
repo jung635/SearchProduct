@@ -21,19 +21,6 @@ public class CommentBean {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	public int getRe_ref() {
-		return re_ref;
-	}
-	public void setRe_ref(int re_ref) {
-		this.re_ref = re_ref;
-	}
-	public int getRe_lev() {
-		return re_lev;
-	}
-	public void setRe_lev(int re_lev) {
-		this.re_lev = re_lev;
-	}
 	public int getRe_seq() {
 		return re_seq;
 	}
@@ -54,7 +41,7 @@ public class CommentBean {
 	}
 
 	private String name, pass, content;
-	private int re_ref, re_lev, re_seq, renum, board_num;
+	private int re_seq, renum, board_num;
 	
 
 

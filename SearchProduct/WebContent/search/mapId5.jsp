@@ -38,7 +38,6 @@
   <body>
         <%request.setCharacterEncoding("utf-8");
        	String ad_list = request.getParameter("ad_list");
-         System.out.println("ad_list:"+ad_list);
          List<String> list = new ArrayList<String>();
 
          StringTokenizer tokenizer = new StringTokenizer(ad_list, ",");
@@ -57,7 +56,6 @@
    <% while(tokenizer.hasMoreTokens()){
        //System.out.println("Token is : "+ tokenizer.nextToken());
    		list.add(tokenizer.nextToken());    
-   	 System.out.println("list:" +list.get(0));
    }
    
    %>

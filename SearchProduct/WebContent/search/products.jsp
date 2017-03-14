@@ -37,7 +37,7 @@
 <div id="main_img"><img src="../images/map.png"
  width="971" height="282"></div>
 <div id="search">
-<form action="searchPro.jsp" name="fr">
+<form action="searchPro2.jsp" name="fr">
 <input type="text" placeholder="무엇을 찾으시나요" name="product">
 <input type="submit" value="search" >
 </form>

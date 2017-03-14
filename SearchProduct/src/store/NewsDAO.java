@@ -78,8 +78,8 @@ public class NewsDAO {
 				}
 				
 				sql = "insert into news(num, name, subject,"
-						+ " content, readcount,date, file)"
-								+ " values(?,?,?,?,?,now(),?);";
+						+ " content, readcount,date)"
+								+ " values(?,?,?,?,?,now());";
 				pstmt=con.prepareStatement(sql);
 				
 				pstmt.setInt(1, num);
@@ -87,8 +87,7 @@ public class NewsDAO {
 				pstmt.setString(3, nb.getSubject());
 				pstmt.setString(4, nb.getContent());
 				pstmt.setInt(5, readcount);
-				pstmt.setString(6, nb.getFile());
-				
+	
 				pstmt.executeUpdate();
 				
 			}catch(Exception e){
@@ -248,7 +247,6 @@ public class NewsDAO {
 					nb.setName(rs.getString("name"));
 					nb.setSubject(rs.getString("subject"));
 					nb.setContent(rs.getString("content"));
-					nb.setFile(rs.getString("file"));
 				}
 				
 			

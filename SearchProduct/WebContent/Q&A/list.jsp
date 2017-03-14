@@ -72,7 +72,9 @@ int end=0;
     <th class="twrite">Writer</th>
     <th class="tdate">Date</th>
     <th class="tread">Read</th></tr>
-    <%
+   <%if(list == null){%>
+<tr><td colspan="4">글이 없습니다</td><td>
+   <%}else{
 for(int i=0; i<list.size(); i++){
 	BoardBean bb = (BoardBean)list.get(i);
 %>
@@ -82,7 +84,7 @@ for(int i=0; i<list.size(); i++){
 <a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %></a></td>
 <td><%=bb.getName() %></td><td><%=bb.getDate() %></td><td><%=bb.getReadcount() %></td>
 </tr>
-<%} %>  
+<%} }%>  
 </table>
 <div id="table_search">
 <form action="qa_search.jsp">
@@ -140,9 +142,6 @@ for(int i=startPage; i<=endPage; i++){
 
 
 <input type="button" value="글쓰기" class="write_btn" onclick="location.href='write.jsp'" >
-count: <%=count %>
-start: <%=start %>
-end: <%=end %>
 </div>
 </article>
 <!-- 게시판 -->

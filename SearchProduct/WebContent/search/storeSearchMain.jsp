@@ -25,6 +25,33 @@
  </script>
  <![endif]--> 
 
+<script>
+	
+
+		function map(address){
+		var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      document.getElementById("map_view").innerHTML = this.responseText;
+			    }
+			  };
+		xhttp.open("GET", "map4.jsp?address="+address, true);
+		xhttp.send();
+		}
+		function gallery(storeId,address){
+		var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      document.getElementById("map_view").innerHTML = this.responseText;
+			    }
+			  };
+		xhttp.open("GET", "goodsGallery.jsp?storeId="+storeId+"&address="+address, true);
+		xhttp.send();
+		}
+	
+	
+	
+	</script>
 
 </head>
 <body>
@@ -37,16 +64,16 @@
 <!-- 메뉴 들어가는 곳 -->
 
 <%
-
-String ad_id=request.getParameter("ad_id");
 String address=request.getParameter("address");
+String storeId=request.getParameter("storeId");
 %>
 <div class="text_center">
 
 
-<a href="map.jsp?ad_id=<%=ad_id %>&address=<%=address %>"  id="ad_href">위치 보기</a><br>
-<a href="goodsGallery.jsp?ad_id=<%=ad_id %>&address=<%=address %>" id="ad_href">물품 목록 보기</a><br>
+<input type="button" value="위치보기" onclick="map('<%=address%>')">
+<input type="button" value="물품 목록 보기" onclick="gallery('<%=storeId%>','<%=address%>')">
 </div>
+	<div id="map_view"></div>
 <!-- 메뉴 들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

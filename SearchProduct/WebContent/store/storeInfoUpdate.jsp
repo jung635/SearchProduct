@@ -59,7 +59,6 @@
 String id =request.getParameter("id");
 String name = request.getParameter("name");
 String address = request.getParameter("address");
-String ad_id = request.getParameter("ad_id");
 String email = request.getParameter("email");
 String pass=(String)session.getAttribute("pass");
 
@@ -95,8 +94,7 @@ String sessionId=(String)session.getAttribute("id");
 <input type="email" name="email" value=<%=email %>><br>
 <label>Address</label>
 <input type="text" name="address" value="<%=address %>"><input type="button" value="주소 찾기" onclick='window.open("idFinder.jsp", "idfinder", "width=600,height=500");'><br>
-<label>address id</label>
-<input type="text" name="ad_id" value=<%=ad_id %>>
+
 
 
 

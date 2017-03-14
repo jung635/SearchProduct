@@ -163,7 +163,6 @@ public class BoardDAO {
 		BoardBean bb = null;
 		try{
 			
-			Class.forName("com.mysql.jdbc.Driver");
 			con=getConnection();
 			
 			sql = "select * from board order by num desc limit ?,?;";
@@ -458,18 +457,16 @@ public class BoardDAO {
 			pstmt.executeUpdate();*/
 			
 			
-			sql = "insert into comment(name, pass, content, re_ref, re_lev, re_seq"
+			sql = "insert into comment(name, pass, content, re_seq"
 					+ " ,date, renum, board_num)"
-							+ " values(?,?,?,?,?,?,now(),?,?);";
+							+ " values(?,?,?,?,now(),?,?);";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, cb.getName());
 			pstmt.setString(2, cb.getPass());
 			pstmt.setString(3, cb.getContent());
-			pstmt.setInt(4, 0); //답변글 그룹
-			pstmt.setInt(5, 0); //답변글 레벨
-			pstmt.setInt(6, 0); //답변글 순서
-			pstmt.setInt(7, max); //글 순서
-			pstmt.setInt(8, cb.getBoard_num()); //글 순서
+			pstmt.setInt(4, 0); //답변글 순서
+			pstmt.setInt(5, max); //글 순서
+			pstmt.setInt(6, cb.getBoard_num()); //글 순서
 			
 			
 			pstmt.executeUpdate();
@@ -535,19 +532,17 @@ public class BoardDAO {
 			
 			
 			sql = "insert into comment(name, pass,"
-					+ " content, re_lev, "
-					+ "re_seq, renum, board_num, date, re_ref)"
-					+ " values(?,?,?,?,?,?,?,now(),?);";
+					+ " content,"
+					+ "re_seq, renum, board_num, date)"
+					+ " values(?,?,?,?,?,?,now());";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1, cb.getName());
 			pstmt.setString(2, cb.getPass());
 			pstmt.setString(3, cb.getContent());
-			pstmt.setInt(4, 0); //답변글 들여쓰기
-			pstmt.setInt(5, max); //답변글 순서
-			pstmt.setInt(6, cb.getRenum()); //답변글 순서
-			pstmt.setInt(7, cb.getBoard_num());
-			pstmt.setInt(8, 0); //답변글 들여쓰기
+			pstmt.setInt(4, max); //답변글 순서
+			pstmt.setInt(5, cb.getRenum()); //답변글 순서
+			pstmt.setInt(6, cb.getBoard_num());
 			
 			
 			pstmt.executeUpdate();
@@ -602,9 +597,7 @@ public class BoardDAO {
 						cb = new CommentBean();
 						cb.setName(rs.getString("name"));
 						cb.setContent(rs.getString("content"));
-						cb.setRe_lev(rs.getInt("re_lev"));
 						cb.setRe_seq(rs.getInt("re_seq"));
-						cb.setRe_ref(rs.getInt("re_ref"));
 						cb.setRenum(rs.getInt("renum"));
 						cb.setBoard_num(rs.getInt("board_num"));
 						cb.setDate(rs.getTimestamp("date"));

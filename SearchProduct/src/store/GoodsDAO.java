@@ -31,7 +31,8 @@ public class GoodsDAO {
 		String sql = "";
 		List<Object> list = new ArrayList<Object>();
 		GoodsBean gb = null;
-		
+		System.out.println("hi");
+		System.out.println(id);
 		try{
 
 			con=getConnection();
@@ -87,15 +88,14 @@ public class GoodsDAO {
 				int check = 1;//성공
 				try{
 					con=getConnection();
-					sql = "update stores set name=?, address=?, pass=?, ad_id=?, email=? where id=?";
+					sql = "update stores set name=?, address=?, pass=?, email=? where id=?";
 					pstmt = con.prepareStatement(sql);
 					
 					pstmt.setString(1, sb.getName());
 					pstmt.setString(2, sb.getAddress());
 					pstmt.setString(3, sb.getPass());
-					pstmt.setString(4, sb.getAd_id());
-					pstmt.setString(5, sb.getEmail());
-					pstmt.setString(6, sb.getId());
+					pstmt.setString(4, sb.getEmail());
+					pstmt.setString(5, sb.getId());
 					
 					pstmt.executeUpdate();
 					

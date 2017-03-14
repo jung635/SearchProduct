@@ -44,24 +44,20 @@
 String product = request.getParameter("product");
 StoreDAO sdao = new StoreDAO();
 List list = sdao.storeList(product);
-List<Object> adId_list = new ArrayList<Object>();
 List<Object> ad_list = new ArrayList<Object>();
-String ad = "부산역";
 %>
 <!--테이블-->
 
 
 	<table border="1" class="center_table">
-	<th>스토어 이름</th><th>주소</th><th>주소 아이디</th>
+	<th>스토어 이름</th><th>주소</th>
 	<%for(int i=0; i<list.size(); i++){
 	StoreBean sb = (StoreBean)list.get(i);
 	%>
-	<tr><td><a href="#" id="ad_href"><%=sb.getName() %></a></td>
+	<tr><td><a href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>" id="ad_href"><%=sb.getName() %></a></td>
 	<td><%=sb.getAddress() %></td>
-	<td><%=sb.getAd_id()%></td>
-	<td><input type="button" value="방문하기" onclick="map('<%=sb.getAd_id()%>','<%=sb.getAddress()%>')"></td>
-	<td><input type="button" value="테스트" onclick="list()"></td>
-	<%adId_list.add(sb.getAd_id()); %>
+	<td><input type="button" value="위치보기" onclick="map('<%=sb.getAddress()%>')"></td>
+	<td><input type="button" value="방문하기" onclick='location.href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>"'></td>
 	<%ad_list.add(sb.getAddress()); %>
 
 	</tr>
@@ -69,33 +65,20 @@ String ad = "부산역";
 
 	</table>
 	<div id="map_view2" class="text_center">
-	<embed type="text/html" src="mapId5.jsp?ad_list=<%=ad_list %> "  height="400px" width="500px">
+	<embed type="text/html" src="mapId5.jsp?ad_list=<%=ad_list %>" id ="map_view2"  height="400px" width="500px">
 	</div>
-	<div id="map_view"></div>
 	<script>
 	
 
-		function map(ad_id, address){
+		function map(address){
 		var xhttp = new XMLHttpRequest();
 			  xhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
-			      document.getElementById("map_view").innerHTML = this.responseText;
+			      document.getElementById("map_view2").innerHTML = this.responseText;
 			    }
 			  };
-		xhttp.open("GET", "map2.jsp?ad_id="+ad_id+"&address="+address, true);
+		xhttp.open("GET", "map4.jsp?address="+address, true);
 		xhttp.send();
-		}
-		
-		function list(){
-			alert("hi");
-		/*var xhttp = new XMLHttpRequest();
-			  xhttp.onreadystatechange = function() {
-			    if (this.readyState == 4 && this.status == 200) {
-			      //document.getElementById("map_view").innerHTML = this.responseText;
-			    }
-			  };
-		xhttp.open("GET", "map2.jsp?adId_list="+adId_list, true);
-		xhttp.send();*/
 		}
 	
 	

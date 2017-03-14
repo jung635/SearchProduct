@@ -113,7 +113,7 @@ if(bb.getFile()==null){
 	<td><%=cb.getName() %></td>
 	<td><%=cb.getContent() %></td>
 	<td><%=cb.getDate() %></td>
-	<td><input type="button" id="re_reply_button" value="댓글달기" alt="<%=cb.getRenum()%>" onclick="re_view(<%=cb.getBoard_num()%>,<%=cb.getRenum()%>)"></td>
+	<td><input type="button" id="re_reply_button" value="댓글" alt="<%=cb.getRenum()%>" onclick="re_view(<%=cb.getBoard_num()%>,<%=cb.getRenum()%>)"></td>
 	</tr>
 	<tr id="re_reply_content<%=cb.getRenum()%>" style="display: none;">
 	<td colspan="4"><div id="re_re_detail<%=cb.getRenum()%>" style="padding-left: 57px;"></div>
