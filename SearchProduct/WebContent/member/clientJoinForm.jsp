@@ -236,7 +236,7 @@ function authCheck(){
 <body>
 
 
-<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 
 <!-- 본문들어가는 곳 -->

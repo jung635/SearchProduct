@@ -36,7 +36,7 @@ String email = request.getParameter("email");
 String pass=(String)session.getAttribute("pass");
 
 %>
-<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->

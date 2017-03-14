@@ -31,9 +31,12 @@
 
 
 </head>
+
 <body>
+<jsp:include page="../inc/snsbar_main.jsp"/>
 <div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
+
 <!-- 메인이미지 들어가는곳 -->
 <div class="clear"></div>
 <div id="main_img"><img src="../images/map.png"

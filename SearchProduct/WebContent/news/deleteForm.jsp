@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>

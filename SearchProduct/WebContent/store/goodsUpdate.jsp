@@ -33,7 +33,7 @@ String product = request.getParameter("product");
 String pic = request.getParameter("pic");
 int price = Integer.parseInt(request.getParameter("price"));
 %>
-<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
 
 <jsp:include page="../inc/top.jsp"/>
 <!-- 서브페이지 메인이미지 -->

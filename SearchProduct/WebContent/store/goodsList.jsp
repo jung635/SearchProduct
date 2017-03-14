@@ -40,7 +40,7 @@ String sessionId=(String)session.getAttribute("id");
 GoodsDAO gdao = new GoodsDAO();
 List<Object> list = new ArrayList<Object>();
 list=gdao.goodsList(sessionId);%>
-<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 <!-- 서브페이지 메인이미지 -->
 <div id="sub_img"></div>

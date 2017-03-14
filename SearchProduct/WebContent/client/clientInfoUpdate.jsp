@@ -93,7 +93,7 @@
 </head>
 <body>
 <body>
-<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문 들어가는 곳 -->
 <%request.setCharacterEncoding("utf-8");

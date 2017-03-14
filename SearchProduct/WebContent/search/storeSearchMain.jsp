@@ -59,7 +59,7 @@
 String address=request.getParameter("address");
 String storeId=request.getParameter("storeId");
 %>
-<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 <!-- 서브페이지 메인이미지 -->
 <div id="sub_img"></div>
