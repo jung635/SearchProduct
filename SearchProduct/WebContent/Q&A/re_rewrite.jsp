@@ -29,16 +29,16 @@ List list = bdao.getRereDetail(num, cb.getRenum());
 
 
 %>
-<table>
+<table id="rere">
 <%
 for(int i=0; i<list.size(); i++){
 	cb = (CommentBean)list.get(i);
 	
 	%>
 <tr>
-<td><%=cb.getName() %></td>
-<td><%=cb.getContent() %></td>
-<td><%=cb.getDate() %></td>
+<td style="width: 200px;"><%=cb.getName() %></td>
+<td style="width: 200px;"><%=cb.getContent() %></td>
+<td style="width: 200px;"><%=cb.getDate() %></td>
 
 </tr>
 <%} %>

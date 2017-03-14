@@ -41,7 +41,6 @@ bb.setNum(Integer.parseInt(multi.getParameter("num")));
 
 int pageNum = Integer.parseInt(multi.getParameter("pageNum"));
 //사용자가 올린 원 파일이름
-
 BoardDAO bdao = new BoardDAO();
 bdao.updateBoard(bb);
 //response.sendRedirect("list.jsp?pageNum="pageNum);

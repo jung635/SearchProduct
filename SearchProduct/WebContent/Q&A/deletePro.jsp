@@ -1,3 +1,7 @@
+
+<%@page import="java.io.File"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="store.BoardDAO"%>
 <%@page import="store.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,15 +14,37 @@
 </head>
 <body>
 <%request.setCharacterEncoding("utf-8");
-String id = request.getParameter("id");
-String pass = request.getParameter("pass");
-int num = Integer.parseInt(request.getParameter("num"));
-String pageNum = (String)request.getParameter("pageNum");
+
+String realfilePath = request.getRealPath("/boardPic");
+
+int maxSize = 5*1024*1024; //5M(메가바이트)
+MultipartRequest multi = new MultipartRequest(request, realfilePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+String file_name = multi.getParameter("file");
+String rfp = realfilePath+'\\'+file_name;
+System.out.println("물리적경로: "+rfp);
+
+File file = new File(rfp);
+System.out.println("파일인가: "+file.isDirectory());
+System.out.println("존재하나: "+file.exists());
+System.out.println("절대경로: "+file.getAbsolutePath());
+System.out.println("파일이름: "+file.getName());
+if(file.delete()){
+	System.out.println("성공");
+}else{
+	System.out.println("실패");
+	System.out.println(rfp);
+}
+String id = multi.getParameter("id");
+String pass = multi.getParameter("pass");
+int num = Integer.parseInt(multi.getParameter("num"));
+String pageNum = (String)multi.getParameter("pageNum");
 MemberDAO mdao = new MemberDAO();
 BoardDAO bdao = new BoardDAO();
 int check=mdao.idCheck(id,pass);
 if(check==1){
-	bdao.deleteBoard(num);%>
+	bdao.deleteBoard(num);
+
+	%>
 	 <script>
  location.href='list.jsp?pageNum=<%=pageNum%>'
  </script>

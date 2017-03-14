@@ -51,7 +51,7 @@
 
 </head>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<jsp:include page="../inc/snsbar_main.jsp"/><div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
@@ -71,18 +71,17 @@ BoardBean bb = bdao.getDetail(num);
 <table class="border_table">
 <tr>
 <td>글번호</td><td><%=bb.getNum() %></td>
-</tr>
-<tr>
 <td>이름</td><td><%=bb.getName() %></td>
+<td>조회수</td><td><%=bb.getReadcount() %></td>
 </tr>
 <tr>
-<td>제목</td><td colspan="3"><%=bb.getSubject() %></td>
+<td>제목</td><td colspan="5"><%=bb.getSubject() %></td>
 </tr>
 <tr>
-<td>내용 </td><td colspan="3"><%=bb.getContent() %></td>
+<td>내용 </td><td colspan="5"><%=bb.getContent() %></td>
 </tr>
 <tr>
-<td>첨부파일 </td><td colspan="3"><%
+<td>첨부파일 </td><td colspan="5"><%
 if(bb.getFile()==null){
 %>
 첨부파일 없음
@@ -91,7 +90,7 @@ if(bb.getFile()==null){
 <%=bb.getFile() %></a></td>
 </tr>
 <tr>
-<td colspan="3" align="center">
+<td colspan="6" align="center">
 <img src="../boardPic/<%=bb.getFile() %>" width="100px" height="100px">
 </td>
 </tr>
@@ -115,7 +114,7 @@ if(bb.getFile()==null){
 	<td><input type="button" id="re_reply_button" value="댓글" alt="<%=cb.getRenum()%>" onclick="re_view(<%=cb.getBoard_num()%>,<%=cb.getRenum()%>)"></td>
 	</tr>
 	<tr id="re_reply_content<%=cb.getRenum()%>" style="display: none;">
-	<td colspan="4"><div id="re_re_detail<%=cb.getRenum()%>" style="padding-left: 57px;"></div>
+	<td colspan="4"><div id="re_re_detail<%=cb.getRenum()%>" style="padding-left: 173px;"></div>
 	<textarea cols="60" rows="2" id="re_re_text<%=cb.getRenum()%>"></textarea><input type="button" id="re_reply_content" value="댓글등록"
 	onclick="re_reply(<%=cb.getRenum()%>)">
 	</td>	
@@ -194,7 +193,7 @@ String pass=(String)session.getAttribute("pass");
 </div> --%>
 <div id="content_btn">
 <input type="button" value="글수정" onclick="location.href='updateForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>'">
-<input type="button" value="글삭제" onclick="location.href='deleteForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>&name=<%=bb.getName()%>'">
+<input type="button" value="글삭제" onclick="location.href='deleteForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>&name=<%=bb.getName()%>&file=<%=bb.getFile()%>'">
 <input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%=pageNum%>'">
 </div> 
 

@@ -223,13 +223,16 @@ repeat-x center center*/
 .border_table{
 	margin: auto;
 	width: 500px;
-	height: 500px;
 	margin-top: 100px;
+	border-collapse: collapse;
 }
 
 .border_table td{
-	background: #E3E3E3;
 	text-align: center;
+	border: 1px solid;
+}
+.border_table tr{
+	height: 40px;
 }
 .write_btn{
 	padding: 2px;
@@ -243,4 +246,8 @@ repeat-x center center*/
     background-repeat: repeat-x;
     background-position: center center;
     float: right;
+}
+
+#rere td{
+	width: 200px;
 }

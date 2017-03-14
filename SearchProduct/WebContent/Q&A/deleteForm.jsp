@@ -37,6 +37,7 @@ String sessionId=(String)session.getAttribute("id");
 int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
 String name = request.getParameter("name");
+String file = request.getParameter("file");
 if(sessionId==null){%>
 <script>
 alert('로그인을 해주세요');
@@ -51,9 +52,10 @@ history.back();
 <%}%>
 <div class="text_center">
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>
-<form action="deletePro.jsp" method="post" name="fr">
+<form action="deletePro.jsp" method="post" name="fr" enctype="multipart/form-data" method="post">
 <input type="hidden" name="num" value="<%=num %>">
 <input type="hidden" name="pageNum" value="<%=pageNum %>">
+<input type="hidden" name="file" value="<%=file %>">
 아이디:<input type="text" name="id" value="<%=sessionId %>" readonly><br>
 비밀번호 :<input type="password" name="pass"><br>
 <input type="submit" value="글 삭제">
