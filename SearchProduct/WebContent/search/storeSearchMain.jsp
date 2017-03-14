@@ -78,8 +78,8 @@ String storeId=request.getParameter("storeId");
 
 
 </div>
-<div id="map_view" class="text_center">
-	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=address %>" id ="map_view"  height="400px" width="500px">
+<div id="map_view" class="text_center" >
+	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=address %>" id ="map_view"  style="margin:0;" height="400px" width="500px">
 	</div>
 
 <!-- 메뉴 들어가는 곳 -->

@@ -55,12 +55,13 @@ list=gdao.goodsList(sessionId);%>
 </nav>
 <!-- 왼쪽메뉴 -->
 <!-- 본문 들어가는 곳 -->
+<div class="text_center">
 <article>
 <h1>상품 목록</h1>
 *수정이나 삭제를 원하실 경우 상품의 사진을 클릭하세요
 </article>
 
-	<table border="1">
+	<table id="goods_table">
 	
 	
 	
@@ -70,6 +71,7 @@ list=gdao.goodsList(sessionId);%>
  		<tr>
  		<%}%>
  	<td><a href="goodsUpdate.jsp?product=<%=gb.getProduct()%>&price=<%=gb.getPrice()%>&pic=<%=gb.getPic()%>"><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></a><br>
+ 	<hr>
  	상품명: <%=gb.getProduct() %><br>
  	가격: <%=gb.getPrice() %></td>
  	
@@ -83,6 +85,7 @@ list=gdao.goodsList(sessionId);%>
 	<%//}%> 
 
 	</table>
+	</div>
 <!-- 본문 들어가는 곳 -->
 
 <!-- 메뉴 들어가는 곳 -->

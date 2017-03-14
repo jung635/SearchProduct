@@ -65,7 +65,7 @@ List<Object> ad_list = new ArrayList<Object>();
 <!--테이블-->
 
 
-	<table border="1" class="center_table">
+	<table class="center_table">
 	<th>스토어 이름</th><th>주소</th>
 	<%for(int i=0; i<list.size(); i++){
 	StoreBean sb = (StoreBean)list.get(i);

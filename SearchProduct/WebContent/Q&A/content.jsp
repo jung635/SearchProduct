@@ -72,13 +72,18 @@ BoardBean bb = bdao.getDetail(num);
 <tr>
 <td>글번호</td><td><%=bb.getNum() %></td>
 <td>이름</td><td><%=bb.getName() %></td>
+</tr>
+<tr>
 <td>조회수</td><td><%=bb.getReadcount() %></td>
+<td>작성 날짜</td><td><%=bb.getDate() %></td>
 </tr>
 <tr>
 <td>제목</td><td colspan="5"><%=bb.getSubject() %></td>
 </tr>
 <tr>
-<td>내용 </td><td colspan="5"><%=bb.getContent() %></td>
+<td style="height: 300px;">내용 </td><td colspan="5">
+<%=bb.getContent() %>
+</td>
 </tr>
 <tr>
 <td>첨부파일 </td><td colspan="5"><%
@@ -86,14 +91,15 @@ if(bb.getFile()==null){
 %>
 첨부파일 없음
 <%}else{ %>
-<a href="../boardPic/<%=bb.getFile() %>" >
-<%=bb.getFile() %></a></td>
-</tr>
-<tr>
-<td colspan="6" align="center">
+
+<div><a href="../boardPic/<%=bb.getFile() %>" style="float: right">
+<%=bb.getFile() %></a>
 <img src="../boardPic/<%=bb.getFile() %>" width="100px" height="100px">
+</div>
 </td>
+
 </tr>
+
 <%} %>
 </table>
 
@@ -109,7 +115,7 @@ if(bb.getFile()==null){
 	
 	<tr>
 	<td><%=cb.getName() %></td>
-	<td><%=cb.getContent() %></td>
+	<td ><%=cb.getContent() %></td>
 	<td><%=cb.getDate() %></td>
 	<td><input type="button" id="re_reply_button" value="댓글" alt="<%=cb.getRenum()%>" onclick="re_view(<%=cb.getBoard_num()%>,<%=cb.getRenum()%>)"></td>
 	</tr>

@@ -54,6 +54,7 @@ list=gdao.goodsList(storeId);%>
  		<tr>
  		<%}%>
  	<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></a><br>
+ 	<hr>
  	상품명: <%=gb.getProduct() %><br>
  	가격: <%=gb.getPrice() %></td>
  	

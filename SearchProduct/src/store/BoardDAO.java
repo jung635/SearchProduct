@@ -266,6 +266,7 @@ public class BoardDAO {
 				bb.setSubject(rs.getString("subject"));
 				bb.setContent(rs.getString("content"));
 				bb.setReadcount(rs.getInt("readcount"));
+				bb.setDate(rs.getDate("date"));
 				bb.setFile(rs.getString("file"));
 			}
 			

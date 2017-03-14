@@ -47,18 +47,13 @@ ndao.updateReadcount(num);
 NewsBean nb = ndao.getDetail(num);
 %>
 
-<table border="1" class="center_table">
-<tr>
-<td>글번호</td><td style="width: 300px;"><%=nb.getNum() %></td>
-</tr>
-<tr>
-<td>이름</td><td><%=nb.getName() %></td>
-</tr>
+<table border="1" id="news_table">
 <tr>
 <td>제목</td><td colspan="3"><%=nb.getSubject() %></td>
+<td>글번호</td><td><%=nb.getNum() %></td>
 </tr>
 <tr>
-<td style="height: 300px;">내용 </td><td colspan="3"><%=nb.getContent() %></td>
+<td style="height: 300px;">내용 </td><td colspan="5"><%=nb.getContent() %></td>
 </tr>
 </table>
 

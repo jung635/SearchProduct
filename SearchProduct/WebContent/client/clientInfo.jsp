@@ -65,9 +65,9 @@ if(id==null){%>
 
 
 
-<div id="store_info">
+<div class="text_center">
 <h1>client 회원정보</h1>
-<table border="1" id="store_info_table">
+<table border="1" class="info_table">
 <tr><td>아이디</td><td><%=id%></td></tr>
 <tr><td>비밀번호</td><td><%=mb.getPass()%></td></tr>
 <tr><td>이름</td><td><%=mb.getName()%></td></tr>

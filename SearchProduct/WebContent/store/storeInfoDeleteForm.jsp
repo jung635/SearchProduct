@@ -52,12 +52,16 @@ String pass=(String)session.getAttribute("pass");
 
 
 <!-- 왼쪽메뉴 -->
+<div class="text_center">
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>
+<table class="table_center" style="margin: auto;">
 <form action="storeInfoDeletePro.jsp" method="post" name="fr">
-아이디:<input type="text" name="id" value="<%=id %>" readonly><br>
-비밀번호 :<input type="password" name="pass"><br>
-<input type="submit" value="회원정보삭제">
+<tr><td>아이디</td><td><input type="text" name="id" value="<%=id %>" readonly></td></tr>
+<tr><td>비밀번호</td><td><input type="password" name="pass"></td></tr>
+<tr><td colspan="2"><input type="submit" value="회원정보삭제" style="float: right;"></td></tr>
 </form>
+</table>
+</div>
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

@@ -46,10 +46,10 @@ if(id==null||id.equals("admin")==false){%>
 <input type="hidden" name="pass" value="<%=pass%>">
 <table class="center_table">
 <tr>
-<td>제목 <input type="text" name="subject"></td>
+<td>제목 </td><td> <input type="text" name="subject"></td>
 </tr>
 <tr>
-<td>내용 <textarea name="content" cols="60" rows="15"></textarea></td>
+<td>내용  </td><td><textarea name="content" cols="60" rows="15"></textarea></td>
 </tr>
 </table>
 <div class="text_center">

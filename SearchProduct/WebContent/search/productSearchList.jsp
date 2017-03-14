@@ -64,8 +64,8 @@ List<Object> ad_list = new ArrayList<Object>();
 <%} %>
 
 	</table>
-	<div id="map_view2" class="text_center">
-	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=ad_list %>" id ="map_view2"  height="400px" width="500px">
+	<div id="map_view" class="text_center">
+	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=ad_list %>" id ="map_view"  height="400px" width="500px">
 	</div>
 	<script>
 	
@@ -74,7 +74,7 @@ List<Object> ad_list = new ArrayList<Object>();
 		var xhttp = new XMLHttpRequest();
 			  xhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
-			      document.getElementById("map_view2").innerHTML = this.responseText;
+			      document.getElementById("map_view").innerHTML = this.responseText;
 			    }
 			  };
 		xhttp.open("GET", "single_ad_map.jsp?address="+address, true);

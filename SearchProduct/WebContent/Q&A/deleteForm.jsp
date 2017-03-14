@@ -52,14 +52,16 @@ history.back();
 <%}%>
 <div class="text_center">
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>
+<table class="table_center" style="margin: auto;">
 <form action="deletePro.jsp" method="post" name="fr" enctype="multipart/form-data" method="post">
 <input type="hidden" name="num" value="<%=num %>">
 <input type="hidden" name="pageNum" value="<%=pageNum %>">
 <input type="hidden" name="file" value="<%=file %>">
-아이디:<input type="text" name="id" value="<%=sessionId %>" readonly><br>
-비밀번호 :<input type="password" name="pass"><br>
-<input type="submit" value="글 삭제">
+<tr><td>아이디</td><td><input type="text" name="id" value="<%=sessionId %>" readonly></td></tr>
+<tr><td>비밀번호</td><td><input type="password" name="pass"></td></tr>
+<tr><td colspan="2"><input type="submit" value="글 삭제" style="float: right;"></td></tr>
 </form>
+</table>
 </div>
 
 <!-- 본문들어가는 곳 -->

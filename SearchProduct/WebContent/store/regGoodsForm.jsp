@@ -49,21 +49,27 @@
  <%
  String id=(String)session.getAttribute("id");
  %>
-
+ 
+<article>
+<h1>상품 등록</h1>
+</article>
 <form action="regGoodsPro.jsp" name="fr" enctype="multipart/form-data" method="POST">
-<table>
+<table class="table_center" style="margin: auto;">
 <tr>
-<td>상품 이름 <input type="text" name="product"></td>
+<td>상품 이름</td><td> <input type="text" name="product"></td>
 </tr>
 <tr>
-<td>가격 <input type="text" name="price"></td>
+<td>가격</td><td> <input type="text" name="price"></td>
 </tr>
 <tr>
-<td>파일 <input type="file" name="file"></td>
+<td>파일</td><td> <input type="file" name="file"></td>
 </tr>
+<tr><td colspan="2" >
+<input type="button" value="취소" onclick="history.back()"  style="float: right;">
+<input type="submit" value="등록"  style="float: right;">
+
+</td></tr>
 </table>
-<input type="submit" value="등록">
-<input type="button" value="취소" onclick="history.back()">
 </form>
 <!-- 메뉴 들어가는 곳 -->
 <div class="clear"></div>

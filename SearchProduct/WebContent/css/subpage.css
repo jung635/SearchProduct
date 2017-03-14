@@ -213,13 +213,50 @@ repeat-x center center*/
 	padding-left: 250px;
 	margin-top: 100px;
 }
+.info_table{
+	margin: auto;	
+	border-collapse: collapse;
+}
+.info td{
+	margin: auto;
+	text-align: center;
+	border: 1px solid;
 
+	
+}
 .center_table{
 	margin: auto;	
+	border-collapse: collapse;
+}
+
+.center_table th{
+	margin: auto;
+	text-align: center;
+	
+}
+.center_table td{
+	margin: auto;
+	text-align: center;
+	border-bottom: 1px solid;
+	border-top: 1px solid;
+	
+}
+#goods_table{
+	margin: auto;	
+	border-collapse: collapse;
+}
+#goods_table td{
+	margin: auto;
+	text-align: center;
+	border: 1px solid;
+
+	
 }
 .text_center{
 	text-align: center;
+
 }
+
 .border_table{
 	margin: auto;
 	width: 500px;
@@ -250,4 +287,22 @@ repeat-x center center*/
 
 #rere td{
 	width: 200px;
+}
+
+#news_table{
+	margin: auto;
+	width: 500px;
+	margin-top: 100px;
+	border-collapse: collapse;
+}
+#news_table td{
+	text-align: center;
+}
+#news_table tr{
+	height: 40px;
+	
+}
+
+#map_view{
+	margin-top: 30px;
 }

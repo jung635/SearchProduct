@@ -24,15 +24,10 @@ String rfp = realfilePath+'\\'+file_name;
 System.out.println("물리적경로: "+rfp);
 
 File file = new File(rfp);
-System.out.println("파일인가: "+file.isDirectory());
-System.out.println("존재하나: "+file.exists());
-System.out.println("절대경로: "+file.getAbsolutePath());
-System.out.println("파일이름: "+file.getName());
 if(file.delete()){
 	System.out.println("성공");
 }else{
 	System.out.println("실패");
-	System.out.println(rfp);
 }
 String id = multi.getParameter("id");
 String pass = multi.getParameter("pass");
