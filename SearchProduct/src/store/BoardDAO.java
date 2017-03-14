@@ -290,7 +290,6 @@ public class BoardDAO {
 		String sql = "";
 		
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
 			sql = "update board set readcount=readcount+1 where num=? ";
 			pstmt=con.prepareStatement(sql);
@@ -430,7 +429,6 @@ public class BoardDAO {
 		int max=0;
 		
 		try{
-			
 			con = getConnection();
 			sql="select max(renum) from comment;";
 			pstmt=con.prepareStatement(sql);
@@ -662,7 +660,32 @@ public class BoardDAO {
 				return relist;
 			}
 			
-
+			//조회수 증가
+			public void updateMinusReadcount(int num){
+				Connection con=null;
+				PreparedStatement pstmt=null;
+				String sql = "";
+				
+				try{
+					con = getConnection();
+					sql = "update board set readcount=readcount-1 where num=? ";
+					pstmt=con.prepareStatement(sql);
+					pstmt.setInt(1, num);
+					pstmt.executeUpdate();
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}finally{
+					try{
+						con.close();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					
+				}
+				
+			}
+			
 
 }
 

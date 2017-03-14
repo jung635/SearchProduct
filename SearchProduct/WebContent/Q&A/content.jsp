@@ -63,8 +63,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
 BoardDAO bdao = new BoardDAO();
 CommentBean cb = null;
-//조회수증가 readcount 1증가 update readcount=readcount+1
-//메서드 호출 updateReadcount(num)
+
 bdao.updateReadcount(num);
 BoardBean bb = bdao.getDetail(num);
 %>
@@ -174,8 +173,8 @@ String pass=(String)session.getAttribute("pass");
 </td>
 </tr>
 	</table>
->
 
+	 
 <%
 //String id=(String)session.getAttribute("id");
 //String pass=(String)session.getAttribute("pass");

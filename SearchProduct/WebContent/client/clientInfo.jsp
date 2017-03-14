@@ -57,7 +57,7 @@ if(id==null){%>
 <ul>
 <li><a href="clientInfo.jsp">회원 정보 확인</a></li>
 <li><a href="clientInfoUpdate.jsp?id=<%=id%>&name=<%=mb.getName()%>&address=<%=mb.getAddress()%>&postcode=<%=mb.getPostcode() %>&phone=<%=mb.getPhone()%>&email=<%=mb.getEmail()%>">회원 정보 수정</a></li>
-<li><a href="clientInfoDeleteForm.jsp">회원 탈퇴</a></li>
+<li><a href="clientInfoDeleteForm.jsp?id=<%=id%>&name=<%=mb.getName()%>&address=<%=mb.getAddress()%>&postcode=<%=mb.getPostcode() %>&phone=<%=mb.getPhone()%>&email=<%=mb.getEmail()%>">회원 탈퇴</a></li>
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->

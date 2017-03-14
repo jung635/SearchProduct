@@ -26,7 +26,15 @@
 
  </script>
  <![endif]--> 
-
+<script type="text/javascript">
+function check(){
+	if(document.fr.store.value==""){
+ 		alert("검색어를 입력해주세요");
+ 		document.fr.store.focus();
+ 		return false;
+ 	}
+}
+</script>
 
 </head>
 <body>
@@ -37,7 +45,7 @@
 <div id="main_img"><img src="../images/map.png"
  width="971" height="282"></div>
 <div id="search">
-<form action="storeSearchList.jsp" name="fr">
+<form action="storeSearchList.jsp" name="fr" onsubmit="return check()">
 <input type="text" placeholder="스토어를 찾으시나요" name="store">
 <input type="submit" value="search" >
 </form>

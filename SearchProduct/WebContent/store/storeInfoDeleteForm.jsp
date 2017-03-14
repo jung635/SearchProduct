@@ -26,6 +26,15 @@
  <![endif]--> 
  </head>
 <body>
+<%request.setCharacterEncoding("utf-8");
+String id =request.getParameter("id");
+String name = request.getParameter("name");
+String address = request.getParameter("address");
+String email = request.getParameter("email");
+String pass=(String)session.getAttribute("pass");
+
+%>
+
 <div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문들어가는 곳 -->
@@ -36,17 +45,16 @@
 <nav id="sub_menu">
 <ul>
 <li><a href="../store/storeInfo.jsp">회원 정보 확인</a></li>
-<li><a href="../store/storeInfoUpdate.jsp">회원 정보 수정</a></li>
-<li><a href="../store/storeInfoDeleteForm.jsp">회원 탈퇴</a></li>
+<li><a href="../store/storeInfoUpdate.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&email=<%=email%>">회원 정보 수정</a></li>
+<li><a href="../store/storeInfoDeleteForm.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&email=<%=email%>">회원 탈퇴</a></li>
 </ul>
 </nav>
-<%
-String sessionId=(String)session.getAttribute("id");
-%>
+
+
 <!-- 왼쪽메뉴 -->
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>
 <form action="storeInfoDeletePro.jsp" method="post" name="fr">
-아이디:<input type="text" name="id" value="<%=sessionId %>" readonly><br>
+아이디:<input type="text" name="id" value="<%=id %>" readonly><br>
 비밀번호 :<input type="password" name="pass"><br>
 <input type="submit" value="회원정보삭제">
 </form>

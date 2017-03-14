@@ -35,7 +35,7 @@
 			      document.getElementById("map_view").innerHTML = this.responseText;
 			    }
 			  };
-		xhttp.open("GET", "map4.jsp?address="+address, true);
+		xhttp.open("GET", "single_ad_map.jsp?address="+address, true);
 		xhttp.send();
 		}
 		function gallery(storeId,address){
@@ -55,25 +55,33 @@
 
 </head>
 <body>
+<%
+String address=request.getParameter("address");
+String storeId=request.getParameter("storeId");
+%>
 <div id="wrap">
 <jsp:include page="../inc/top.jsp"/>
 <!-- 서브페이지 메인이미지 -->
 <div id="sub_img"></div>
 <!-- 서브페이지 메인이미지 -->
-
+<nav id="sub_menu">
+<ul>
+<li><a href="#" onclick="map('<%=address%>')">위치보기</a></li>
+<li><a href="#" onclick="gallery('<%=storeId%>','<%=address%>')">물품 목록 보기</a></li>
+</ul>
+</nav>
+<!-- 왼쪽메뉴 -->
 <!-- 메뉴 들어가는 곳 -->
 
-<%
-String address=request.getParameter("address");
-String storeId=request.getParameter("storeId");
-%>
+
 <div class="text_center">
 
 
-<input type="button" value="위치보기" onclick="map('<%=address%>')">
-<input type="button" value="물품 목록 보기" onclick="gallery('<%=storeId%>','<%=address%>')">
 </div>
-	<div id="map_view"></div>
+<div id="map_view" class="text_center">
+	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=address %>" id ="map_view"  height="400px" width="500px">
+	</div>
+
 <!-- 메뉴 들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

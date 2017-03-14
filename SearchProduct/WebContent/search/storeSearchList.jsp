@@ -35,10 +35,10 @@
 		var xhttp = new XMLHttpRequest();
 			  xhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
-			      document.getElementById("map_view2").innerHTML = this.responseText;
+			      document.getElementById("map_view").innerHTML = this.responseText;
 			    }
 			  };
-		xhttp.open("GET", "map4.jsp?address="+address, true);
+		xhttp.open("GET", "single_ad_map.jsp?address="+address, true);
 		xhttp.send();
 		}
 	
@@ -70,7 +70,7 @@ List<Object> ad_list = new ArrayList<Object>();
 	<%for(int i=0; i<list.size(); i++){
 	StoreBean sb = (StoreBean)list.get(i);
 	%>
-	<tr><td><a href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>" id="ad_href"><%=sb.getName() %></a>
+	<tr><td><a href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>" id="ad_href"><%=sb.getName() %></a>
 	</td>
 	<td><%=sb.getAddress() %></td>
 	<td><input type="button" value="위치보기" onclick="map('<%=sb.getAddress()%>')"></td>
@@ -80,8 +80,8 @@ List<Object> ad_list = new ArrayList<Object>();
 
 <%} %>
 	</table>
-	<div id="map_view2" class="text_center">
-	<embed type="text/html" src="mapId5.jsp?ad_list=<%=ad_list %>" id ="map_view2"  height="400px" width="500px">
+	<div id="map_view" class="text_center">
+	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=ad_list %>" id ="map_view"  height="400px" width="500px">
 	</div>
 <!--테이블-->
 <!-- 내용 -->

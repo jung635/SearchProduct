@@ -118,8 +118,8 @@ String sessionId=(String)session.getAttribute("id");
 <nav id="sub_menu">
 <ul>
 <li><a href="clientInfo.jsp">회원 정보 확인</a></li>
-<li><a href="clientInfoUpdate.jsp">회원 정보 수정</a></li>
-<li><a href="clientInfoDeleteForm.jsp">회원 탈퇴</a></li>
+<li><a href="clientInfoUpdate.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&postcode=<%=postcode %>&phone=<%=phone%>&email=<%=email%>">회원 정보 수정</a></li>
+<li><a href="clientInfoDeleteForm.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&postcode=<%=postcode %>&phone=<%=phone%>&email=<%=email%>">회원 탈퇴</a></li>
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->

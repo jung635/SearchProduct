@@ -49,7 +49,7 @@ StoreBean sb = sdao.infoStore(id);
 <ul>
 <li><a href="storeInfo.jsp">회원 정보 확인</a></li>
 <li><a href="storeInfoUpdate.jsp?id=<%=id%>&name=<%=sb.getName()%>&address=<%=sb.getAddress()%>&email=<%=sb.getEmail()%>">회원 정보 수정</a></li>
-<li><a href="storeInfoDeleteForm.jsp">회원 탈퇴</a></li>
+<li><a href="storeInfoDeleteForm.jsp?id=<%=id%>&name=<%=sb.getName()%>&address=<%=sb.getAddress()%>&email=<%=sb.getEmail()%>">회원 탈퇴</a></li>
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->
