@@ -44,8 +44,8 @@
 String product = request.getParameter("product");
 StoreDAO sdao = new StoreDAO();
 List list = sdao.storeList(product);
-List adId_list = new ArrayList();
-List ad_list = new ArrayList();
+List<Object> adId_list = new ArrayList<Object>();
+List<Object> ad_list = new ArrayList<Object>();
 String ad = "부산역";
 %>
 <!--테이블-->
@@ -66,12 +66,10 @@ String ad = "부산역";
 
 	</tr>
 <%} %>
-<%
-System.out.println(ad);
-%>
+
 	</table>
 	<div id="map_view2" class="text_center">
-	<embed type="text/html" src="mapId3.jsp?address=<%=ad %> "  height="400px" width="500px">
+	<embed type="text/html" src="mapId5.jsp?ad_list=<%=ad_list %> "  height="400px" width="500px">
 	</div>
 	<div id="map_view"></div>
 	<script>
