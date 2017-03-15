@@ -13,7 +13,7 @@ height: 257px;
 background: #7ED2FF;
 float: right;
 margin: auto;
-margin-left: 182px;
+margin-left: -43px;
 margin-top: 465px;	
  }
 .sns{

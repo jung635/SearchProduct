@@ -38,7 +38,7 @@ function check(){
 </script>
 </head>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 들어가는곳 -->
 <div class="clear"></div>

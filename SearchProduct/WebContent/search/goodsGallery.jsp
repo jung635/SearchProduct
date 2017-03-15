@@ -56,7 +56,8 @@ list=gdao.goodsList(storeId);%>
  	<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></a><br>
  	<hr>
  	상품명: <%=gb.getProduct() %><br>
- 	가격: <%=gb.getPrice() %></td>
+ 	가격: <%=gb.getPrice() %><br>
+ 	<input type = "button" value="찜하기" onclick="location.href='addHot.jsp?storeId=<%=storeId%>&product=<%=gb.getProduct()%>'"></td>
  	
 
 	<%

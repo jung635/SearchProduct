@@ -30,7 +30,7 @@
 
 </head>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 
 
@@ -56,8 +56,9 @@ if(id==null){%>
 <nav id="sub_menu">
 <ul>
 <li><a href="clientInfo.jsp">회원 정보 확인</a></li>
-<li><a href="clientInfoUpdate.jsp?id=<%=id%>&name=<%=mb.getName()%>&address=<%=mb.getAddress()%>&postcode=<%=mb.getPostcode() %>&phone=<%=mb.getPhone()%>&email=<%=mb.getEmail()%>">회원 정보 수정</a></li>
-<li><a href="clientInfoDeleteForm.jsp?id=<%=id%>&name=<%=mb.getName()%>&address=<%=mb.getAddress()%>&postcode=<%=mb.getPostcode() %>&phone=<%=mb.getPhone()%>&email=<%=mb.getEmail()%>">회원 탈퇴</a></li>
+<li><a href="clientInfoUpdate.jsp">회원 정보 수정</a></li>
+<li><a href="clientInfoDeleteForm.jsp">회원 탈퇴</a></li>
+<li><a href="mygoods.jsp">찜 리스트</a></li>
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->

@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
@@ -44,7 +44,7 @@ if(id==null||id.equals("admin")==false){%>
 <form action="writePro.jsp" name="fr">
 <input type="hidden" name="name" value="<%=id%>">
 <input type="hidden" name="pass" value="<%=pass%>">
-<table class="center_table">
+<table class="write_table">
 <tr>
 <td>제목 </td><td> <input type="text" name="subject"></td>
 </tr>

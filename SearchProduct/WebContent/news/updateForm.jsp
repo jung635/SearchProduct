@@ -26,7 +26,7 @@
  <![endif]-->
 </head>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
@@ -44,7 +44,7 @@ NewsBean nb=ndao.getDetail(num);
 <form action="updatePro.jsp" name="fr">
 <input type="hidden" name="num" value="<%=num%>">
 <input type="hidden" name="pageNum" value="<%=pageNum %>">
-<table class="center_table">
+<table class="write_table">
 <tr>
 <td>제목 </td><td> <input type="text" name="subject" value="<%=nb.getSubject()%>"></td>
 </tr>

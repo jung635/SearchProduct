@@ -32,7 +32,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <%request.setCharacterEncoding("utf-8"); String realfilePath = request.getRealPath("/upload");
 int maxSize = 5*1024*1024; //5M(메가바이트)

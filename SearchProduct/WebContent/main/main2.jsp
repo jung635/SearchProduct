@@ -1,7 +1,3 @@
-<%@page import="store.StoreDAO"%>
-<%@page import="store.GoodsBean"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="store.GoodsDAO"%>
 <%@page import="store.NewsBean"%>
 <%@page import="store.NewsDAO"%>
 <%@page import="store.BoardBean"%>
@@ -16,7 +12,6 @@
 <title>Insert title here</title>
 <link href="../css/default.css" rel="stylesheet" type="text/css">
 <link href="../css/front.css" rel="stylesheet" type="text/css">
-
 
 <!--[if lt IE 9]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
@@ -33,18 +28,7 @@
 
  </script>
  <![endif]--> 
-<style>
-.main_title{
-	text-align: center;
-	margin-bottom: 30px;
-	background-color: #ff7428;
-	overflow: initial;
-	height: 64px;
-	line-height: 65px;
-	max-width: 952px;
-	margin: 0 auto;
-}
-</style>
+
 
 </head>
 
@@ -65,7 +49,6 @@
 </div>
 <!-- 메인이미지 들어가는곳 -->
 <!-- 광고슬라이더 -->
-<div class="main_title"><span style="font-size: 2em;">오늘의 상품|</span><span>오늘의 행사제품입니다</span></div>
 <div class="slideshow-container">
 
 <div class="mySlides fade">
@@ -86,7 +69,7 @@
 </div>
 <br>
 
-<div style="text-align:center; margin-bottom: 48px;">
+<div style="text-align:center">
   <span class="dot"></span> 
   <span class="dot"></span> 
   <span class="dot"></span> 
@@ -114,43 +97,6 @@ function showSlides() {
 }
 </script>
 <!-- 광고슬라이더 -->
-<!-- 인기상품 -->
-<div class="main_title" style="background-color: #ff2828; margin-bottom: 30px;"><span style="font-size: 2em;">인기상품|</span><span>이번달 인기 상품입니다</span></div>
-<%
-
-GoodsDAO gdao = new GoodsDAO();
-StoreDAO sdao = new StoreDAO();
-List<Object> goodslist = new ArrayList<Object>();
-goodslist=gdao.hotgoodsList();%>
-<div class="clear"></div>
-<div style="margin-bottom: 45px;">
-	<table id="hot_table">
-	 		<tr><th>상품이름</th><th>상품사진</th><th>가격</th></tr>
- 	<%for(int i=0; i<goodslist.size();i++){
- 	GoodsBean gb = (GoodsBean)goodslist.get(i);
- 	%>
-
- 		<tr>
- 		<td><%=gb.getProduct() %></td>
- 		<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></td>
- 		<td> <%=gb.getPrice() %></td>
- 		<td> <%=sdao.storeAddSearch(gb.getId())%></td>
- 		<td style="text-align: right">
- 		<input type = "button" value="스토어 방문" onclick="location.href='../search/storeSearchMain.jsp?storeId=<%=gb.getId()%>&address=<%=sdao.storeAddSearch(gb.getId())%>'">
- 		<input type = "button" value="찜하기" onclick="location.href='../search/addHot.jsp?storeId=<%=gb.getId()%>&product=<%=gb.getProduct()%>'"></td>
- 		</tr>
-
-
-	
-	
-	<%}%> 
- 
-
-
-	</table>
-	</div>
-	<div class="clear"></div>
-<!-- 인기상품 -->
 <!-- 메인 콘텐츠 들어가는 곳 -->
 <article id="front">
 <div id="solution">

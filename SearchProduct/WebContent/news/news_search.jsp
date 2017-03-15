@@ -56,7 +56,7 @@ int end=0;
 	//글 잘라오기 limit 시작행-1,개수
 
 %>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 
 <!-- 본문들어가는 곳 -->

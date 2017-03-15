@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="store.GoodsBean"%>
@@ -22,6 +23,16 @@ String id=(String)session.getAttribute("id");
 String ori_product=multi.getParameter("ori_product");
 String ori_pic = multi.getParameter("ori_pic");
 String pic = multi.getFilesystemName("file");
+String rfp = realfilePath+'\\'+ori_pic;
+System.out.println("물리적경로: "+rfp);
+
+File file = new File(rfp);
+if(file.delete()){
+	System.out.println("성공");
+}else{
+	System.out.println("실패");
+}
+
 GoodsBean gb = new GoodsBean();
 if(pic==null){
 	gb.setPic(ori_pic);
@@ -32,7 +43,7 @@ gb.setId(id);
 gb.setPrice(Integer.parseInt(multi.getParameter("price")));
 gb.setProduct(multi.getParameter("product"));
 
-System.out.println("사용자가 올린 원 파일 이름: "+multi.getOriginalFileName("file"));
+
 GoodsDAO gdao = new GoodsDAO();
 StoreDAO sdao = new StoreDAO();
 //int check=sdao.isStoreAdmin(id,pass);

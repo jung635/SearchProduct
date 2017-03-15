@@ -89,7 +89,7 @@ function initMap() {
         position: results[0].geometry.location
       });
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+    	alert('주소가 잘못되거나 없습니다');
     }
   });
   }

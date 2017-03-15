@@ -51,7 +51,7 @@
 
 </head>
 <body>
-<jsp:include page="../inc/snsbar_main.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
@@ -92,8 +92,10 @@ if(bb.getFile()==null){
 첨부파일 없음
 <%}else{ %>
 
-<div><a href="../boardPic/<%=bb.getFile() %>" style="float: right">
-<%=bb.getFile() %></a>
+<div>
+<a href="../boardPic/<%=bb.getFile() %>" style="float: right">파일열기</a><br>
+<a href="file_down.jsp?file_name=<%=bb.getFile() %>" style="float: right">파일다운</a><br>
+
 <img src="../boardPic/<%=bb.getFile() %>" width="100px" height="100px">
 </div>
 </td>

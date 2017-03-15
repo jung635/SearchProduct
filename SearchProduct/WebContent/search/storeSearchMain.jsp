@@ -58,8 +58,14 @@
 <%
 String address=request.getParameter("address");
 String storeId=request.getParameter("storeId");
+if(address==""){%>
+<script>
+alert('주소가 존재하지 않는 스토어 입니다');
+history.back();
+</script>
+<%}else{
 %>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 서브페이지 메인이미지 -->
 <div id="sub_img"></div>
@@ -81,7 +87,7 @@ String storeId=request.getParameter("storeId");
 <div id="map_view" class="text_center" >
 	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=address %>" id ="map_view"  style="margin:0;" height="400px" width="500px">
 	</div>
-
+<%} %>
 <!-- 메뉴 들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

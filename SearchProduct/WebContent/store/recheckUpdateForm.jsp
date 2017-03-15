@@ -29,7 +29,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <%request.setCharacterEncoding("utf-8"); %>
 <jsp:useBean id="sb" class="store.StoreBean"></jsp:useBean>

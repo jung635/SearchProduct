@@ -35,7 +35,7 @@ String pass=(String)session.getAttribute("pass");
 
 %>
 
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->

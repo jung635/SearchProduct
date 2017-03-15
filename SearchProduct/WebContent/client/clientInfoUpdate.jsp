@@ -1,3 +1,5 @@
+<%@page import="store.MemberBean"%>
+<%@page import="store.MemberDAO"%>
 <%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -93,23 +95,18 @@
 </head>
 <body>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문 들어가는 곳 -->
 <%request.setCharacterEncoding("utf-8");
-String id =request.getParameter("id");
-String name = request.getParameter("name");
-String address = request.getParameter("address");
-String postcode = request.getParameter("postcode");
-String phone = request.getParameter("phone");
-String email = request.getParameter("email");
-String pass=(String)session.getAttribute("pass");
+String id=(String)session.getAttribute("id");
+
+MemberDAO mdao = new MemberDAO();
+MemberBean mb = mdao.infoMember(id);
 
 %>
 
-<%
-String sessionId=(String)session.getAttribute("id");
-%>
+
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
 <div id="sub_img_member"></div>
@@ -118,8 +115,10 @@ String sessionId=(String)session.getAttribute("id");
 <nav id="sub_menu">
 <ul>
 <li><a href="clientInfo.jsp">회원 정보 확인</a></li>
-<li><a href="clientInfoUpdate.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&postcode=<%=postcode %>&phone=<%=phone%>&email=<%=email%>">회원 정보 수정</a></li>
-<li><a href="clientInfoDeleteForm.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&postcode=<%=postcode %>&phone=<%=phone%>&email=<%=email%>">회원 탈퇴</a></li>
+<li><a href="clientInfoUpdate.jsp">회원 정보 수정</a></li>
+<li><a href="clientInfoDeleteForm.jsp">회원 탈퇴</a></li>
+<li><a href="mygoods.jsp">찜 리스트</a></li>
+
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->
@@ -130,18 +129,18 @@ String sessionId=(String)session.getAttribute("id");
 <fieldset>
 <legend>Basic Info</legend>
 <label>User ID</label>
-<input type="text" name="id" class="id" value=<%=sessionId %> readonly><br>
+<input type="text" name="id" class="id" value=<%=id %> readonly><br>
 <label>Name</label>
-<input type="text" name="name" value=<%=name %>><br>
+<input type="text" name="name" value=<%=mb.getName() %>><br>
 <label>E-Mail</label>
-<input type="email" name="email" value=<%=email %>><br>
+<input type="email" name="email" value=<%=mb.getEmail() %>><br>
 <label>Address</label>
-<input type="text" name="postcode" id="postcode" placeholder="우편번호" value="<%=postcode%>">
+<input type="text" name="postcode" id="postcode" placeholder="우편번호" value="<%=mb.getPostcode()%>">
 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 <label></label>
-<input type="text" name="address" id="address" placeholder="주소" value="<%=address%>"><br>
+<input type="text" name="address" id="address" placeholder="주소" value="<%=mb.getAddress()%>"><br>
 <label>Phone Number</label>
-<input type="text" name="phone" id="phone" value="<%=phone%>"><br>
+<input type="text" name="phone" id="phone" value="<%=mb.getPhone()%>"><br>
 </fieldset>
 
 

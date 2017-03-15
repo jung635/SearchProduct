@@ -241,6 +241,20 @@ repeat-x center center*/
 	border-top: 1px solid;
 	
 }
+
+.write_table{
+	margin: auto;	
+	border-collapse: collapse;
+}
+.write_table td{
+	margin: auto;
+	border: 1px solid;
+	
+}
+.write_table input{
+	min-width: 509px;
+	
+}
 #goods_table{
 	margin: auto;	
 	border-collapse: collapse;
@@ -305,4 +319,18 @@ repeat-x center center*/
 
 #map_view{
 	margin-top: 30px;
+}
+
+#hot_table{
+	margin: auto;	
+	border-collapse: collapse;
+	width: 71%;
+}
+#hot_table td{
+	margin: auto;
+	border-top: 1px double;
+	border-bottom: 1px solid;
+	
+
+	
 }

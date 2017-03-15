@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="store.StoreDAO"%>
 <%@page import="store.GoodsDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,13 +16,23 @@
 <% 
 String id = request.getParameter("id");
 String pass = request.getParameter("pass");
+String product = request.getParameter("product");
+String pic = request.getParameter("pic");
+String realpath = "D:\\workspace_jsp2\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\SearchProduct\\upload\\"+pic;
+File file = new File(realpath);
+System.out.println(realpath);
+if(file.delete()){
+	System.out.println("성공");
+}else{
+	System.out.println("실패");
+}
 GoodsDAO gdao = new GoodsDAO();
 StoreDAO sdao = new StoreDAO();
 int check=sdao.isStoreAdmin(id,pass);
 if(check==1){
 	session.setAttribute("id", id);
 	session.setAttribute("pass", pass);
-	gdao.deleteGoods(gb);
+	gdao.deleteGoods(id, product);
 	response.sendRedirect("../store/goodsList.jsp");
 }else if(check==-1){%>
 	<script type="text/javascript">

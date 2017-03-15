@@ -29,7 +29,7 @@
 </head>
 <body>
 <%request.setCharacterEncoding("utf-8"); %>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 
 <jsp:include page="../inc/top.jsp"/>
 <!-- 서브페이지 메인이미지 -->

@@ -1,3 +1,5 @@
+<%@page import="store.MemberBean"%>
+<%@page import="store.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,13 +31,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <%request.setCharacterEncoding("utf-8"); %>
 <jsp:useBean id="mb" class="store.MemberBean"></jsp:useBean>
 <jsp:setProperty property="*" name="mb"/>
 <%
-String sessionId=(String)session.getAttribute("id");
+String id=(String)session.getAttribute("id");
 String sessionPass=(String)session.getAttribute("pass");
 %>
 <!-- 본문들어가는 곳 -->
@@ -48,6 +50,7 @@ String sessionPass=(String)session.getAttribute("pass");
 <li><a href="clientInfo.jsp">회원 정보 확인</a></li>
 <li><a href="clientInfoUpdate.jsp">회원 정보 수정</a></li>
 <li><a href="clientInfoDeleteForm.jsp">회원 탈퇴</a></li>
+<li><a href="mygoods.jsp">찜 리스트</a></li>
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->
@@ -63,7 +66,7 @@ String sessionPass=(String)session.getAttribute("pass");
 <fieldset>
 <legend>Login Info</legend>
 <label>User ID</label>
-<input type="text" name="id" value=<%=sessionId %> readonly><br>
+<input type="text" name="id" value=<%=id %> readonly><br>
 <label>Password</label>
 <input type="password" name="pass"><br>
 </fieldset>

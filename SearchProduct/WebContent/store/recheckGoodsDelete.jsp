@@ -29,14 +29,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <%request.setCharacterEncoding("utf-8"); %>
-<jsp:useBean id="gb" class="store.GoodsBean"></jsp:useBean>
-<jsp:setProperty property="*" name="gb"/>
 <%
 String id=(String)session.getAttribute("id");
 String pass=(String)session.getAttribute("pass");
+String product = request.getParameter("product");
+String pic = request.getParameter("pic");
 %>
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
@@ -54,8 +54,8 @@ String pass=(String)session.getAttribute("pass");
 <article>
 <h1>Password Check</h1>
 <form action="goodsDeletePro.jsp" id="join">
-<input type="hidden" name="product" value="<%=gb.getProduct()%>">
-<input type="hidden" name="price" value="<%=gb.getPrice()%>">
+<input type="hidden" name="product" value="<%=product%>">
+<input type="hidden" name="pic" value="<%=pic%>">
 <fieldset>
 <legend>Login Info</legend>
 <label>User ID</label>

@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="store.BoardBean"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
@@ -32,6 +33,15 @@ bb.setContent(multi.getParameter("content"));
 //upload폴더에 올라간 파일이름
 System.out.println("ori: "+ori_file);
 System.out.println("file: "+file);
+String rfp = realfilePath+'\\'+ori_file;
+System.out.println("물리적경로: "+rfp);
+
+File ffile = new File(rfp);
+if(ffile.delete()){
+	System.out.println("성공");
+}else{
+	System.out.println("실패");
+}
 if(file==null){
 	bb.setFile(ori_file);
 }else{

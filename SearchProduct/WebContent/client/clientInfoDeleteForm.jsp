@@ -1,3 +1,5 @@
+<%@page import="store.MemberBean"%>
+<%@page import="store.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,15 +30,12 @@
 <body>
 <%request.setCharacterEncoding("utf-8");
 String id=(String)session.getAttribute("id");
-String name = request.getParameter("name");
-String address = request.getParameter("address");
-String postcode = request.getParameter("postcode");
-String phone = request.getParameter("phone");
-String email = request.getParameter("email");
-String pass=(String)session.getAttribute("pass");
+
+MemberDAO mdao = new MemberDAO();
+MemberBean mb = mdao.infoMember(id);
 
 %>
-<jsp:include page="../inc/snsbar.jsp"/><div id="wrap">
+<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
@@ -46,8 +45,9 @@ String pass=(String)session.getAttribute("pass");
 <nav id="sub_menu">
 <ul>
 <li><a href="clientInfo.jsp">회원 정보 확인</a></li>
-<li><a href="clientInfoUpdate.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&postcode=<%=postcode %>&phone=<%=phone%>&email=<%=email%>">회원 정보 수정</a></li>
-<li><a href="clientInfoDeleteForm.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&postcode=<%=postcode %>&phone=<%=phone%>&email=<%=email%>">회원 탈퇴</a></li>
+<li><a href="clientInfoUpdate.jsp">회원 정보 수정</a></li>
+<li><a href="clientInfoDeleteForm.jsp">회원 탈퇴</a></li>
+<li><a href="mygoods.jsp">찜 리스트</a></li>
 </ul>
 </nav>
 

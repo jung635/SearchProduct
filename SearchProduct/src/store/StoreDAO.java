@@ -572,7 +572,7 @@ public class StoreDAO {
 			
 		}
 		
-		//스토어 찾기
+		//스토어 찾기(이름으로)
 				public List<Object> storeSearchList(String store){
 					Connection con = null;
 					PreparedStatement pstmt = null;
@@ -583,7 +583,6 @@ public class StoreDAO {
 					
 					try{
 						
-						Class.forName("com.mysql.jdbc.Driver");
 						con=getConnection();
 						
 						sql = "select * from stores where name=?;";
@@ -626,6 +625,58 @@ public class StoreDAO {
 						}
 					}
 					return list;
+					
+				}
+				//스토어 찾기(아이디로 으로)
+				public String storeAddSearch(String storeId){
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = "";
+					List<Object> list = new ArrayList<Object>();
+					String address="";
+					
+					try{
+						
+						con=getConnection();
+						
+						sql = "select address from stores where id=?;";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, storeId);
+						rs = pstmt.executeQuery();
+						
+						
+						while(rs.next()){
+		
+							address=rs.getString(1);
+							
+						}
+					}catch(Exception e){
+						e.printStackTrace();
+					}finally{
+						try{
+							con.close();
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						if(pstmt!=null){
+							try{
+								pstmt.close();
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+						}
+						if(rs!=null){
+							try{
+								rs.close();
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+						}
+					}
+					
+					return address;
+					
 					
 				}
 		
