@@ -38,21 +38,27 @@
   <body>
         <%request.setCharacterEncoding("utf-8");
        	String ad_list = request.getParameter("ad_list");
+       	String name_list1 = request.getParameter("name_list");
          List<String> list = new ArrayList<String>();
          List<String> add_list = new ArrayList<String>();
+         List<String> list2 = new ArrayList<String>();
+         List<String> name_list = new ArrayList<String>();
 
          StringTokenizer tokenizer = new StringTokenizer(ad_list, ",");
+         StringTokenizer tokenizer_name = new StringTokenizer(name_list1, ",");
          //String count=Integer.toString(tokenizer.countTokens());
         
          int count=tokenizer.countTokens();
+         int count_name=tokenizer.countTokens();
         
    %>
    <script>
-   
 
-   
-   var i =0;
+
+   //주소 배열 만들기
+
 	var address2 = [];
+	var name_view = [];
 
    <% while(tokenizer.hasMoreTokens()){
        //System.out.println("Token is : "+ tokenizer.nextToken());
@@ -97,14 +103,64 @@
 	   address2[<%=adcount%>]='<%=add_list.get(adcount)%>';
    <%}
    %>
-   </script>
+   
+   //이름 배열 만들기
+	
 
+   <% while(tokenizer_name.hasMoreTokens()){
+       //System.out.println("Token is : "+ tokenizer.nextToken());
+   		list2.add(tokenizer_name.nextToken());    
+   }
+   
+   %>
+   
+   
+   <%
+   String result_name="";
+   for(int i=0; i<list2.size(); i++){
+	   
+	   String name_tmp=list2.get(i);
+	   
+	   boolean open = false;
+		for(int j=0; j<name_tmp.length(); j++){
+		
+			if(name_tmp.charAt(j)=='['||name_tmp.charAt(j)==']'){
+			}else{
+				if(name_tmp.charAt(j)=='('){
+					open=true;
+				}else if(name_tmp.charAt(j)==')'){
+					open=false;
+				}
+				result_name+=name_tmp.charAt(j);
+			}
+			
+		}
+		if(!open){
+		//result_ad+="/";
+		//System.out.println(result_ad);
+		name_list.add(result_name);
+		result_name="";
+		}
+   %>
+   <%}
+   for(int namecount=0; namecount<name_list.size(); namecount++){
+	   System.out.println("name_list:"+name_list.get(namecount));%>
+	   name_view[<%=namecount%>]='<%=name_list.get(namecount)%>';
+   <%}
+   %>
+   function name2(){
+	   alert(name_view[0]);
+   }
+ 
+   </script>
+<input type="button" onclick="name2()" value="name">
     <div id="map"></div>
     <script>
 
 
 
 function initMap() {
+
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
     center: {lat: -34.397, lng: 150.644}
@@ -114,14 +170,14 @@ function initMap() {
   var infoWindow = new google.maps.InfoWindow({map: map});
   var infowindow2 = new google.maps.InfoWindow();
 
-  if (navigator.geolocation) {
+/*   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
 
-        infoWindow.setPosition(pos);
+        infoWindow.setPosition('hi');
         infoWindow.setContent('Location found.');
         map.setCenter(pos);
       }, function() {
@@ -130,32 +186,62 @@ function initMap() {
     } else {
       // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map.getCenter());
-    }
+    } */
 
 
  
   
 //지오코더
   var geocoder = new google.maps.Geocoder();
+  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
 
   for(i=0; i<address2.length; i++){
-  geocoder.geocode({'address': address2[i]}, function(results, status) {
 
+  geocoder.geocode({'address': address2[i]}, function(results, status) {
+	  for(j=0; j<name_view.length; j++){
     if (status === google.maps.GeocoderStatus.OK) {
+    	
       map.setCenter(results[0].geometry.location);
-      
-      var marker = new google.maps.Marker({
+     
+       var marker = new google.maps.Marker({
         map: map,
-        position: results[0].geometry.location
-      });
-      google.maps.event.addListener(marker, 'click', function() {
-    	  infowindow2.setContent(results[0].geometry.location);
-    	  infowindow2.open(map, this);
+        position: results[0].geometry.location,
+        label: name_view[i],
+      }); 
+/*       for (var i = 0, result; result = results[i]; i++) {
+    	    addMarker(result);
+    	  }
+      function addMarker(place) {
+    	  var marker = new google.maps.Marker({
+    		  map: map,
+    	        position: results[0].geometry.location
     	  });
 
+    	  google.maps.event.addListener(marker, 'click', function() {
+    	  	    service.getDetails(place, function(result, status) {
+    	  	      if (status !== google.maps.places.PlacesServiceStatus.OK) {
+    	  	        console.error(status);
+    	  	        return;
+    	  	      }
+    	  	      infoWindow2.setContent('hi');
+    	  	      //result.name
+    	  	      infoWindow2.open(map, marker);
+    	  	    });
+    	  	  });
+    	} */
+     
+
+      
+       google.maps.event.addListener(marker, 'click', function() {
+    	  infowindow2.setContent(name_view[j]);
+    	  infowindow2.open(map, this);
+    	  }); 
+    
     } else {
     	//alert(address2[i]);
     }
+	  }//j if
   });
   }
   

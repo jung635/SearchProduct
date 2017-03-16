@@ -38,7 +38,7 @@
   <body>
         <%request.setCharacterEncoding("utf-8");
        	String address = request.getParameter("address");   
-       	System.out.println(address);
+       	System.out.println("single:"+address);
    %>
    <script>
    
@@ -67,7 +67,7 @@ function initMap() {
         position: results[0].geometry.location
       });
     } else {
-      alert('주소가 잘못되거나 없습니다');
+      alert('모든 주소가 포함되어있지 않을 수도 있습니다.');
       history.back();
     }
   });
