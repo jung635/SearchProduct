@@ -64,9 +64,10 @@ list=gdao.hotgoodsList();
 <article style="float: none; width: 100%;">
 <h1>인기상품</h1>
 </article>
+*사진 위에 마우스를 올리시면 크게 볼 수 있습니다.
 </div>
 <div class="clear"></div>
-<div id="hot_list">
+<div style="margin-top: 50px;">
 	<table id="hot_table">
 	 		<tr><th>Rank</th><th>상품사진</th><th>상품이름</th><th>가격</th><th>스토어 주소</th></tr>
  	<%for(int i=0; i<list.size();i++){

@@ -107,6 +107,7 @@ if(count!=0){
 	int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
 //끝페이지 번호 구하기
 	int endPage = startPage+pageBlock-1;
+
 //이전
 //1...10
 //다음
@@ -132,7 +133,7 @@ for(int i=startPage; i<=endPage; i++){
 }
 %>
 
-<%if(endPage<pageCount){ %>
+<%if(endPage<=pageCount){ %>
 [다음]
 <%}else{ %>
 <a href="list.jsp?pageNum=<%=startPage+pageBlock %>">[다음]</a>&nbsp;

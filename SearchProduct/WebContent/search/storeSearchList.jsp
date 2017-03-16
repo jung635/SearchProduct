@@ -59,7 +59,24 @@
 <%
 String store = request.getParameter("store");
 StoreDAO sdao = new StoreDAO();
-List list = sdao.storeSearchList(store);
+int count = sdao.getStoreSearchCount(store);
+String pageNum_store = request.getParameter("pageNum_store");
+if(pageNum_store==null)	pageNum_store="1";
+int currentPage=Integer.parseInt(pageNum_store);
+int pageSize=5;
+int start=0;
+int end=0;
+//시작행 구하기
+	start = (pageSize*(currentPage-1));
+	//start = 1+(pageSize*(currentPage-1));
+	end = start+pageSize-1;
+	List<?> list = null ;
+ 	if(count!=0){
+ 		//list = bdao.boardList(start, end);
+ 		list = sdao.storeSearchList(store, start, pageSize);
+ 		
+	} 
+
 List<Object> ad_list = new ArrayList<Object>();
 %>
 <!--테이블-->
@@ -75,11 +92,67 @@ List<Object> ad_list = new ArrayList<Object>();
 	<td><%=sb.getAddress() %></td>
 	<td><input type="button" value="위치보기" onclick="map('<%=sb.getAddress()%>')"></td>
 	<td><input type="button" value="방문하기" onclick='location.href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>"'></td>
-	<%ad_list.add(sb.getAddress()); %>
+	<%//ad_list.add(sb.getAddress()); %>
 	</tr>
 
 <%} %>
 	</table>
+	
+		<div id="page_control">
+<%
+if(count!=0){
+//전체 페이지 수 구하기
+ 	pageNum_store = request.getParameter("pageNum_store");
+	//int maxPage=(int)Math.ceil((float)count/pageSize);
+	int pageCount = count/pageSize+(count%pageSize==0?0:1);
+//한 화면에 보여줄 페이지 번호 개수
+	int pageBlock=10;
+//시작페이지 번호 구하기
+	int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
+
+//끝페이지 번호 구하기
+	int endPage = startPage+pageBlock-1;
+	System.out.println(pageCount);
+//이전
+//1...10
+//다음
+if(endPage > pageCount){
+	endPage=pageCount;
+}
+if(currentPage<=10){ %>
+[이전]
+<%}else{ %>
+<a href="storeSearchList.jsp?store=<%=store %>&pageNum_store=<%=startPage-pageBlock %>">[이전]</a>&nbsp;
+
+<%}
+for(int i=startPage; i<=endPage; i++){
+	if(i==currentPage){%>
+	
+	[<%=i %>]
+	<%
+	}else{%>
+	
+	<a href="storeSearchList.jsp?store=<%=store %>&pageNum_store=<%=i %>">[<%=i %>]</a>&nbsp;
+	<%
+	}
+}
+%>
+
+<%if(endPage<=pageCount){ %>
+[다음]
+<%}else{ %>
+<a href="storeSearchList.jsp?store=<%=store %>&pageNum_store=<%=startPage+pageBlock %>">[다음]</a>&nbsp;
+<%}
+}
+
+%>
+</div>
+	<%
+	list = sdao.storeSearchList(store, 0, 100);
+	for(int i=0; i<list.size(); i++){
+	StoreBean sb = (StoreBean)list.get(i);
+	ad_list.add(sb.getAddress());
+	} %>
 	<div id="map_view" class="text_center">
 	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=ad_list %>" id ="map_view"  height="400px" width="500px">
 	</div>

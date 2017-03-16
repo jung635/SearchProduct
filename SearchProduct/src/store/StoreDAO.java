@@ -513,7 +513,7 @@ public class StoreDAO {
 		}*/
 		
 	//상품 찾기
-		public List<Object> storeList(String product){
+		public List<Object> storeList(String product, int start, int pageSize){
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -524,9 +524,11 @@ public class StoreDAO {
 			try{
 				con=getConnection();
 				
-				sql = "select * from goods where product like ?;";
+				sql = "select * from goods where product like ? limit ?,?;";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + product + "%");
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, pageSize);
 				rs = pstmt.executeQuery();
 
 				while(rs.next()){
@@ -565,6 +567,71 @@ public class StoreDAO {
 			}
 			return list;
 			
+		}
+		// 검색된 수
+		public int getSearchListCount(String product) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "";
+			int num = 0;
+
+			try {
+				con = getConnection();
+				sql = "select count(product) from goods where product like ?;";
+
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + product + "%");
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+		
+					num = rs.getInt(1);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			return num;
+		}
+		// 검색된 수
+		public int getStoreSearchCount(String store) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "";
+			int num = 0;
+			System.out.println(store);
+			try {
+				con=getConnection();
+				sql = "select count(id) from stores where name like ?;";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+store+"%");
+				rs = pstmt.executeQuery();
+				System.out.println("test");
+				if (rs.next()) {
+					System.out.println(num);
+					num = rs.getInt(1);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return num;
 		}
 /*		//상품 찾기
 		public List<Object> storeList(String product){
@@ -627,7 +694,7 @@ public class StoreDAO {
 		}
 */		
 		//스토어 찾기(이름으로)
-				public List<Object> storeSearchList(String store){
+				public List<Object> storeSearchList(String store, int start, int pageSize){
 					Connection con = null;
 					PreparedStatement pstmt = null;
 					ResultSet rs = null;
@@ -639,9 +706,12 @@ public class StoreDAO {
 						
 						con=getConnection();
 						
-						sql = "select * from stores where name like ?;";
+						sql = "select * from stores where name like ? limit ?,?;";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setString(1, "%"+store+"%");
+						pstmt.setInt(2, start);
+						pstmt.setInt(3, pageSize);
+						
 						rs = pstmt.executeQuery();
 
 						
