@@ -19,16 +19,24 @@ String realfilePath = request.getRealPath("/upload");
 
 int maxSize = 5*1024*1024; //5M(메가바이트)
 MultipartRequest multi = new MultipartRequest(request, realfilePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
-
+String price = multi.getParameter("price");
 GoodsBean gb = new GoodsBean();
 gb.setId(multi.getParameter("id"));
 gb.setPic(multi.getFilesystemName("file"));
-gb.setPrice(Integer.parseInt(multi.getParameter("price")));
+try{
+gb.setPrice(Integer.parseInt(price));
 gb.setProduct(multi.getParameter("product"));
 
 GoodsDAO gdao = new GoodsDAO();
 gdao.insertGoods(id,gb);
 response.sendRedirect("goodsList.jsp");
+}catch(NumberFormatException e){
 %>
+	 <script>
+	history.back();
+	</script> 
+<%
+
+}%>
 </body>
 </html>

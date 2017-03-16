@@ -1,3 +1,5 @@
+<%@page import="store.GoodsBean"%>
+<%@page import="store.GoodsDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="store.StoreDAO"%>
 <%@page import="java.util.List"%>
@@ -42,7 +44,9 @@
 <!-- 내용 -->
 <%
 String product = request.getParameter("product");
+GoodsDAO gdao = new GoodsDAO();
 StoreDAO sdao = new StoreDAO();
+
 List list = sdao.storeList(product);
 List<Object> ad_list = new ArrayList<Object>();
 %>
@@ -50,14 +54,19 @@ List<Object> ad_list = new ArrayList<Object>();
 
 
 	<table border="1" class="center_table">
-	<th>스토어 이름</th><th>주소</th>
+	<th>상품 사진</th><th>상품 이름</th><th>스토어 이름</th><th>주소</th>
 	<%for(int i=0; i<list.size(); i++){
-	StoreBean sb = (StoreBean)list.get(i);
+	GoodsBean gb = (GoodsBean)list.get(i);
+	StoreBean sb = sdao.storeSearch(gb.getId());
 	%>
-	<tr><td><a href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>" id="ad_href"><%=sb.getName() %></a></td>
+	<tr>
+	<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></td>
+	<td><%=gb.getProduct() %></td>
+	<td><a href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>" id="ad_href"><%=sb.getName() %></a></td>
 	<td><%=sb.getAddress() %></td>
 	<td><input type="button" value="위치보기" onclick="map('<%=sb.getAddress()%>')"></td>
 	<td><input type="button" value="방문하기" onclick='location.href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>"'></td>
+	<td><input type = "button" value="찜하기" onclick="location.href='../search/addHot.jsp?storeId=<%=gb.getId()%>&product=<%=gb.getProduct()%>'"></td>
 	<%ad_list.add(sb.getAddress()); %>
 
 	</tr>

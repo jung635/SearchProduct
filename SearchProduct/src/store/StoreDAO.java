@@ -519,31 +519,26 @@ public class StoreDAO {
 			ResultSet rs = null;
 			String sql = "";
 			List<Object> list = new ArrayList<Object>();
-			StoreBean sb = null;
 			GoodsBean gb = null;
 			
 			try{
 				con=getConnection();
 				
-				sql = "select id from goods where product=?;";
+				sql = "select * from goods where product like ?;";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, product);
+				pstmt.setString(1, "%" + product + "%");
 				rs = pstmt.executeQuery();
 
 				while(rs.next()){
-					sql = "select * from stores where id=?;";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, rs.getString("id"));
-					ResultSet rs2 = pstmt.executeQuery();
-					
-					while(rs2.next()){
-					sb=new StoreBean();
-					sb.setId(rs2.getString("id"));
-					sb.setAddress(rs2.getString("address"));
-					sb.setName(rs2.getString("name"));
-					sb.setPass("pass");
-					list.add(sb);
-					}
+
+					gb=new GoodsBean();
+					gb.setId(rs.getString("id"));
+					gb.setPic(rs.getString("pic"));
+					gb.setProduct(rs.getString("product"));
+					gb.setPrice(rs.getInt("price"));
+					gb.setHot(rs.getInt("hot"));
+					list.add(gb);
+
 				}
 			}catch(Exception e){
 				e.printStackTrace();
@@ -571,7 +566,66 @@ public class StoreDAO {
 			return list;
 			
 		}
-		
+/*		//상품 찾기
+		public List<Object> storeList(String product){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "";
+			List<Object> list = new ArrayList<Object>();
+			StoreBean sb = null;
+			GoodsBean gb = null;
+			
+			try{
+				con=getConnection();
+				
+				sql = "select id from goods where product like ?;";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + product + "%");
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					sql = "select * from stores where id=?;";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, rs.getString("id"));
+					ResultSet rs2 = pstmt.executeQuery();
+					
+					while(rs2.next()){
+						sb=new StoreBean();
+						sb.setId(rs2.getString("id"));
+						sb.setAddress(rs2.getString("address"));
+						sb.setName(rs2.getString("name"));
+						sb.setPass("pass");
+						list.add(sb);
+					}
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				try{
+					con.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				if(pstmt!=null){
+					try{
+						pstmt.close();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+				}
+				if(rs!=null){
+					try{
+						rs.close();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+				}
+			}
+			return list;
+			
+		}
+*/		
 		//스토어 찾기(이름으로)
 				public List<Object> storeSearchList(String store){
 					Connection con = null;
@@ -585,9 +639,9 @@ public class StoreDAO {
 						
 						con=getConnection();
 						
-						sql = "select * from stores where name=?;";
+						sql = "select * from stores where name like ?;";
 						pstmt = con.prepareStatement(sql);
-						pstmt.setString(1, store);
+						pstmt.setString(1, "%"+store+"%");
 						rs = pstmt.executeQuery();
 
 						
@@ -628,19 +682,19 @@ public class StoreDAO {
 					
 				}
 				//스토어 찾기(아이디로 으로)
-				public String storeAddSearch(String storeId){
+				public StoreBean storeSearch(String storeId){
 					Connection con = null;
 					PreparedStatement pstmt = null;
 					ResultSet rs = null;
 					String sql = "";
 					List<Object> list = new ArrayList<Object>();
 					String address="";
-					
+					StoreBean sb = new StoreBean();
 					try{
 						
 						con=getConnection();
 						
-						sql = "select address from stores where id=?;";
+						sql = "select * from stores where id=?;";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setString(1, storeId);
 						rs = pstmt.executeQuery();
@@ -648,7 +702,12 @@ public class StoreDAO {
 						
 						while(rs.next()){
 		
-							address=rs.getString(1);
+							sb.setAddress(rs.getString("address"));
+							sb.setEmail(rs.getString("email"));
+							sb.setId(rs.getString("id"));
+							sb.setName(rs.getString("name"));
+
+								
 							
 						}
 					}catch(Exception e){
@@ -675,7 +734,7 @@ public class StoreDAO {
 						}
 					}
 					
-					return address;
+					return sb;
 					
 					
 				}

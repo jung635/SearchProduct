@@ -399,6 +399,70 @@ public class GoodsDAO {
 			return gb;
 
 		}
+		//특정 물건 찾기(결과)
+		public Boolean isSearchGoods(String storeId, String product) {
+			// 2단계 디비연결 => Connection con 객체 저장
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "";
+			ResultSet rs = null;
+			GoodsBean gb=null;
+			Boolean check=false;
+			try {
+				con = getConnection();
+				//hot 개수 올리기
+				System.out.println(storeId+", "+product);
+				//특정 물건 찾기
+				sql = "select * from goods where product=? and id=?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, product);
+				pstmt.setString(2, storeId);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					/*gb = new GoodsBean();
+					gb.setId(rs.getString("id"));
+					gb.setPic(rs.getString("pic"));
+					gb.setPrice(rs.getInt("price"));
+					gb.setProduct(rs.getString("product"));*/
+					check=true;
+				}else{
+
+					check=false;
+				}
+				
+			} catch (Exception e) {
+				System.out.println("DB연결 실패" + e);
+			} finally {
+				// 객체생성닫기
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			
+			return check;
+			
+		}
 		//인기상품 리스트
 		public List<Object> hotgoodsList() {
 			Connection con = null;

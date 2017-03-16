@@ -1,3 +1,4 @@
+<%@page import="store.StoreBean"%>
 <%@page import="store.StoreDAO"%>
 <%@page import="store.MygoodsBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -83,6 +84,7 @@ if(id==null){%>
 	
  	<%for(int i=0; i<list.size();i++){
  	MygoodsBean mgb = (MygoodsBean)list.get(i);
+ 	StoreBean sb = sdao.storeSearch(mgb.getGoods_id());
  	if(i==0||i%4==0){%>
  		<tr>
  		<%}%>
@@ -90,7 +92,7 @@ if(id==null){%>
  	<hr>
  	상품명: <%=mgb.getProduct() %><br>
  	가격: <%=mgb.getPrice() %><br>
- 	<%=sdao.storeAddSearch(mgb.getId())%><input type = "button" value="스토어 방문" onclick="location.href='../search/storeSearchMain.jsp?storeId=<%=mgb.getGoods_id()%>&address=<%=sdao.storeAddSearch(mgb.getGoods_id())%>'"><br>
+ 	<input type = "button" value="스토어 방문" onclick="location.href='../search/storeSearchMain.jsp?storeId=<%=mgb.getGoods_id()%>&address=<%=sb.getAddress()%>'"><br>
  	<input type = "button" value="찜해제" onclick="location.href='deleteMygoods.jsp?id=<%=mgb.getId()%>&product=<%=mgb.getProduct()%>&goods_id=<%=mgb.getGoods_id()%>'">
  	
  	
