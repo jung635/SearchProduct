@@ -45,8 +45,20 @@
 	max-width: 952px;
 	margin: 0 auto;
 }
-</style>
 
+</style>
+<script>
+function imageOn(path, count){
+		var divform = document.getElementById("up"+count);
+		divform.style.display = '';
+		document.getElementById("upImg"+count).src = path;
+	}
+	function imageOut(count){
+		var divform = document.getElementById("up"+count);
+		divform.style.display = 'none';
+	}
+
+</script>
 </head>
 
 <body>
@@ -126,14 +138,21 @@ goodslist=gdao.hotgoodsList();%>
 <div class="clear"></div>
 <div style="margin-bottom: 45px;">
 	<table id="hot_table">
-	 		<tr><th>상품사진</th><th>상품이름</th><th>가격</th></tr>
+	 		<tr><th>Rank</th><th>상품사진</th><th>상품이름</th><th>가격</th></tr>
  	<%for(int i=0; i<goodslist.size();i++){
  	GoodsBean gb = (GoodsBean)goodslist.get(i);
  	StoreBean sb = sdao.storeSearch(gb.getId());
  	%>
 
- 		<tr>
- 		<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></td>
+		<tr style="position: relative;">
+ 		<td><%=i+1 %></td>
+ 		<td>
+ 		<img src="../upload/<%=gb.getPic()%>" height="80px" width="80px" onmouseover="imageOn('../upload/<%=gb.getPic()%>', <%=i%>)" onmouseout="imageOut(<%=i%>)">
+<div id="up<%=i %>" style="position:absolute; width:30%; left:100px; bottom:-100px; display:none; z-index: 50;">
+	<img id="upImg<%=i %>" src="" width="100%" height="100%" style="max-width: 300px;z-index: 100;"/>
+</div>
+
+ 		</td>
  		<td><%=gb.getProduct() %></td>
  		<td> <%=gb.getPrice() %></td>
  		<td> <%=sb.getAddress()%></td>

@@ -21,7 +21,6 @@ int maxSize = 5*1024*1024; //5M(메가바이트)
 MultipartRequest multi = new MultipartRequest(request, realfilePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 String file_name = multi.getParameter("file");
 String rfp = realfilePath+'\\'+file_name;
-System.out.println("물리적경로: "+rfp);
 
 File file = new File(rfp);
 if(file.delete()){

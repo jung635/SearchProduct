@@ -38,7 +38,10 @@ for(int i=0; i<list.size(); i++){
 <tr>
 <td style="width: 200px;"><%=cb.getName() %></td>
 <td style="width: 200px;"><%=cb.getContent() %></td>
-<td style="width: 200px;"><%=cb.getDate() %></td>
+<td style="width: 200px;"><%=cb.getDate() %>
+<input type="button" id="re_delete_btn" value="X" onclick="location.href='rere_delete.jsp?board_num=<%=cb.getBoard_num()%>&renum=<%=cb.getRenum()%>&name=<%=cb.getName()%>&pageNum=<%= pageNum %>&re_seq=<%= cb.getRe_seq() %>'">
+
+</td>
 
 </tr>
 <%} %>

@@ -39,6 +39,7 @@
         <%request.setCharacterEncoding("utf-8");
        	String ad_list = request.getParameter("ad_list");
          List<String> list = new ArrayList<String>();
+         List<String> add_list = new ArrayList<String>();
 
          StringTokenizer tokenizer = new StringTokenizer(ad_list, ",");
          //String count=Integer.toString(tokenizer.countTokens());
@@ -60,11 +61,42 @@
    
    %>
    
-   <%for(int i=0; i<list.size(); i++){
-	   System.out.println("list:" +list.get(i));
+   <%
+   String result_ad="";
+   for(int i=0; i<list.size(); i++){
+	   //System.out.println("list:" +list.get(i));
+	   
+	   String add=list.get(i);
+	   
+	   boolean open = false;
+		for(int j=0; j<add.length(); j++){
+		
+			if(add.charAt(j)=='['||add.charAt(j)==']'){
+			}else{
+				if(add.charAt(j)=='('){
+					open=true;
+				}else if(add.charAt(j)==')'){
+					open=false;
+				}
+				result_ad+=add.charAt(j);
+			}
+			
+		}
+		if(!open){
+		result_ad+="/";
+		//System.out.println(result_ad);
+		add_list.add(result_ad);
+		result_ad="";
+		}
    %>
-   address2[<%=i%>]='<%=list.get(i)%>';
-   <%}%>
+   //address2[<%=i%>]='<%=list.get(i)%>';
+   <%}
+   //System.out.println(result_ad);
+   for(int adcount=0; adcount<add_list.size(); adcount++){
+	   System.out.println("addlist:"+add_list.get(adcount));%>
+	   address2[<%=adcount%>]='<%=add_list.get(adcount)%>';
+   <%}
+   %>
    </script>
 
     <div id="map"></div>

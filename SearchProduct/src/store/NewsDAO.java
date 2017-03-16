@@ -304,6 +304,11 @@ public class NewsDAO {
 				pstmt=con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				pstmt.executeUpdate();
+				
+				sql = "update news set num=num-1 where num>?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
 			
 				
 				

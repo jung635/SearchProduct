@@ -366,6 +366,11 @@ public class BoardDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
+			
+			sql = "update board set num=num-1 where num>?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -627,6 +632,91 @@ public class BoardDAO {
 
 		}
 
+	}
+	
+	// 대댓글 삭제
+	public void deleterereBoard(int board_num, int renum, int re_seq) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		ResultSet rs = null;
+		int check = 1;
+		try {
+			con = getConnection();
+			sql = "delete from comment where board_num=? and renum=? and re_seq=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, board_num);
+			pstmt.setInt(2, renum);
+			pstmt.setInt(3, re_seq);
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+	// 대댓글 삭제
+	public void deletereBoard(int board_num, int renum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		ResultSet rs = null;
+		int check = 1;
+		try {
+			con = getConnection();
+			sql = "delete from comment where board_num=? and renum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, board_num);
+			pstmt.setInt(2, renum);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+	// 대댓글,댓글 업데이트
+	public void updatereBoard(int board_num, int renum, int re_seq, String content) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		ResultSet rs = null;
+		int check = 1;
+		try {
+			con = getConnection();
+			sql = "update comment set content=? where board_num=? and renum=? and re_seq=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, content);
+			pstmt.setInt(2, board_num);
+			pstmt.setInt(3, renum);
+			pstmt.setInt(4, re_seq);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 }

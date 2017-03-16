@@ -36,6 +36,7 @@ request.setCharacterEncoding("utf-8");
 String sessionId=(String)session.getAttribute("id");
 int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
+
 %>
 <div class="text_center">
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>

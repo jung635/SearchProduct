@@ -56,7 +56,7 @@ bdao.updateBoard(bb);
 //response.sendRedirect("list.jsp?pageNum="pageNum);
 %>
  <script>
- location.href='list.jsp?pageNum=<%=pageNum%>'
+ location.href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>";
  </script>
 </body>
 </html>

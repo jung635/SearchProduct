@@ -62,7 +62,7 @@ try{
 if(type.equals("admin")){ %>
 <div id="content_btn">
 <input type="button" value="글수정" onclick="location.href='updateForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>'">
-<input type="button" value="글삭제" onclick="location.href='deleteForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>">
+<input type="button" value="글삭제" onclick="location.href='deleteForm.jsp?pageNum=<%=pageNum%>&num=<%=num%>'">
 <input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%=pageNum%>'">
 </div> 
 <%}}catch(Exception e){%>

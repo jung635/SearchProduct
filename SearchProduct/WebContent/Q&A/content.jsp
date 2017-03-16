@@ -26,6 +26,15 @@
 
  </script>
  <![endif]-->
+ <%
+int num = Integer.parseInt(request.getParameter("num"));
+String pageNum = (String)request.getParameter("pageNum");
+BoardDAO bdao = new BoardDAO();
+CommentBean cb = null;
+
+bdao.updateReadcount(num);
+BoardBean bb = bdao.getDetail(num);
+%>
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
  $(document).ready(function(){
@@ -35,6 +44,7 @@
         $("#re_reply_content"+num).toggle();
     });
 }); 
+
  
  function re_view(board_num, renum){
 		var xhttp = new XMLHttpRequest();
@@ -43,9 +53,10 @@
 			      document.getElementById("re_re_detail"+renum).innerHTML = this.responseText;
 			    }
 			  };
-			xhttp.open("GET", "re_redetail.jsp?board_num="+board_num+"&renum="+renum, true);
+			xhttp.open("GET", "re_redetail.jsp?board_num="+board_num+"&renum="+renum+"&pageNum="+<%=pageNum%>, true);
 			xhttp.send();
 		}
+
 </script>
 
 
@@ -58,15 +69,7 @@
 <!-- 메인이미지 -->
 
 <!-- 본문들어가는 곳 -->
-<%
-int num = Integer.parseInt(request.getParameter("num"));
-String pageNum = (String)request.getParameter("pageNum");
-BoardDAO bdao = new BoardDAO();
-CommentBean cb = null;
 
-bdao.updateReadcount(num);
-BoardBean bb = bdao.getDetail(num);
-%>
 
 <table class="border_table">
 <tr>
@@ -119,14 +122,18 @@ if(bb.getFile()==null){
 	<td><%=cb.getName() %></td>
 	<td ><%=cb.getContent() %></td>
 	<td><%=cb.getDate() %></td>
-	<td><input type="button" id="re_reply_button" value="댓글" alt="<%=cb.getRenum()%>" onclick="re_view(<%=cb.getBoard_num()%>,<%=cb.getRenum()%>)"></td>
+	<td>
+	<input type="button" id="re_reply_button" value="댓글" alt="<%=cb.getRenum()%>" onclick="re_view(<%=cb.getBoard_num()%>,<%=cb.getRenum()%>)">
+	<input type="button" id="re_delete_btn" value="X" onclick="location.href='re_delete.jsp?board_num=<%=cb.getBoard_num()%>&renum=<%=cb.getRenum()%>&name=<%=cb.getName()%>&pageNum=<%= pageNum %>'">
+	</td>
+	
 	</tr>
 	<tr id="re_reply_content<%=cb.getRenum()%>" style="display: none;">
-	<td colspan="4"><div id="re_re_detail<%=cb.getRenum()%>" style="padding-left: 173px;"></div>
+	<td colspan="4"><div id="re_re_detail<%=cb.getRenum()%>"></div>
 	<textarea cols="60" rows="2" id="re_re_text<%=cb.getRenum()%>"></textarea><input type="button" id="re_reply_content" value="댓글등록"
 	onclick="re_reply(<%=cb.getRenum()%>)">
 	</td>	
-	</tr>
+
 	
 
 	<script>
@@ -142,6 +149,7 @@ if(bb.getFile()==null){
 			  xhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
 			      document.getElementById("re_re_detail"+renum).innerHTML = this.responseText;
+			      
 			    }
 			  };
 		xhttp.open("GET", "re_rewrite.jsp?num=<%=num %>&re_seq=<%=cb.getRe_seq() %>&pageNum=<%=pageNum %>&renum="+renum+"&content="+text, true);
