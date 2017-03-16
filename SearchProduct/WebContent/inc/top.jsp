@@ -42,7 +42,7 @@ if(type.equals("client")||type.equals("admin")){
   <a href="../hot/hotlist.jsp">HOT</a>
   <a href="../news/list.jsp">NEWS</a>
   <div class="dropdown">
-    <button class="dropbtn">SEARCH</button>
+    <button class="dropbtn">SEARCH▼</button>
     <div class="dropdown-content">
       <a href="../search/stores.jsp">STORES</a>
       <a href="../search/products.jsp">PRODUCTS</a>

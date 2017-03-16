@@ -82,6 +82,8 @@ function authCheck(){
 
  
  function submitCheck(){
+	 
+
  	//////아이디 체크
  	if(document.fr.id.value==""){
  		alert("아이디를 입력해 주세요!");

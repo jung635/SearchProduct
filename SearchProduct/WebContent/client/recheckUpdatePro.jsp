@@ -14,9 +14,9 @@
 <jsp:setProperty property="*" name="mb"/>
 <% 
 String id = request.getParameter("id");
-String pass = request.getParameter("pass");
+String inputPass = request.getParameter("inputPass");
 MemberDAO mdao = new MemberDAO();
-int check=mdao.idCheck(id,pass);
+int check=mdao.idCheck(id,inputPass);
 if(check==1){
 	mdao.updateMember(mb);
 	response.sendRedirect("clientInfo.jsp");

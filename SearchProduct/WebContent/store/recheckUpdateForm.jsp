@@ -57,12 +57,13 @@ String sessionPass=(String)session.getAttribute("pass");
 <input type="hidden" name="name" value="<%=sb.getName()%>">
 <input type="hidden" name="address" value="<%=sb.getAddress()%>">
 <input type="hidden" name="email" value="<%=sb.getEmail()%>">
+<input type="hidden" name="pass" value="<%=sb.getPass()%>">
 <fieldset>
 <legend>Login Info</legend>
 <label>User ID</label>
 <input type="text" name="id" value=<%=sessionId %> readonly><br>
 <label>Password</label>
-<input type="password" name="pass"><br>
+<input type="password" name="inputPass"><br>
 </fieldset>
 <div class="clear"></div>
 <div id="buttons">

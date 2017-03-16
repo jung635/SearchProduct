@@ -13,9 +13,9 @@
 <jsp:setProperty property="*" name="sb"/>
 <% 
 String id = request.getParameter("id");
-String pass = request.getParameter("pass");
+String inputPass = request.getParameter("inputPass");
 StoreDAO sdao = new StoreDAO();
-int check=sdao.isStoreAdmin(id,pass);
+int check=sdao.isStoreAdmin(id,inputPass);
 if(check==1){
 	sdao.updateStore(sb);
 	response.sendRedirect("../store/storeInfo.jsp");

@@ -27,8 +27,134 @@
 
  </script>
  <![endif]--> 
+ <%request.setCharacterEncoding("utf-8");
+String id=(String)session.getAttribute("id");
+String sessionPass=(String)session.getAttribute("pass");
+
+MemberDAO mdao = new MemberDAO();
+MemberBean mb = mdao.infoMember(id);
+
+%>
  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
  <script type="text/javascript">
+ var authMailClicked=false;
+ var authCheckChecked=false;
+ var authNumCheck=false;
+ var authnum =(Math.floor)(Math.random()*1000000);
+ var pass_reg =/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[~,!,@,#,$,*,(,),=,+,_,.,|]).{10,20}$/;
+ var sessionPass='<%=sessionPass%>';
+ 
+ //이메일 전송
+ function sendmail(){
+	 authMailClicked=true;
+	 var email=document.fr.email.value;
+	 var url = "../member/mailPro.jsp?email="+email+"&authNum="+authnum;
+	 window.open(url,'sendmail',"height=400 width=400");
+}
+
+ //이메일 인증 체크
+function authCheck(){
+ 	authCheckChecked=true;
+	authInputNum = document.fr.authInputNum.value;
+ 	if(authInputNum==authnum){
+		alert('인증성공!');
+		authNumCheck=true;
+	}else{
+		alert('인증실패!'); 
+		authNumCheck=false;
+
+	}  
+ }
+
+
+
+ 
+ function submitCheck(){
+	 
+ 	//////이름 체크
+ 	if(document.fr.name.value==""){
+ 		alert("이름을 입력해 주세요");
+ 		document.fr.name.focus();
+ 		return false;
+ 	}
+ 	
+ 	//////이메일 체크
+ 	
+ 	var email = document.fr.email.value;
+ 	var ori_email = '<%=mb.getEmail()%>';
+ 	
+	if(email==""){
+		alert("이메일을 입력해 주세요!");
+		document.fr.name.focus();
+		return false;
+	}else if(email!=ori_email){
+		if(!authMailClicked){
+			alert("이메일을 변경하시려면 메일 인증을 해주세요");
+			return false;
+	 	}else if(document.fr.authInputNum.value==""){
+	 		document.fr.authInputNum.focus();
+			alert("메일 인증번호를 입력해주세요");
+			return false;
+	 	}else if(!authCheckChecked){
+			alert("인증번호를 확인해주세요");
+			return false;
+		}else if(!authNumCheck){
+			document.fr.authInputNum.focus();
+			alert("인증번호가 맞지 않습니다.");
+			return false;
+		}
+	}
+ 	
+ 	//비밀번호 체크
+	var pass = document.fr.pass.value;
+	if(pass==""){
+		pass=sessionPass;
+	}
+	if(pass!=sessionPass){
+		//////비밀번호 유형 체크
+	 	if(!pass_reg.test(document.fr.pass.value)){
+	 		alert("비밀번호는 영어대, 소문자, 숫자, 특수문자 조합 10-20자리로 구성해주세요.");
+	 		document.fr.pass.focus();
+	 		return false;
+	 	}
+		//////비밀번호 일치 체크
+	 	if(document.fr.pass2.value==""){
+	 		alert("비밀번호를 확인해 주세요!");
+	 		document.fr.pass2.focus();
+	 		return false;
+	 	}else if(document.fr.pass.value!=document.fr.pass2.value){
+	 		alert("비밀번호가 일치하지 않습니다!");
+	 		document.fr.pass2.focus();
+	 		return false;
+	 	}
+	}
+ 	
+
+ }
+ 
+ 
+	//비밀번호 일치 체크 디스플레이
+function passCheck(){
+	if(document.fr.pass.value==document.fr.pass2.value){
+		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치합니다";
+	}else{
+		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치하지 않습니다.";
+	
+}	
+}
+
+//비밀번호 유형 체크 디스플레이
+function passFormCheck(){
+	var pwd=document.fr.pass.value;
+	
+	if(!pass_reg.test(pwd)){
+		document.getElementById("passCheckDisplay").innerHTML="비밀번호는 영어대, 소문자, 숫자, 특수문자 조합 10-20자리로 구성해주세요.";	
+	}else{
+		document.getElementById("passCheckDisplay").innerHTML="OK!";	
+		
+	}
+}
+//우편번호 검색
  function sample6_execDaumPostcode() {
      new daum.Postcode({
          oncomplete: function(data) {
@@ -70,26 +196,6 @@
          }
      }).open();
  }
- function submitCheck(){
- 	
- 	
- 	//////이름 체크
- 	if(document.fr.name.value==""){
- 		alert("이름을 입력해 주세요!");
- 		document.fr.name.focus();
- 		return false;
- 	}
- 	//////이메일 체크
- 	if(document.fr.email.value==""){
- 		alert("이메일을 입력해 주세요!");
- 		document.fr.name.focus();
- 		return false;
- 	}
- 	
- 	
-
-
- }
 
  </script>
 </head>
@@ -98,13 +204,7 @@
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문 들어가는 곳 -->
-<%request.setCharacterEncoding("utf-8");
-String id=(String)session.getAttribute("id");
 
-MemberDAO mdao = new MemberDAO();
-MemberBean mb = mdao.infoMember(id);
-
-%>
 
 
 <!-- 본문들어가는 곳 -->
@@ -125,30 +225,39 @@ MemberBean mb = mdao.infoMember(id);
 <!-- 본문내용 -->
 <article>
 <h1>InFo</h1>
+*비밀번호를 바꾸시지 않으실 경우 비워둔 상태로 두셔도 됩니다.
 <form action="recheckUpdateForm.jsp" id="join" name="fr" onsubmit="return submitCheck()">
+
 <fieldset>
 <legend>Basic Info</legend>
 <label>User ID</label>
-<input type="text" name="id" class="id" value=<%=id %> readonly><br>
+<input type="text" name="id" class="id" value="<%=id%>" readonly><br>
+<label>Password</label>
+<input type="password" name="pass" onkeyup="passFormCheck()"><span id="passCheckDisplay"></span><br>
+<label>Retype Password</label>
+<input type="password" name="pass2"  onkeyup="passCheck()"><span id="passdbCheckDisplay"></span><br>
 <label>Name</label>
-<input type="text" name="name" value=<%=mb.getName() %>><br>
+<input type="text" name="name" value="<%=mb.getName()%>"><br>
 <label>E-Mail</label>
-<input type="email" name="email" value=<%=mb.getEmail() %>><br>
+<input type="email" name="email" value="<%=mb.getEmail()%>"><input type="button" value="인증메일 발송" onclick="sendmail()"><br>
+<label></label>
+<input type="text" name="authInputNum"><input type="button" value="인증확인" onclick="authCheck()"><br>
+</fieldset>
+<fieldset>
+<legend>Optional</legend>
 <label>Address</label>
-<input type="text" name="postcode" id="postcode" placeholder="우편번호" value="<%=mb.getPostcode()%>">
+<input type="text" name="postcode" id="postcode" value="<%=mb.getPostcode() %>" placeholder="우편번호">
 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 <label></label>
-<input type="text" name="address" id="address" placeholder="주소" value="<%=mb.getAddress()%>"><br>
+<input type="text" name="address" id="address" value="<%=mb.getAddress() %>" placeholder="주소"><br>
+
 <label>Phone Number</label>
 <input type="text" name="phone" id="phone" value="<%=mb.getPhone()%>"><br>
 </fieldset>
-
-
-
 <div class="clear"></div>
 <div id="buttons">
 <input type="submit" value="Submit" class="submit">
-<input type="button" value="Cancel" class="cancel">
+<input type="button" value="Cancel" class="cancel" onclick="history.back()">
 </div>
 </form>
 </article>

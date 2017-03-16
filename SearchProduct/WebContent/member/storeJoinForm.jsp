@@ -101,7 +101,7 @@ function authCheck(){
 	 		alert("비밀번호를 확인해 주세요!");
 	 		document.fr.pass2.focus();
 	 		return false;
-	 	}if(document.fr.pass.value!=document.fr.pass2.value){
+	 	}else if(document.fr.pass.value!=document.fr.pass2.value){
 	 		alert("비밀번호가 일치하지 않습니다!");
 	 		document.fr.pass2.focus();
 	 		return false;

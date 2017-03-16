@@ -63,12 +63,14 @@ String sessionPass=(String)session.getAttribute("pass");
 <input type="hidden" name="postcode" value="<%=mb.getPostcode()%>">
 <input type="hidden" name="email" value="<%=mb.getEmail()%>">
 <input type="hidden" name="phone" value="<%=mb.getPhone()%>">
+<input type="hidden" name="phone" value="<%=mb.getPhone()%>">
+<input type="hidden" name="pass" value="<%=mb.getPass()%>">
 <fieldset>
 <legend>Login Info</legend>
 <label>User ID</label>
 <input type="text" name="id" value=<%=id %> readonly><br>
 <label>Password</label>
-<input type="password" name="pass"><br>
+<input type="password" name="inputPass"><br>
 </fieldset>
 <div class="clear"></div>
 <div id="buttons">

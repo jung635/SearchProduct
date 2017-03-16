@@ -1,3 +1,5 @@
+<%@page import="store.StoreBean"%>
+<%@page import="store.StoreDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,13 +29,11 @@
  </head>
 <body>
 <%request.setCharacterEncoding("utf-8");
-String id =request.getParameter("id");
-String name = request.getParameter("name");
-String address = request.getParameter("address");
-String email = request.getParameter("email");
-String pass=(String)session.getAttribute("pass");
-
+String id = (String)session.getAttribute("id");
+StoreDAO sdao = new StoreDAO();
+StoreBean sb = sdao.infoStore(id);
 %>
+
 
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
@@ -45,8 +45,8 @@ String pass=(String)session.getAttribute("pass");
 <nav id="sub_menu">
 <ul>
 <li><a href="../store/storeInfo.jsp">회원 정보 확인</a></li>
-<li><a href="../store/storeInfoUpdate.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&email=<%=email%>">회원 정보 수정</a></li>
-<li><a href="../store/storeInfoDeleteForm.jsp?id=<%=id%>&name=<%=name%>&address=<%=address%>&email=<%=email%>">회원 탈퇴</a></li>
+<li><a href="../store/storeInfoUpdate.jsp">회원 정보 수정</a></li>
+<li><a href="../store/storeInfoDeleteForm.jsp">회원 탈퇴</a></li>
 </ul>
 </nav>
 

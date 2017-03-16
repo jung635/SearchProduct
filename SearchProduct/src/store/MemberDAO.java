@@ -290,6 +290,7 @@ public boolean idDupCheck(String id){
 				try{
 					con=getConnection();
 					sql = "update member set name=?, address=?, pass=?, phone=?, email=?, postcode=? where id=?";
+					
 					pstmt = con.prepareStatement(sql);
 					
 					pstmt.setString(1, mb.getName());
