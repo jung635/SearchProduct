@@ -137,7 +137,7 @@
 		}
 		if(!open){
 		//result_ad+="/";
-		//System.out.println(result_ad);
+		//System.out.println(result_name);
 		name_list.add(result_name);
 		result_name="";
 		}
@@ -195,56 +195,24 @@ function initMap() {
   var geocoder = new google.maps.Geocoder();
   var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-
-  for(i=0; i<address2.length; i++){
-
-  geocoder.geocode({'address': address2[i]}, function(results, status) {
-	  for(j=0; j<name_view.length; j++){
-    if (status === google.maps.GeocoderStatus.OK) {
-    	
-      map.setCenter(results[0].geometry.location);
-     
-       var marker = new google.maps.Marker({
-        map: map,
-        position: results[0].geometry.location,
-        label: name_view[i],
-      }); 
-/*       for (var i = 0, result; result = results[i]; i++) {
-    	    addMarker(result);
-    	  }
-      function addMarker(place) {
-    	  var marker = new google.maps.Marker({
-    		  map: map,
-    	        position: results[0].geometry.location
-    	  });
-
-    	  google.maps.event.addListener(marker, 'click', function() {
-    	  	    service.getDetails(place, function(result, status) {
-    	  	      if (status !== google.maps.places.PlacesServiceStatus.OK) {
-    	  	        console.error(status);
-    	  	        return;
-    	  	      }
-    	  	      infoWindow2.setContent('hi');
-    	  	      //result.name
-    	  	      infoWindow2.open(map, marker);
-    	  	    });
-    	  	  });
-    	} */
-     
-
-      
-       google.maps.event.addListener(marker, 'click', function() {
-    	  infowindow2.setContent(name_view[j]);
-    	  infowindow2.open(map, this);
-    	  }); 
-    
-    } else {
-    	//alert(address2[i]);
-    }
-	  }//j if
+  address2.map(function(address, index){
+	 geocoder.geocode({'address':address}, function(results, status){
+		if(status === google.maps.GeocoderStatus.OK){
+			results.map(function(result){
+				map.setCenter(result.geometry.location);
+				var marker = new google.maps.Marker({
+					map:map,
+					position: result.geometry.location,
+					label:name_view[index],
+				});
+				
+				google.maps.event.addListener(marker, 'click', function(){
+					alert(address);
+				});
+			});
+		}
+	 });
   });
-  }
-  
 }
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
