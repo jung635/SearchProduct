@@ -69,7 +69,7 @@ int end=0;
 	//start = 1+(pageSize*(currentPage-1));
 	end = start+pageSize-1;
 	List<?> list = null ;
- 	if(count!=0){
+	if(count!=0){
  		//list = bdao.boardList(start, end);
  		list = sdao.storeList(product, start, pageSize);
  		
@@ -77,13 +77,17 @@ int end=0;
  	
 //list = sdao.storeList(product);
 List<Object> ad_list = new ArrayList<Object>();
+List<Object> name_list = new ArrayList<Object>();
 %>
 <!--테이블-->
 
 
 	<table border="1" class="center_table">
 	<th>상품 사진</th><th>상품 이름</th><th>스토어 이름</th><th>주소</th>
-	<%for(int i=0; i<list.size(); i++){
+	
+	<%
+	try{
+	for(int i=0; i<list.size(); i++){
 	GoodsBean gb = (GoodsBean)list.get(i);
 	StoreBean sb = sdao.storeSearch(gb.getId());
 	%>
@@ -105,7 +109,11 @@ List<Object> ad_list = new ArrayList<Object>();
 	<%//ad_list.add(sb.getAddress()); %>
 
 	</tr>
-<%} %>
+<%}}catch(Exception e){%>
+
+<tr><td colspan="4">찾으시는 상품이 없습니다.</td></tr>
+<%}
+	%>
 
 	</table>
 	<div id="page_control">
@@ -164,9 +172,10 @@ for(int i=startPage; i<=endPage; i++){
 		GoodsBean gb = (GoodsBean)list.get(i);
 		StoreBean sb = sdao.storeSearch(gb.getId());
 		ad_list.add(sb.getAddress());
+		name_list.add(sb.getName());
 	} %>
 	<div id="map_view" class="text_center">
-	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=ad_list %>" id ="map_view"  height="400px" width="500px">
+	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=ad_list %>&name_list=<%=name_list %>" id ="map_view"  height="400px" width="500px">
 	</div>
 	<script>
 	

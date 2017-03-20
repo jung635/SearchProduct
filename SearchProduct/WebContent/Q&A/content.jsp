@@ -27,6 +27,8 @@
  </script>
  <![endif]-->
  <%
+ String id=(String)session.getAttribute("id");
+ String pass=(String)session.getAttribute("pass");
 int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
 BoardDAO bdao = new BoardDAO();
@@ -138,9 +140,12 @@ if(bb.getFile()==null){
 
 	<script>
 	function re_reply(renum){
+	var id=<%=id%>;
 		var text = document.getElementById('re_re_text'+renum).value;
-		
-	if(text==""){
+	if(id==null){
+		alert('로그인을 해주세요');
+		location.href="../member/clientLoginForm.jsp"
+	}else if(text==""){
 		alert("내용을 입력해 주세요");
 	}else{
 		//window.open("re_rewritePro.jsp?num=<%=num %>&re_seq=<%=cb.getRe_seq() %>&pageNum=<%=pageNum %>&renum="+renum+"&content="+text);
@@ -169,10 +174,7 @@ if(bb.getFile()==null){
 
 <%} %>
 
-<%
-String id=(String)session.getAttribute("id");
-String pass=(String)session.getAttribute("pass");
-%>
+
 <tr>
 <td colspan="4">
 <form action="rewritePro.jsp">

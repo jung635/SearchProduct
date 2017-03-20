@@ -78,16 +78,13 @@ int end=0;
 	} 
 
 List<Object> ad_list = new ArrayList<Object>();
-List<Object> name_list = new ArrayList<Object>();
 %>
 <!--테이블-->
 
 
 	<table class="center_table">
 	<th>스토어 이름</th><th>주소</th>
-	<%
-	try{
-	for(int i=0; i<list.size(); i++){
+	<%for(int i=0; i<list.size(); i++){
 	StoreBean sb = (StoreBean)list.get(i);
 	%>
 	<tr><td><a href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>" id="ad_href"><%=sb.getName() %></a>
@@ -98,11 +95,7 @@ List<Object> name_list = new ArrayList<Object>();
 	<%//ad_list.add(sb.getAddress()); %>
 	</tr>
 
-<%} }catch(Exception e){%>
-
-<tr><td colspan="4">찾으시는 상품이 없습니다.</td></tr>
-<%}
-	%>
+<%} %>
 	</table>
 	
 		<div id="page_control">
@@ -159,10 +152,9 @@ for(int i=startPage; i<=endPage; i++){
 	for(int i=0; i<list.size(); i++){
 	StoreBean sb = (StoreBean)list.get(i);
 	ad_list.add(sb.getAddress());
-	name_list.add(sb.getName());
 	} %>
 	<div id="map_view" class="text_center">
-	<embed type="text/html" src="multiple_map2.jsp?ad_list=<%=ad_list %>&name_list=<%=name_list %>" id ="map_view"  height="400px" width="500px">
+	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=ad_list %>" id ="map_view"  height="400px" width="500px">
 	</div>
 <!--테이블-->
 <!-- 내용 -->
