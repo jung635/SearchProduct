@@ -14,15 +14,14 @@
 <jsp:useBean id="nb" class="store.NewsBean"></jsp:useBean>
 <jsp:setProperty property="*" name="nb"/>
 <%request.setCharacterEncoding("utf-8"); 
-
 int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
 NewsDAO ndao = new NewsDAO();
 ndao.updateBoard(nb);
 %>
-	<script>
-	alert('글이 수정되었습니다.');
-	location.href="content.jsp?pageNum=<%=pageNum%>&num=<%=num%>";
-	</script>
+<script>
+alert('글이 수정되었습니다.');
+location.href="content.jsp?pageNum=<%=pageNum%>&num=<%=num%>";
+</script>
 </body>
 </html>

@@ -12,7 +12,6 @@
 String id = request.getParameter("id");
 String product = request.getParameter("product");
 String goods_id = request.getParameter("goods_id");
-
 GoodsDAO gdao = new GoodsDAO();
 gdao.deletemyGoods(id, product, goods_id);
 %>

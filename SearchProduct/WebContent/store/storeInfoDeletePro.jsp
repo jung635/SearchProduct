@@ -17,10 +17,8 @@ String pass = request.getParameter("pass");
 StoreDAO sdao = new StoreDAO();
 int check=sdao.isStoreAdmin(id,pass);
 if(check==1){
-
 	sdao.deleteStore(id);
-	session.invalidate();
-		%>
+	session.invalidate();%>
 	<script type="text/javascript">
 	alert('탈퇴 완료!');
 	location.href="../main/main.jsp";
@@ -35,8 +33,6 @@ if(check==1){
 	alert('아이디를 다시 확인해 주세요.');
 	history.back();
 	</script>
-<%}
-
-%>
+<%}%>
 </body>
 </html>

@@ -43,8 +43,6 @@ String pic = request.getParameter("pic");
 <div id="sub_img_member"></div>
 <!-- 본문메인이미지 -->
 <!-- 왼쪽메뉴 -->
-
-
 <nav id="sub_menu">
 <ul>
 <li><a href="goodsList.jsp">상품 목록</a></li>
@@ -68,11 +66,10 @@ String pic = request.getParameter("pic");
 <div class="clear"></div>
 <div id="buttons">
 <input type="submit" value="Submit" class="submit">
-<input type="button" value="Cancel" class="cancel">
+<input type="button" value="Cancel" onclick="history.back()" class="cancel">
 </div>
 </form>
 </article>
-
 <!-- 본문내용 -->
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>

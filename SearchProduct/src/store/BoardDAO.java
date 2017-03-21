@@ -10,16 +10,10 @@ import javax.sql.DataSource;
 
 public class BoardDAO {
 	public Connection getConnection() throws Exception {
-
-		// Context객체 생성
 		Context init = new InitialContext();
-		// DataSource 디비 연동 이름 불러오기
 		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mysqlDB");
-																				
-		// con= DataSource형태로 저장
 		Connection con = ds.getConnection();
 		return con;
-
 	}
 
 	// 글 개수
@@ -33,23 +27,36 @@ public class BoardDAO {
 		try {
 			con = getConnection();
 			sql = "select count(num) from board";
-
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				num = rs.getInt(1);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-
 		return num;
 	}
 
@@ -64,21 +71,35 @@ public class BoardDAO {
 		try {
 			con = getConnection();
 			sql = "select count(num) from board where subject like ?";
-
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				num = rs.getInt(1);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -87,9 +108,6 @@ public class BoardDAO {
 
 	// 글 등록
 	public void insertBoard(BoardBean bb) {
-		/*
-		 * 디비연결 num게시판 글번호 구하기 sql insert 실행
-		 */
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -98,7 +116,6 @@ public class BoardDAO {
 		int readcount = 0;
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
 			sql = "select max(num) from board;";
 			pstmt = con.prepareStatement(sql);
@@ -110,7 +127,6 @@ public class BoardDAO {
 			sql = "insert into board(num, name, pass, subject," + " content, readcount,date, file)"
 					+ " values(?,?,?,?,?,?,now(),?);";
 			pstmt = con.prepareStatement(sql);
-
 			pstmt.setInt(1, num);
 			pstmt.setString(2, bb.getName());
 			pstmt.setString(3, bb.getPass());
@@ -118,16 +134,17 @@ public class BoardDAO {
 			pstmt.setString(5, bb.getContent());
 			pstmt.setInt(6, readcount);
 			pstmt.setString(7, bb.getFile());
-
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			if (pstmt != null) {
 				try {
@@ -157,7 +174,6 @@ public class BoardDAO {
 		try {
 
 			con = getConnection();
-
 			sql = "select * from board order by num desc limit ?,?;";
 			// sql = "select * from board where num>=? and num<=? group by
 			// re_ref order by re_ref desc, re_seq asc;";
@@ -175,20 +191,34 @@ public class BoardDAO {
 				bb.setDate(rs.getDate("date"));
 				bb.setFile(rs.getString("file"));
 				bb.setReadcount(rs.getInt("readcount"));
-
 				list.add(bb);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return list;
-
 	}
 
 	// search 글목록
@@ -200,8 +230,6 @@ public class BoardDAO {
 		List<Object> list = new ArrayList<Object>();
 		BoardBean bb = null;
 		try {
-
-			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
 
 			sql = "select * from board where subject like ? order by num desc limit ?,? ;";
@@ -223,20 +251,34 @@ public class BoardDAO {
 				bb.setDate(rs.getDate("date"));
 				bb.setFile(rs.getString("file"));
 				bb.setReadcount(rs.getInt("readcount"));
-
 				list.add(bb);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return list;
-
 	}
 
 	// 글내용
@@ -247,9 +289,7 @@ public class BoardDAO {
 		String sql = "";
 		BoardBean bb = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
 			con = getConnection();
-
 			sql = "select * from board where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -264,17 +304,31 @@ public class BoardDAO {
 				bb.setDate(rs.getDate("date"));
 				bb.setFile(rs.getString("file"));
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-
 		return bb;
 	}
 
@@ -283,47 +337,32 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
-
 		try {
 			con = getConnection();
 			sql = "update board set readcount=readcount+1 where num=? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
-
 	}
 
-	/*
-	 * //글 쓴이 체크 public boolean userCheck(int num, String pass){ Connection
-	 * con=null; PreparedStatement pstmt=null; String sql = ""; ResultSet rs
-	 * =null; boolean result = false; try{
-	 * Class.forName("com.mysql.jdbc.Driver"); con = getConnection(); sql =
-	 * "select pass from board where num=? "; pstmt=con.prepareStatement(sql);
-	 * pstmt.setInt(1, num); rs=pstmt.executeQuery();
-	 * 
-	 * if(rs.next()){ if(rs.getString("pass").equals(pass)){ result = true; } }
-	 * 
-	 * }catch(Exception e){ e.printStackTrace(); }finally{ try{ con.close();
-	 * }catch(Exception e){ e.printStackTrace(); }
-	 * 
-	 * }
-	 * 
-	 * return result;
-	 * 
-	 * 
-	 * }
-	 */
 	// 글 수정
 	public void updateBoard(BoardBean bb) {
 		Connection con = null;
@@ -333,23 +372,29 @@ public class BoardDAO {
 		try {
 			con = getConnection();
 			sql = "update board set subject=?, content=?, file=? where num=? ";
-
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bb.getSubject());
 			pstmt.setString(2, bb.getContent());
 			pstmt.setString(3, bb.getFile());
 			pstmt.setInt(4, bb.getNum());
 			pstmt.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -358,15 +403,12 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
-		ResultSet rs = null;
-		int check = 1;
 		try {
 			con = getConnection();
 			sql = "delete from board where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
-			
 			sql = "update board set num=num-1 where num>?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -375,21 +417,25 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
-
 	}
 
 	// 답글쓰기
 	public void insertreBoard(CommentBean cb) {
-		/*
-		 * 디비연결 num게시판 글번호 구하기 sql insert 실행
-		 */
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -400,28 +446,21 @@ public class BoardDAO {
 
 		try {
 			con = getConnection();
-			sql = "select max(renum) from comment;";
+			sql = "select max(renum) from comment where board_num=?;";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, cb.getBoard_num());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				max = rs.getInt(1) + 1;
 			} else {
 				max = 1;
 			}
-
-			/*
-			 * sql="select max(re_seq) from comment where re_ref=?;";
-			 * pstmt=con.prepareStatement(sql); pstmt.setInt(1, cb.getRe_ref());
-			 * rs = pstmt.executeQuery(); if(rs.next()){ max=rs.getInt(1); }
-			 */
-
 			/*
 			 * //답글 순서 재배치 sql=
 			 * "update comment set re_seq=re_seq+1 where re_ref=? and re_seq>?";
 			 * pstmt=con.prepareStatement(sql); pstmt.setInt(1, cb.getRe_ref());
 			 * pstmt.setInt(2, cb.getRe_seq()); pstmt.executeUpdate();
 			 */
-
 			sql = "insert into comment(name, pass, content, re_seq" + " ,date, renum, board_num)"
 					+ " values(?,?,?,?,now(),?,?);";
 			pstmt = con.prepareStatement(sql);
@@ -431,16 +470,17 @@ public class BoardDAO {
 			pstmt.setInt(4, 0); // 답변글 순서
 			pstmt.setInt(5, max); // 글 순서
 			pstmt.setInt(6, cb.getBoard_num()); // 글 순서
-
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			if (pstmt != null) {
 				try {
@@ -466,12 +506,10 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int readcount = 0;
 		int re_seq = 0;
 		int max = 0;
 
 		try {
-
 			con = getConnection();
 			sql = "select max(re_seq) from comment where renum=?;";
 			pstmt = con.prepareStatement(sql);
@@ -480,34 +518,26 @@ public class BoardDAO {
 			if (rs.next()) {
 				max = rs.getInt(1) + 1;
 			}
-
-			/*
-			 * //답글 순서 재배치 sql=
-			 * "update comment set re_seq=re_seq+1 where re_ref=? and re_seq>?";
-			 * pstmt=con.prepareStatement(sql); pstmt.setInt(1, cb.getRe_ref());
-			 * pstmt.setInt(2, cb.getRe_seq()); pstmt.executeUpdate();
-			 */
-
 			sql = "insert into comment(name, pass," + " content," + "re_seq, renum, board_num, date)"
 					+ " values(?,?,?,?,?,?,now());";
 			pstmt = con.prepareStatement(sql);
-
 			pstmt.setString(1, cb.getName());
 			pstmt.setString(2, cb.getPass());
 			pstmt.setString(3, cb.getContent());
 			pstmt.setInt(4, max); // 답변글 순서
 			pstmt.setInt(5, cb.getRenum()); // 답변글 순서
 			pstmt.setInt(6, cb.getBoard_num());
-
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			if (pstmt != null) {
 				try {
@@ -536,7 +566,6 @@ public class BoardDAO {
 		List<Object> relist = new ArrayList<Object>();
 		try {
 			con = getConnection();
-
 			sql = "select * from comment where board_num=? and re_seq=0 order by renum desc, re_seq asc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -549,17 +578,31 @@ public class BoardDAO {
 				cb.setRenum(rs.getInt("renum"));
 				cb.setBoard_num(rs.getInt("board_num"));
 				cb.setDate(rs.getTimestamp("date"));
-
 				relist.add(cb);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -576,12 +619,10 @@ public class BoardDAO {
 		List<Object> relist = new ArrayList<Object>();
 		try {
 			con = getConnection();
-
 			sql = "select * from comment where board_num=? and renum=? and re_seq>0 order by re_seq desc ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, board_num);
 			pstmt.setInt(2, renum);
-
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				cb = new CommentBean();
@@ -591,20 +632,33 @@ public class BoardDAO {
 				cb.setBoard_num(rs.getInt("board_num"));
 				cb.setRenum(rs.getInt("renum"));
 				cb.setDate(rs.getTimestamp("date"));
-
 				relist.add(cb);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-
 		return relist;
 	}
 
@@ -620,18 +674,24 @@ public class BoardDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
-
 	}
 	
 	// 대댓글 삭제
@@ -639,8 +699,6 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
-		ResultSet rs = null;
-		int check = 1;
 		try {
 			con = getConnection();
 			sql = "delete from comment where board_num=? and renum=? and re_seq=?";
@@ -649,26 +707,31 @@ public class BoardDAO {
 			pstmt.setInt(2, renum);
 			pstmt.setInt(3, re_seq);
 			pstmt.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
-
 	}
+	
 	// 대댓글 삭제
 	public void deletereBoard(int board_num, int renum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
-		ResultSet rs = null;
-		int check = 1;
 		try {
 			con = getConnection();
 			sql = "delete from comment where board_num=? and renum=?";
@@ -676,26 +739,31 @@ public class BoardDAO {
 			pstmt.setInt(1, board_num);
 			pstmt.setInt(2, renum);
 			pstmt.executeUpdate();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-			
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		
 	}
+	
 	// 대댓글,댓글 업데이트
 	public void updatereBoard(int board_num, int renum, int re_seq, String content) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
-		ResultSet rs = null;
-		int check = 1;
 		try {
 			con = getConnection();
 			sql = "update comment set content=? where board_num=? and renum=? and re_seq=?";
@@ -705,18 +773,25 @@ public class BoardDAO {
 			pstmt.setInt(3, renum);
 			pstmt.setInt(4, re_seq);
 			pstmt.executeUpdate();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-			
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		
+
 	}
 
 }

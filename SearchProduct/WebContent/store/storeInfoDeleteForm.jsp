@@ -33,8 +33,6 @@ String id = (String)session.getAttribute("id");
 StoreDAO sdao = new StoreDAO();
 StoreBean sb = sdao.infoStore(id);
 %>
-
-
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문들어가는 곳 -->
@@ -49,8 +47,6 @@ StoreBean sb = sdao.infoStore(id);
 <li><a href="../store/storeInfoDeleteForm.jsp">회원 탈퇴</a></li>
 </ul>
 </nav>
-
-
 <!-- 왼쪽메뉴 -->
 <div class="text_center">
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>

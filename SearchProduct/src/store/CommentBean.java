@@ -3,6 +3,10 @@ package store;
 import java.sql.Timestamp;
 
 public class CommentBean {
+	private String name, pass, content;
+	private int re_seq, renum, board_num;
+	private Timestamp date;
+
 	public String getName() {
 		return name;
 	}
@@ -51,9 +55,6 @@ public class CommentBean {
 		this.renum = renum;
 	}
 
-	private String name, pass, content;
-	private int re_seq, renum, board_num;
-
 	public int getBoard_num() {
 		return board_num;
 	}
@@ -61,7 +62,5 @@ public class CommentBean {
 	public void setBoard_num(int board_num) {
 		this.board_num = board_num;
 	}
-
-	private Timestamp date;
 
 }

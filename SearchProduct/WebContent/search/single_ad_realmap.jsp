@@ -32,26 +32,17 @@
   line-height: 30px;
   padding-left: 10px;
 }
-
-    </style>
-  </head>
-  <body>
-        <%request.setCharacterEncoding("utf-8");
-       	String address = request.getParameter("address");   
-       	System.out.println("single:"+address);
-   %>
-   <script>
-   
-
-
-	var address = '<%=address%>';
-   </script>
-
-    <div id="map"></div>
-    <script>
-
-
-
+</style>
+</head>
+<body>
+<%request.setCharacterEncoding("utf-8");
+String address = request.getParameter("address");   
+System.out.println("single:"+address);%>
+<script>
+var address = '<%=address%>';
+</script>
+<div id="map"></div>
+<script>
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
@@ -74,11 +65,8 @@ function initMap() {
   
   
 }
-
-
-
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAroo00lZc2VzIMzy0o8Aj4QSTYB-WW5_0&callback=initMap"
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAroo00lZc2VzIMzy0o8Aj4QSTYB-WW5_0&callback=initMap"
         async defer></script>
   </body>
 </html>

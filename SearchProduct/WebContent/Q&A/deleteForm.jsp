@@ -23,13 +23,11 @@
  <![endif]-->
 </head>
 <body>
-
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
 <!-- 메인이미지 -->
-
 <!-- 본문들어가는 곳 -->
 <%
 request.setCharacterEncoding("utf-8");
@@ -39,16 +37,15 @@ String pageNum = (String)request.getParameter("pageNum");
 String name = request.getParameter("name");
 String file = request.getParameter("file");
 if(sessionId==null){%>
-<script>
-alert('로그인을 해주세요');
-location.href="../member/clientLoginForm.jsp"
-</script>
-
+	<script>
+	alert('로그인을 해주세요');
+	location.href="../member/clientLoginForm.jsp"
+	</script>
 <%}else if(sessionId.equals(name)==false){%>
-<script>
-alert('글쓴이가 아닙니다');
-history.back();
-</script>
+	<script>
+	alert('글쓴이가 아닙니다');
+	history.back();
+	</script>
 <%}%>
 <div class="text_center">
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>
@@ -57,9 +54,9 @@ history.back();
 <input type="hidden" name="num" value="<%=num %>">
 <input type="hidden" name="pageNum" value="<%=pageNum %>">
 <input type="hidden" name="file" value="<%=file %>">
-<tr><td>아이디</td><td><input type="text" name="id" value="<%=sessionId %>" readonly></td></tr>
-<tr><td>비밀번호</td><td><input type="password" name="pass"></td></tr>
-<tr><td colspan="2"><input type="submit" value="글 삭제" style="float: right;"></td></tr>
+	<tr><td>아이디</td><td><input type="text" name="id" value="<%=sessionId %>" readonly></td></tr>
+	<tr><td>비밀번호</td><td><input type="password" name="pass"></td></tr>
+	<tr><td colspan="2"><input type="submit" value="글 삭제" style="float: right;"></td></tr>
 </form>
 </table>
 </div>

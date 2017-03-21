@@ -20,11 +20,5 @@ mdao.insertMember(mb);%>
 alert('가입 완료!');
 location.href="clientLoginForm.jsp";
 </script>
-<%
-//response.sendRedirect("login.jsp");
-%>
-
-
-
 </body>
 </html>

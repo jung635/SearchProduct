@@ -9,16 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <%request.setCharacterEncoding("utf-8"); %>
 <jsp:useBean id="nb" class="store.NewsBean"></jsp:useBean>
 <jsp:setProperty property="*" name="nb"/>
-
 <%
 NewsDAO ndao = new NewsDAO();
 ndao.insertBoard(nb);
 response.sendRedirect("list.jsp");
 %>
- 
+
 </body>
 </html>

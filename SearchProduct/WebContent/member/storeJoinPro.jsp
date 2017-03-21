@@ -16,9 +16,9 @@
 sb.setReg_date(new Timestamp(System.currentTimeMillis()));
 StoreDAO sdao = new StoreDAO();
 sdao.insertStore(sb);%>
-<script type="text/javascript">
-alert('가입 완료!');
-location.href="storeLoginForm.jsp";
-</script>
+	<script type="text/javascript">
+	alert('가입 완료!');
+	location.href="storeLoginForm.jsp";
+	</script>
 </body>
 </html>

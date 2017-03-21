@@ -31,14 +31,11 @@
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
 <!-- 메인이미지 -->
-
 <%
 int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
 NewsDAO ndao = new NewsDAO();
 NewsBean nb=ndao.getDetail(num);
-
-
 %>
 
 <form action="updatePro.jsp" name="fr">
@@ -57,7 +54,6 @@ NewsBean nb=ndao.getDetail(num);
 <input type="button" value="취소" onclick="history.back()">
 </div>
 </form>
-
 
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>

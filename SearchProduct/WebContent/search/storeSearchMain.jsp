@@ -1,3 +1,5 @@
+<%@page import="store.StoreDAO"%>
+<%@page import="store.StoreBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -58,6 +60,12 @@
 <%
 String address=request.getParameter("address");
 String storeId=request.getParameter("storeId");
+Cookie sidCookie = new Cookie(storeId, storeId);
+sidCookie.setMaxAge(60*60);
+sidCookie.setPath("/");
+response.addCookie(sidCookie); // 쿠키 추가
+StoreDAO sdao = new StoreDAO();
+
 if(address==""){%>
 <script>
 alert('주소가 존재하지 않는 스토어 입니다');
@@ -85,9 +93,9 @@ history.back();
 
 </div>
 <div id="map_view" class="text_center" >
-	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=address %>" id ="map_view"  style="margin:0;" height="400px" width="500px">
+	<embed type="text/html" src="single_ad_map.jsp?address=<%=address %>" id ="map_view"  style="margin:0;" height="400px" width="500px">
 	</div>
-<%} %>
+<%}%>
 <!-- 메뉴 들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

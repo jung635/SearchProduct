@@ -30,17 +30,17 @@
 <body>
 <%request.setCharacterEncoding("utf-8");
 String id=(String)session.getAttribute("id");
-
 MemberDAO mdao = new MemberDAO();
 MemberBean mb = mdao.infoMember(id);
-
 %>
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
 <div id="sub_img_member"></div>
 <!-- 본문메인이미지 -->
+
 <!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
 <ul>
@@ -50,8 +50,8 @@ MemberBean mb = mdao.infoMember(id);
 <li><a href="mygoods.jsp">찜 리스트</a></li>
 </ul>
 </nav>
-
 <!-- 왼쪽메뉴 -->
+<!-- 본문내용 -->
 <div class="text_center">
 <h2>비밀번호와 아이디를 다시한번 입력해주세요</h2>
 <table class="table_center" style="margin: auto;">
@@ -62,6 +62,7 @@ MemberBean mb = mdao.infoMember(id);
 </form>
 </table>
 </div>
+<!-- 본문내용 -->
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

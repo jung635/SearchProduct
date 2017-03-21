@@ -43,36 +43,21 @@ list=gdao.goodsList(storeId);%>
 <article>
 <h1>상품 목록</h1>
 </article>
-
 	<table border="1" class="center_table">
-	
-	
-	
  	<%for(int i=0; i<list.size();i++){
  	GoodsBean gb = (GoodsBean)list.get(i);
  	if(i==0||i%4==0){%>
- 		<tr>
- 		<%}%>
+ 	<tr>
+ 	<%}%>
  	<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></a><br>
  	<hr>
  	상품명: <%=gb.getProduct() %><br>
  	가격: <%=gb.getPrice() %><br>
  	<input type = "button" value="찜하기" onclick="location.href='addHot.jsp?storeId=<%=storeId%>&product=<%=gb.getProduct()%>'"></td>
- 	
-
-	<%
-	if(i%4==3){%>
+	<%if(i%4==3){%>
 	</tr>
-	<%}} %> 
-	
-	
-	<%//}%> 
-
+	<%}}%> 
 	</table>
-
 <!-- 본문 들어가는 곳 -->
-
-<!-- 메뉴 들어가는 곳 -->
-
 </body>
 </html>

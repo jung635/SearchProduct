@@ -20,7 +20,7 @@ String product = request.getParameter("product");
 String pic = request.getParameter("pic");
 String realpath = "D:\\workspace_jsp2\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\SearchProduct\\upload\\"+pic;
 File file = new File(realpath);
-System.out.println(realpath);
+//원파일 삭제
 if(file.delete()){
 	System.out.println("성공");
 }else{

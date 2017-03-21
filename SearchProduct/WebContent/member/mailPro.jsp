@@ -13,24 +13,20 @@
 <%request.setCharacterEncoding("utf-8"); 
 String email = request.getParameter("email");
 String authNum = request.getParameter("authNum");
-
-
 String content="인증번호는"+authNum+"입니다.";
 MemberDAO mdao = new MemberDAO();
 boolean check = mdao.sendMail(email,content);
-
 if(check){
 %>
-
-<script>
-alert('메일발송하였습니다!');
-window.close();
-</script>
+	<script>
+	alert('메일발송하였습니다!');
+	window.close();
+	</script>
 <%}else{ %>
-<script>
-alert('메일발송을 실패하였습니다.');
-window.close();
-</script>
-<%} %>
+	<script>
+	alert('메일발송을 실패하였습니다.');
+	window.close();
+	</script>
+<%}%>
 </body>
 </html>

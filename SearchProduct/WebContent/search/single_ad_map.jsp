@@ -9,9 +9,7 @@
 <body>
 <%
 String address=request.getParameter("address");
-
 %>
-
 <div class="text_center"><embed type="text/html" src="single_ad_realmap.jsp?address=<%=address %>"  height="400px" width="500px">
 </div>
 <div class="text_center">주소: <%=address %></div>

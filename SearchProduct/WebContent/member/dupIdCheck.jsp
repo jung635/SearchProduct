@@ -11,7 +11,6 @@
 <%request.setCharacterEncoding("utf-8");
 String id = request.getParameter("id");
 MemberDAO mdao = new MemberDAO();
-//System.out.println(id);
 if(mdao.idDupCheck(id)){
 %>
 	<script>
@@ -19,8 +18,6 @@ if(mdao.idDupCheck(id)){
 	alert('아이디 사용 가능');
 	window.close();
 	</script>
-
-
 <%}else{
 %>
 	<script>
@@ -29,7 +26,5 @@ if(mdao.idDupCheck(id)){
 	window.close();
 	</script>
 <%}%>
-
-
 </body>
 </html>

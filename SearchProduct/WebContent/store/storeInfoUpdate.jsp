@@ -52,7 +52,7 @@ StoreBean sb = sdao.infoStore(id);
 }
 
  //이메일 인증 체크
-function authCheck(){
+ function authCheck(){
  	authCheckChecked=true;
 	authInputNum = document.fr.authInputNum.value;
  	if(authInputNum==authnum){
@@ -111,6 +111,7 @@ function authCheck(){
 	var pass = document.fr.pass.value;
 	if(pass==""){
 		pass=sessionPass;
+		document.fr.pass.value=pass;
 	}
 	if(pass!=sessionPass){
 		//////비밀번호 유형 체크
@@ -206,9 +207,6 @@ function authCheck(){
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문 들어가는 곳 -->
-
-
-
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
 <div id="sub_img_member"></div>
@@ -243,8 +241,6 @@ function authCheck(){
 <input type="text" name="authInputNum"><input type="button" value="인증확인" onclick="authCheck()"><br>
 <label>Address</label>
 <input type="text" name="address" value="<%=sb.getAddress() %>"><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-
-
 
 <div class="clear"></div>
 <div id="buttons">

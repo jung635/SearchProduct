@@ -3,6 +3,11 @@ package store;
 import java.sql.Date;
 
 public class BoardBean {
+
+	private String name, pass, subject, content, file;
+	private int num, readcount;
+	private Date date;
+
 	public String getName() {
 		return name;
 	}
@@ -66,9 +71,5 @@ public class BoardBean {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	private String name, pass, subject, content, file;
-	private int num, readcount;
-	private Date date;
 
 }

@@ -45,24 +45,18 @@ int end=0;
 	List<?> list = null ;
  	if(count!=0){
  		//list = bdao.boardList(start, end);
- 		list = bdao.boardList(start, pageSize);
- 		
+ 		list = bdao.boardList(start, pageSize);	
 	} 
-	
 	//최근글이 위로 re_ref 그룹별 내림차순 정렬 re_ref desc, re-seq  오름차순 asc
 	//글 잘라오기 limit 시작행-1,개수
-
 %>
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
-
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
 <!-- 메인이미지 -->
-
-
-
 <!-- 게시판 -->
 <article id="qa_list">
 <h1>Q&A</h1>
@@ -72,20 +66,18 @@ int end=0;
     <th class="twrite">Writer</th>
     <th class="tdate">Date</th>
     <th class="tread">Read</th></tr>
-   <%if(list == null){%>
+<%if(list == null){%>
 <tr><td colspan="4">글이 없습니다</td><td>
    <%}else{
-for(int i=0; i<list.size(); i++){
-	BoardBean bb = (BoardBean)list.get(i);
-%>
+	for(int i=0; i<list.size(); i++){
+		BoardBean bb = (BoardBean)list.get(i);%>
 <tr><td><%=bb.getNum() %></td><td>
-
-
 <a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %></a></td>
 <td><%=bb.getName() %></td><td><%=bb.getDate() %></td><td><%=bb.getReadcount() %></td>
 </tr>
-<%} }%>  
+<%}}%>  
 </table>
+
 <div id="table_search">
 <form action="qa_search.jsp">
 <input type="text" name="search" class="input_box">
@@ -96,51 +88,38 @@ for(int i=0; i<list.size(); i++){
 <div id="page_control">
 <%
 if(count!=0){
-//전체 페이지 수 구하기
+	//전체 페이지 수 구하기
  	pageNum = request.getParameter("pageNum");
 	//int maxPage=(int)Math.ceil((float)count/pageSize);
 	int pageCount = count/pageSize+(count%pageSize==0?0:1);
-//한 화면에 보여줄 페이지 번호 개수
+	//한 화면에 보여줄 페이지 번호 개수
 	int pageBlock=10;
-//시작페이지 번호 구하기
+	//시작페이지 번호 구하기
 	int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
-//끝페이지 번호 구하기
+	//끝페이지 번호 구하기
 	int endPage = startPage+pageBlock-1;
-//이전
-//1...10
-//다음
-if(endPage > pageCount){
-	endPage=pageCount;
-}
-if(currentPage<=10){ %>
-[이전]
-<%}else{ %>
-<a href="list.jsp?pageNum=<%=startPage-pageBlock %>">[이전]</a>&nbsp;
-
-<%}
-for(int i=startPage; i<=endPage; i++){
-	if(i==currentPage){%>
-	
-	[<%=i %>]
-	<%
-	}else{%>
-	
-	<a href="list.jsp?pageNum=<%=i %>">[<%=i %>]</a>&nbsp;
-	<%
+	//이전
+	//1...10
+	//다음
+	if(endPage > pageCount){
+		endPage=pageCount;
 	}
-}
-%>
-
-<%if(endPage<=pageCount){ %>
-[다음]
-<%}else{ %>
-<a href="list.jsp?pageNum=<%=startPage+pageBlock %>">[다음]</a>&nbsp;
-<%}
-}
-
-%>
-
-
+	if(currentPage<=10){ %>
+		[이전]
+	<%}else{ %>
+		<a href="list.jsp?pageNum=<%=startPage-pageBlock %>">[이전]</a>&nbsp;
+	<%}
+	for(int i=startPage; i<=endPage; i++){
+		if(i==currentPage){%>
+			[<%=i %>]
+		<%}else{%>
+		<a href="list.jsp?pageNum=<%=i %>">[<%=i %>]</a>&nbsp;
+	<%}}%>
+	<%if(endPage<=pageCount){ %>
+		[다음]
+	<%}else{ %>
+		<a href="list.jsp?pageNum=<%=startPage+pageBlock %>">[다음]</a>&nbsp;
+	<%}}%>
 <input type="button" value="글쓰기" class="write_btn" onclick="location.href='write.jsp'" >
 </div>
 </article>

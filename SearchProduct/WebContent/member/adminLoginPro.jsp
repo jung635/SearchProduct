@@ -16,17 +16,16 @@ session.setAttribute("type", "admin");
 
 if(id.equals("admin")&&pass.equals("admin")){
 	session.setAttribute("id", id);
-	session.setAttribute("pass", pass);
-%>
-<script>
-alert('안녕하세요 운영자님!');
-location.href="../main/main.jsp";
-</script>
+	session.setAttribute("pass", pass);%>
+	<script>
+	alert('안녕하세요 운영자님!');
+	location.href="../main/main.jsp";
+	</script>
 <%}else{ %>
-<script>
-alert('아이디나 비밀번호를 다시 확인해주세요');
-history.back();
-</script>
+	<script>
+	alert('아이디나 비밀번호를 다시 확인해주세요');
+	history.back();
+	</script>
 <%} %>
 </body>
 </html>

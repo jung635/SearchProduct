@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 public class StoreBean {
 	private String name, address, id, pass, email, type;
+	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
+
 	public String getType() {
 		return type;
 	}
@@ -11,8 +13,6 @@ public class StoreBean {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
 
 	public Timestamp getReg_date() {
 		return reg_date;
@@ -38,7 +38,6 @@ public class StoreBean {
 		this.pass = pass;
 	}
 
-
 	public String getId() {
 		return id;
 	}
@@ -62,6 +61,5 @@ public class StoreBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 }

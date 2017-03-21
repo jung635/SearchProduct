@@ -37,16 +37,13 @@
 <%request.setCharacterEncoding("utf-8"); String realfilePath = request.getRealPath("/upload");
 int maxSize = 5*1024*1024; //5M(메가바이트)
 MultipartRequest multi = new MultipartRequest(request, realfilePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
-
 String id=(String)session.getAttribute("id");
 String pass=(String)session.getAttribute("pass");
 String ori_product=multi.getParameter("ori_product");
-
 GoodsBean gb = new GoodsBean();
 gb.setPic(multi.getFilesystemName("file"));
 gb.setPrice(Integer.parseInt(multi.getParameter("price")));
 gb.setProduct(multi.getParameter("product"));
-System.out.println("사용자가 올린 원 파일 이름: "+multi.getOriginalFileName("file"));
 %>
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
@@ -69,12 +66,13 @@ System.out.println("사용자가 올린 원 파일 이름: "+multi.getOriginalFi
 <input type="hidden" name="ori_product" value="<%=ori_product%>">
 <div style="display: none;"><input type="file" name="file" value="<%=gb.getPic()%>"></div>
 <fieldset>
-<legend>Login Info</legend>
-<label>User ID</label>
-<input type="text" name="id" value=<%=id %> readonly><br>
-<label>Password</label>
-<input type="password" name="pass"><br>
+	<legend>Login Info</legend>
+	<label>User ID</label>
+	<input type="text" name="id" value=<%=id %> readonly><br>
+	<label>Password</label>
+	<input type="password" name="pass"><br>
 </fieldset>
+
 <div class="clear"></div>
 <div id="buttons">
 <input type="submit" value="Submit" class="submit">

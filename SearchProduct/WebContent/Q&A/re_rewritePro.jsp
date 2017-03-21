@@ -9,7 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <%request.setCharacterEncoding("utf-8");
 String id=(String)session.getAttribute("id");
 String pass=(String)session.getAttribute("pass");
@@ -22,22 +21,20 @@ cb.setBoard_num(num);
 cb.setContent(request.getParameter("content"));
 cb.setName(id);
 cb.setPass(pass);
-System.out.println(cb.getRenum());
 if(id==null){%>
 	<script>
 	alert('로그인을 해주세요');
 	location.href="../member/clientLoginForm.jsp"
 	</script>
-	
 <%}else{
 BoardDAO bdao = new BoardDAO();
 bdao.insertRereBoard(cb);
 %>
-<script>
-window.close();
-opener.location.reload();
-//location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
-</script>
+	<script>
+	window.close();
+	opener.location.reload();
+	//location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
+	</script>
 <%}%>
 </body>
 </html>

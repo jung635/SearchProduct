@@ -12,10 +12,9 @@
 </head>
 <body>
 
-<%request.setCharacterEncoding("utf-8"); 
-
+<%
+request.setCharacterEncoding("utf-8"); 
 String realfilePath = request.getRealPath("/boardPic");
-
 int maxSize = 5*1024*1024; //5M(메가바이트)
 //파일이름이 동일 할 때 파일이름을 변경 DefalutFileRenamePolicy()
 MultipartRequest multi = new MultipartRequest(request, realfilePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
@@ -29,11 +28,9 @@ bb.setContent(multi.getParameter("content"));
 //upload폴더에 올라간 파일이름
 bb.setFile(multi.getFilesystemName("file"));
 //사용자가 올린 원 파일이름
-
 BoardDAO bdao = new BoardDAO();
 bdao.insertBoard(bb);
 response.sendRedirect("list.jsp");
 %>
- 
 </body>
 </html>

@@ -32,11 +32,9 @@ gdao.insertGoods(id,gb);
 response.sendRedirect("goodsList.jsp");
 }catch(NumberFormatException e){
 %>
-	 <script>
-	history.back();
-	</script> 
-<%
-
-}%>
+ <script>
+history.back();
+</script> 
+<%}%>
 </body>
 </html>

@@ -41,7 +41,6 @@ function check(){
 	//상품 확인
 	if(document.fr.product.value==""){
 		alert('상품명을 입력해주세요');
-		history.back();
 		document.fr.product.focus();
 		return false;
 	}else if(!dubClicked){
@@ -60,11 +59,11 @@ function check(){
 		document.fr.price.focus();
 		return false;
 	}else if(!regNumber.test(document.fr.price.value)) {
-	        alert('숫자만 입력 가능합니다');
-	        history.back();
-			document.fr.price.focus();
-			return false;
-	    }
+	    alert('가격은 숫자만 입력 가능합니다');
+	    history.back();
+		document.fr.price.focus();
+		return false;
+	}
 
 }
 
@@ -94,13 +93,13 @@ function check(){
 <article>
 <h1>상품 등록</h1>
 </article>
-<form action="regGoodsPro.jsp" name="fr" enctype="multipart/form-data" method="POST" onsubmit="check()">
+<form action="regGoodsPro.jsp" name="fr" enctype="multipart/form-data" method="POST" onsubmit="return check()">
 <input type="hidden" name="dubOk">
 <table class="table_center" style="margin: auto;">
 <tr>
-<td>상품 이름</td><td> <input type="text" name="product">
-<input type="button" value="dup. check" class="dup" onclick="dupCheck()"><br>
-</td>
+<td>상품 이름</td>
+<td><input type="text" name="product">
+<input type="button" value="dup. check" class="dup" onclick="dupCheck()"><br></td>
 </tr>
 <tr>
 <td>가격</td><td> <input type="text" name="price"></td>
@@ -108,11 +107,12 @@ function check(){
 <tr>
 <td>파일</td><td> <input type="file" name="file"></td>
 </tr>
-<tr><td colspan="2" >
+<tr>
+<td colspan="2" >
 <input type="button" value="취소" onclick="history.back()"  style="float: right;">
 <input type="submit" value="등록"  style="float: right;">
-
-</td></tr>
+</td>
+</tr>
 </table>
 </form>
 <!-- 메뉴 들어가는 곳 -->

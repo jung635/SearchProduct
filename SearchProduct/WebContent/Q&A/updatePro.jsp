@@ -14,9 +14,7 @@
 <body>
 
 <%request.setCharacterEncoding("utf-8"); 
-
 String realfilePath = request.getRealPath("/boardPic");
-
 int maxSize = 5*1024*1024; //5M(메가바이트)
 //파일이름이 동일 할 때 파일이름을 변경 DefalutFileRenamePolicy()
 MultipartRequest multi = new MultipartRequest(request, realfilePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
@@ -25,38 +23,33 @@ String ori_file = multi.getParameter("ori_file");
 String file = multi.getFilesystemName("file");
 BoardBean bb = new BoardBean();
 //set 메서드호출 폼 => 자바빈 멤버변수 저장 (수동으로 해야함)
-
 bb.setName(multi.getParameter("name"));
 bb.setPass(multi.getParameter("pass"));
 bb.setSubject(multi.getParameter("subject"));
 bb.setContent(multi.getParameter("content"));
 //upload폴더에 올라간 파일이름
-System.out.println("ori: "+ori_file);
-System.out.println("file: "+file);
 String rfp = realfilePath+'\\'+ori_file;
-System.out.println("물리적경로: "+rfp);
-
-File ffile = new File(rfp);
-if(ffile.delete()){
-	System.out.println("성공");
-}else{
-	System.out.println("실패");
-}
+//파일 안올릴 시 원래 파일 사용
 if(file==null){
 	bb.setFile(ori_file);
 }else{
 	bb.setFile(file);
+	//오리지널 파일 삭제
+	File ffile = new File(rfp);
+	if(ffile.delete()){
+		System.out.println("성공");
+	}else{
+		System.out.println("실패");
+	}
 }
 bb.setNum(Integer.parseInt(multi.getParameter("num")));
-
 int pageNum = Integer.parseInt(multi.getParameter("pageNum"));
 //사용자가 올린 원 파일이름
 BoardDAO bdao = new BoardDAO();
 bdao.updateBoard(bb);
-//response.sendRedirect("list.jsp?pageNum="pageNum);
 %>
- <script>
- location.href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>";
- </script>
+<script>
+location.href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>";
+</script>
 </body>
 </html>

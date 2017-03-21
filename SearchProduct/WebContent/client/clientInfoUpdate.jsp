@@ -70,7 +70,6 @@ function authCheck(){
 
  
  function submitCheck(){
-	 
  	//////이름 체크
  	if(document.fr.name.value==""){
  		alert("이름을 입력해 주세요");
@@ -109,6 +108,7 @@ function authCheck(){
 	var pass = document.fr.pass.value;
 	if(pass==""){
 		pass=sessionPass;
+		document.fr.pass.value=pass;
 	}
 	if(pass!=sessionPass){
 		//////비밀번호 유형 체크
@@ -204,13 +204,10 @@ function passFormCheck(){
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 본문 들어가는 곳 -->
-
-
-
-<!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
 <div id="sub_img_member"></div>
 <!-- 본문메인이미지 -->
+
 <!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
 <ul>
@@ -218,10 +215,10 @@ function passFormCheck(){
 <li><a href="clientInfoUpdate.jsp">회원 정보 수정</a></li>
 <li><a href="clientInfoDeleteForm.jsp">회원 탈퇴</a></li>
 <li><a href="mygoods.jsp">찜 리스트</a></li>
-
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->
+
 <!-- 본문내용 -->
 <article>
 <h1>InFo</h1>

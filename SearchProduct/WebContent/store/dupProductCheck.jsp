@@ -16,18 +16,16 @@ String id = request.getParameter("id");
 String product = request.getParameter("product");
 GoodsDAO gdao = new GoodsDAO();
 Boolean check = gdao.isSearchGoods(id, product);
-//
 if(check==true){
 %>
-		<script>
+	<script>
 	window.opener.fr.dubOk.value="no";
 	alert('다른 이름을 입력해주세요');
 	window.close();
 	</script>
 
-<%}else{
-%>
-<script>
+<%}else{%>
+	<script>
 	window.opener.fr.dubOk.value="ok";
 	alert('이름 사용 가능');
 	window.close();

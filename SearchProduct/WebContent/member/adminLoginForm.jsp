@@ -24,9 +24,9 @@
 
 </head>
 <body>
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
-
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
 <div id="sub_img_member"></div>
@@ -59,7 +59,6 @@
 </article>
 <!-- 본문내용 -->
 <!-- 본문들어가는 곳 -->
-
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>
 </div>

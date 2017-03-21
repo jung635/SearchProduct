@@ -30,12 +30,10 @@
 
 </head>
 <body>
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
-
-
-<%request.setCharacterEncoding("utf-8"); %>
-<%
+<%request.setCharacterEncoding("utf-8");
 String id = (String)session.getAttribute("id");
 MemberDAO mdao = new MemberDAO();
 MemberBean mb = mdao.infoMember(id);
@@ -45,14 +43,14 @@ if(id==null){%>
 	alert('로그인을 해주세요');
 	location.href="../member/clientLoginForm.jsp"
 	</script>
-	
 <%}
 %>
+<!-- 본문 들어가는 곳 -->
 <!-- 서브페이지 메인이미지 -->
 <div id="sub_img"></div>
 <!-- 서브페이지 메인이미지 -->
 
-<!-- 본문 들어가는 곳 -->
+<!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
 <ul>
 <li><a href="clientInfo.jsp">회원 정보 확인</a></li>
@@ -62,9 +60,7 @@ if(id==null){%>
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->
-<!-- 본문 들어가는 곳 -->
-
-
+<!-- 본문내용 -->
 
 <div class="text_center">
 <h1>client 회원정보</h1>
@@ -79,8 +75,8 @@ if(id==null){%>
 <tr><td>email</td><td><%=mb.getEmail()%></td></tr>
 </table>
 </div>
-
-<!-- 메뉴 들어가는 곳 -->
+<!-- 본문내용 -->
+<!-- 본문 들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>
 </div>

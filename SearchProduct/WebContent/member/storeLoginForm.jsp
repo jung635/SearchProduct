@@ -42,13 +42,14 @@
 <article>
 <h1>Login</h1>
 <form action="storeLoginPro.jsp" id="join">
-<fieldset>
-<legend>Login Info</legend>
-<label>User ID</label>
-<input type="text" name="id"><br>
-<label>Password</label>
-<input type="password" name="pass"><br>
-</fieldset>
+	<fieldset>
+	<legend>Login Info</legend>
+	<label>User ID</label>
+	<input type="text" name="id"><br>
+	<label>Password</label>
+	<input type="password" name="pass"><br>
+	</fieldset>
+	
 <div class="clear"></div>
 <div id="buttons">
 <input type="submit" value="Submit" class="submit">

@@ -34,7 +34,6 @@
 <div id="sub_img"></div>
 <!-- 서브페이지 메인이미지 -->
 <!-- 메뉴 들어가는 곳 -->
-
 <%
 String id=(String)session.getAttribute("id");
 String pass=(String)session.getAttribute("pass");
@@ -42,7 +41,6 @@ if(id==null){response.sendRedirect("storeLoginForm.jsp");
 }%>
 <div class="text_center">
 <%=id %>님의 관리 메뉴<br>
-
 <a href="storeInfo.jsp">회원 정보 관리</a><br>
 <a href="goodsList.jsp">물품 관리</a><br>
 </div>

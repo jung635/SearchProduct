@@ -23,13 +23,11 @@
  <![endif]-->
 </head>
 <body>
-
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
 <!-- 메인이미지 -->
-
 <!-- 본문들어가는 곳 -->
 <%
 String id=(String)session.getAttribute("id");
@@ -39,7 +37,6 @@ if(id==null||id.equals("admin")==false){%>
 	alert('admin만 글을 작성할 수 있습니다.');
 	location.href="../member/adminLoginForm.jsp"
 	</script>
-	
 <%}%>
 <form action="writePro.jsp" name="fr">
 <input type="hidden" name="name" value="<%=id%>">
@@ -57,7 +54,6 @@ if(id==null||id.equals("admin")==false){%>
 <input type="button" value="취소" onclick="history.back()">
 </div>
 </form>
-
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

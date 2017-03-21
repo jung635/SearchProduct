@@ -12,15 +12,12 @@
 String id = request.getParameter("id");
 
 StoreDAO sdao = new StoreDAO();
-//System.out.println(id);
 if(sdao.storeIdDupCheck(id)){%>
 	<script>
 	window.opener.fr.idDubOk.value="ok";
 	alert('아이디 사용 가능');
 	window.close();
 	</script>
-
-
 <%}else{%>
 	<script>
 	window.opener.fr.idDubOk.value="no";
@@ -28,6 +25,5 @@ if(sdao.storeIdDupCheck(id)){%>
 	window.close();
 	</script>
 <%}%>
-
 </body>
 </html>

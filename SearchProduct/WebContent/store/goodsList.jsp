@@ -36,7 +36,6 @@
 <body>
 <%request.setCharacterEncoding("utf-8"); 
 String sessionId=(String)session.getAttribute("id");
-
 GoodsDAO gdao = new GoodsDAO();
 List<Object> list = new ArrayList<Object>();
 list=gdao.goodsList(sessionId);%>
@@ -46,7 +45,6 @@ list=gdao.goodsList(sessionId);%>
 <div id="sub_img"></div>
 <!-- 서브페이지 메인이미지 -->
 <!-- 왼쪽메뉴 -->
-
 <nav id="sub_menu">
 <ul>
 <li><a href="goodsList.jsp">상품 목록</a></li>
@@ -58,40 +56,26 @@ list=gdao.goodsList(sessionId);%>
 <div class="text_center">
 <article>
 <h1>상품 목록</h1>
-*수정이나 삭제를 원하실 경우 상품의 사진을 클릭하세요
 </article>
-
 	<table id="goods_table">
-	
-	
-	
  	<%for(int i=0; i<list.size();i++){
  	GoodsBean gb = (GoodsBean)list.get(i);
  	if(i==0||i%4==0){%>
- 		<tr>
- 		<%}%>
- 	<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"><br>
- 	<hr>
- 	상품명: <%=gb.getProduct() %><br>
- 	가격: <%=gb.getPrice() %><br>
- 	<input type = "button" value="수정" onclick="location.href='goodsUpdate.jsp?product=<%=gb.getProduct()%>&price=<%=gb.getPrice()%>&pic=<%=gb.getPic()%>'"><br>
- 	<input type = "button" value="삭제" onclick="location.href='recheckGoodsDelete.jsp?product=<%=gb.getProduct()%>&pic=<%=gb.getPic()%>'">
- 	
- 	</td>
- 	
-
-	<%
-	if(i%4==3){%>
+ 	<tr>
+ 	<%}%>
+ 		<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"><br>
+ 		<hr>
+ 		상품명: <%=gb.getProduct() %><br>
+ 		가격: <%=gb.getPrice() %><br>
+ 		<input type = "button" value="수정" onclick="location.href='goodsUpdate.jsp?product=<%=gb.getProduct()%>&price=<%=gb.getPrice()%>&pic=<%=gb.getPic()%>'"><br>
+ 		<input type = "button" value="삭제" onclick="location.href='recheckGoodsDelete.jsp?product=<%=gb.getProduct()%>&pic=<%=gb.getPic()%>'">
+ 		</td>
+	<%if(i%4==3){%>
 	</tr>
-	<%}} %> 
-	
-	
-	<%//}%> 
-
+	<%}}%> 
 	</table>
 	</div>
 <!-- 본문 들어가는 곳 -->
-
 <!-- 메뉴 들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

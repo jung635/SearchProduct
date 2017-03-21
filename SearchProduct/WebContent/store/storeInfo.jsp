@@ -50,9 +50,6 @@ StoreBean sb = sdao.infoStore(id);
 </nav>
 <!-- 왼쪽메뉴 -->
 <!-- 본문 들어가는 곳 -->
-
-
-
 <div class="text_center">
 <article>
 <h1>회원 정보</h1>
@@ -66,7 +63,6 @@ StoreBean sb = sdao.infoStore(id);
 <tr><td>email</td><td><%=sb.getEmail()%></td></tr>
 </table>
 </div>
-
 <!-- 메뉴 들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

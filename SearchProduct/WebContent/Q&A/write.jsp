@@ -29,7 +29,6 @@
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
 <!-- 메인이미지 -->
-
 <!-- 본문들어가는 곳 -->
 <%
 String id=(String)session.getAttribute("id");
@@ -39,7 +38,6 @@ if(id==null){%>
 	alert('로그인을 해주세요');
 	location.href="../member/clientLoginForm.jsp"
 	</script>
-	
 <%}%>
 <form action="writePro.jsp" name="fr"  enctype="multipart/form-data" method="post">
 <input type="hidden" name="name" value="<%=id%>">
@@ -60,7 +58,6 @@ if(id==null){%>
 <input type="button" value="취소" onclick="history.back()">
 </div>
 </form>
-
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

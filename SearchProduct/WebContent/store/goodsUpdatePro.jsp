@@ -24,44 +24,28 @@ String ori_product=multi.getParameter("ori_product");
 String ori_pic = multi.getParameter("ori_pic");
 String pic = multi.getFilesystemName("file");
 String rfp = realfilePath+'\\'+ori_pic;
-System.out.println("물리적경로: "+rfp);
-
-File file = new File(rfp);
-if(file.delete()){
-	System.out.println("성공");
-}else{
-	System.out.println("실패");
-}
-
+//파일 업로드 안할 시 원 파일 사용
 GoodsBean gb = new GoodsBean();
 if(pic==null){
 	gb.setPic(ori_pic);
 }else{
 	gb.setPic(pic);
+	//원파일 삭제
+	File file = new File(rfp);
+	if(file.delete()){
+		System.out.println("성공");
+	}else{
+		System.out.println("실패");
+	}
 }
 gb.setId(id);
 gb.setPrice(Integer.parseInt(multi.getParameter("price")));
 gb.setProduct(multi.getParameter("product"));
-
-
 GoodsDAO gdao = new GoodsDAO();
 StoreDAO sdao = new StoreDAO();
-//int check=sdao.isStoreAdmin(id,pass);
-//if(check==1){
-	gdao.updateGoods(gb,ori_product);
-	response.sendRedirect("../store/goodsList.jsp");
-//}//else if(check==-1){%>
-	<script type="text/javascript">
-	alert('비밀번호가 일치하지 않습니다.');
-	history.back();
-	</script>
-<%//}else if(check==0){%>
-	<script type="text/javascript">
-	alert('아이디를 다시 확인해 주세요.');
-	history.back();
-	</script>
-<%//}
-
+gdao.updateGoods(gb,ori_product);
+response.sendRedirect("../store/goodsList.jsp");
 %>
+
 </body>
 </html>

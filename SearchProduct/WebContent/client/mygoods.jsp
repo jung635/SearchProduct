@@ -36,17 +36,17 @@
 
 </head>
 <body>
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
-
-
-<%request.setCharacterEncoding("utf-8"); %>
-<%
+<%request.setCharacterEncoding("utf-8");
 String id=(String)session.getAttribute("id");
+
 StoreDAO sdao = new StoreDAO();
 MemberDAO mdao = new MemberDAO();
 MemberBean mb = mdao.infoMember(id);
 GoodsDAO gdao = new GoodsDAO();
+
 List<Object> list = new ArrayList<Object>();
 list=gdao.mygoodsList(id);
 if(id==null){%>
@@ -54,14 +54,14 @@ if(id==null){%>
 	alert('로그인을 해주세요');
 	location.href="../member/clientLoginForm.jsp"
 	</script>
-	
-<%}
-%>
+<%}%>
+
 <!-- 서브페이지 메인이미지 -->
 <div id="sub_img"></div>
 <!-- 서브페이지 메인이미지 -->
 
 <!-- 본문 들어가는 곳 -->
+<!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
 <ul>
 <li><a href="clientInfo.jsp">회원 정보 확인</a></li>
@@ -71,44 +71,31 @@ if(id==null){%>
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->
-<!-- 본문 들어가는 곳 -->
-
+<!-- 본문내용 -->
 
 <article>
 <h1>찜 리스트</h1>
 </article>
-
-	<table border="1" class="center_table">
-	
-	
-	
+	<table border="1" class="center_table">	
  	<%for(int i=0; i<list.size();i++){
  	MygoodsBean mgb = (MygoodsBean)list.get(i);
  	StoreBean sb = sdao.storeSearch(mgb.getGoods_id());
  	if(i==0||i%4==0){%>
- 		<tr>
- 		<%}%>
- 	<td><img src="../upload/<%=mgb.getPic()%>" height="80px" width="80px"></a><br>
+ 	<tr>
+ 	<%}%>
+ 	<td><img src="../upload/<%=mgb.getPic()%>" height="80px" width="80px"><br>
  	<hr>
  	상품명: <%=mgb.getProduct() %><br>
  	가격: <%=mgb.getPrice() %><br>
  	<input type = "button" value="스토어 방문" onclick="location.href='../search/storeSearchMain.jsp?storeId=<%=mgb.getGoods_id()%>&address=<%=sb.getAddress()%>'"><br>
  	<input type = "button" value="찜해제" onclick="location.href='deleteMygoods.jsp?id=<%=mgb.getId()%>&product=<%=mgb.getProduct()%>&goods_id=<%=mgb.getGoods_id()%>'">
- 	
- 	
-
 	<%
 	if(i%4==3){%>
 	</tr>
-	<%}} %> 
-	
-	
-	<%//}%> 
-
+	<%}} %>
 	</table>
-
-
-<!-- 메뉴 들어가는 곳 -->
+<!-- 본문내용 -->
+<!-- 본문 들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>
 </div>

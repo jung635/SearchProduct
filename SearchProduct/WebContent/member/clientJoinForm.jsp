@@ -33,8 +33,8 @@ String authNum = buffer.toString();
 
 
 %> --%>
- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
- <script type="text/javascript">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript">
  var authMailClicked=false;
  var authCheckChecked=false;
  var authNumCheck=false;
@@ -52,7 +52,7 @@ String authNum = buffer.toString();
 }
 
  //이메일 인증 체크
-function authCheck(){
+ function authCheck(){
  	authCheckChecked=true;
 	authInputNum = document.fr.authInputNum.value;
  	if(authInputNum==authnum){
@@ -62,13 +62,7 @@ function authCheck(){
 		alert('인증실패!'); 
 		authNumCheck=false;
 
-	}  
-/* 	if(authCheckChecked==true){
-		alert(authNumCheck);
-	}else{
-		alert("hi2");
-	} */
-	
+	}  	
 }
 
  //아이디 중복 확인
@@ -151,10 +145,6 @@ function authCheck(){
 		alert("인증번호가 맞지 않습니다.");
 		return false;
 	}
- 	
- 	
-
-
  }
 
 //비밀번호 일치 체크 디스플레이
@@ -162,8 +152,7 @@ function authCheck(){
  	if(document.fr.pass.value==document.fr.pass2.value){
  		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치합니다";
  	}else{
- 		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치하지 않습니다.";
- 	
+ 		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치하지 않습니다.";	
  }	
  }
 
@@ -238,7 +227,8 @@ function authCheck(){
 <body>
 
 
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 
 <!-- 본문들어가는 곳 -->
@@ -278,6 +268,7 @@ function authCheck(){
 <label></label>
 <input type="text" name="authInputNum"><input type="button" value="인증확인" onclick="authCheck()"><br>
 </fieldset>
+
 <fieldset>
 <legend>Optional</legend>
 <label>Address</label>
@@ -289,6 +280,7 @@ function authCheck(){
 <label>Phone Number</label>
 <input type="text" name="phone" id="phone"><br>
 </fieldset>
+
 <div class="clear"></div>
 <div id="buttons">
 <input type="submit" value="Submit" class="submit">
@@ -298,7 +290,6 @@ function authCheck(){
 </article>
 <!-- 본문내용 -->
 <!-- 본문들어가는 곳 -->
-
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>
 </div>

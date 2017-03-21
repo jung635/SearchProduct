@@ -25,7 +25,6 @@
 <body>
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
-
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
 <div id="sub_img_member"></div>
@@ -43,12 +42,13 @@
 <h1>Login</h1>
 <form action="clientLoginPro.jsp" id="join">
 <fieldset>
-<legend>Login Info</legend>
-<label>User ID</label>
-<input type="text" name="id"><br>
-<label>Password</label>
-<input type="password" name="pass"><br>
+	<legend>Login Info</legend>
+	<label>User ID</label>
+	<input type="text" name="id"><br>
+	<label>Password</label>
+	<input type="password" name="pass"><br>
 </fieldset>
+
 <div class="clear"></div>
 <div id="buttons">
 <input type="submit" value="Submit" class="submit">
@@ -58,7 +58,6 @@
 </article>
 <!-- 본문내용 -->
 <!-- 본문들어가는 곳 -->
-
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>
 </div>

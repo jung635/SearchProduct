@@ -19,16 +19,14 @@ NewsDAO ndao = new NewsDAO();
 if(pass.equals("admin")){
 	ndao.deleteBoard(num);%>
 	 <script>
- location.href='list.jsp?pageNum=<%=pageNum%>'
- </script>
+ 	location.href='list.jsp?pageNum=<%=pageNum%>'
+ 	</script>
 <%}else{%>
 	<script type="text/javascript">
 	alert('아이디 혹은 비밀번호를 다시 확인해 주세요.');
 	history.back();
 	</script>
-<%}
-
-%>
+<%}%>
 
 </body>
 </html>

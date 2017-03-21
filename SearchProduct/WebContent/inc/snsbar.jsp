@@ -7,28 +7,29 @@
 <title>Insert title here</title>
 <style>
 .sidebar {
-position: fixed;
-width: 53px;
-height: 257px;
-background: #7ED2FF;
-float: right;
-margin: auto;
-margin-left: -43px;
-margin-top: 465px;	
- }
-.sns{
-list-style: none;
-padding-bottom: 15px;
-}
-.sns_ul{
-padding: 6px 0px 0px 7px;
-}
-.sns_img{
-width: 40px;
-}
+	position: fixed;
+	width: 53px;
+	height: 257px;
+	background: #7ED2FF;
+	float: right;
+	margin: auto;
+	margin-left: -43px;
+	margin-top: 465px;
 }
 
+.sns {
+	list-style: none;
+	padding-bottom: 15px;
+}
 
+.sns_ul {
+	padding: 6px 0px 0px 7px;
+}
+
+.sns_img {
+	width: 40px;
+}
+}
 </style>
 </head>
 <body>
@@ -40,6 +41,5 @@ width: 40px;
 <li class="sns"><a href="https://www.facebook.com/FacebookKorea/"><img src="../images/sns/pinstagram.png" class="sns_img"></a></li>
 </ul>
 </div>
-
 </body>
 </html>

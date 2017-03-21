@@ -20,13 +20,18 @@ if(id==null){%>
 	</script>
 <%}else{
 GoodsDAO gdao = new GoodsDAO();
-gdao.updateGoodsHot(storeId, product, id);
-
+if(gdao.updateGoodsHot(storeId, product, id)){
 %>
-<script>
-alert('찜목록에 추가되었습니다!');
-history.back();
-<%}%>
-</script>
+	<script>
+	alert('찜목록에 추가되었습니다!');
+	history.back();
+	</script>
+<%}else{%>
+	<script>
+	alert('찜목록에 이미 존재하는 상품입니다!');
+	history.back();
+	</script>
+<%}}%>
+
 </body>
 </html>

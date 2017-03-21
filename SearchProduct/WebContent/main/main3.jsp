@@ -47,7 +47,7 @@
 }
 </style>
 <script>
-function imageOn(path, count){
+	function imageOn(path, count){
 		var divform = document.getElementById("up"+count);
 		divform.style.display = '';
 		document.getElementById("upImg"+count).src = path;
@@ -56,7 +56,6 @@ function imageOn(path, count){
 		var divform = document.getElementById("up"+count);
 		divform.style.display = 'none';
 	}
-	
 </script>
 </head>
 
@@ -67,6 +66,7 @@ function imageOn(path, count){
 <div id="wrap">
 <jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
+
 <!-- 메인이미지 들어가는곳 -->
 <div class="clear"></div>
 <div id="main_img"><img src="../images/map.png" width="971" height="282"></div>
@@ -162,7 +162,7 @@ goodslist=gdao.hotgoodsList();%>
 <!-- 인기상품 -->
 
 <!-- 메인 콘텐츠 들어가는 곳 -->
-<!-- <article id="front">
+<article id="front">
 <div id="solution">
 <div id="hosting">
 <h3>Web Hosting Solution</h3>
@@ -182,7 +182,7 @@ goodslist=gdao.hotgoodsList();%>
  impsunLorem impsunLorem impsunLorem impsunLorem
   impsunLorem impsunLorem impsun....</p>
 </div>
-</div> -->
+</div>
 <div class="clear"></div>
 <div id="sec_news">
 <h3 class="orange">News</h3>

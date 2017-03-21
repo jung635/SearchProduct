@@ -25,13 +25,11 @@
  <![endif]-->
 </head>
 <body>
-
 <div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
 <!-- 메인이미지 -->
-
 <!-- 본문들어가는 곳 -->
 <%
 String id=(String)session.getAttribute("id");
@@ -41,16 +39,15 @@ String pageNum = (String)request.getParameter("pageNum");
 BoardDAO bdao = new BoardDAO();
 BoardBean bb=bdao.getDetail(num);
 if(id==null){%>
-<script>
-alert('로그인을 해주세요');
-location.href="../member/clientLoginForm.jsp"
-</script>
-
+	<script>
+	alert('로그인을 해주세요');
+	location.href="../member/clientLoginForm.jsp"
+	</script>
 <%}else if(id.equals(bb.getName())==false){%>
-<script>
-alert('글쓴이가 아닙니다');
-history.back();
-</script>
+	<script>
+	alert('글쓴이가 아닙니다');
+	history.back();
+	</script>
 <%}%>
 <form action="updatePro.jsp" name="fr"  enctype="multipart/form-data" method="post">
 <input type="hidden" name="name" value="<%=id%>">
@@ -59,23 +56,15 @@ history.back();
 <input type="hidden" name="pageNum" value="<%=pageNum%>">
 <input type="hidden" name="ori_file" value="<%=bb.getFile() %>">
 <table class="write_table">
-<tr>
-<td>제목  </td><td><input type="text" name="subject" value="<%=bb.getSubject()%>"></td>
-</tr>
-<tr>
-<td>내용 </td><td> <textarea name="content" cols="60" rows="15"><%=bb.getContent()%></textarea></td>
-</tr>
-<tr>
-
+<tr><td>제목  </td><td><input type="text" name="subject" value="<%=bb.getSubject()%>"></td></tr>
+<tr><td>내용 </td><td> <textarea name="content" cols="60" rows="15"><%=bb.getContent()%></textarea></td></tr>
 <tr><td>파일  </td><td><input type="file" name="file" value="<%=bb.getFile() %>"></td>
-</tr>
 </table>
 <div class="text_center">
 <input type="submit" value="등록">
 <input type="button" value="취소" onclick="history.back()">
 </div>
 </form>
-
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>
 <jsp:include page="../inc/bottom.jsp"/>

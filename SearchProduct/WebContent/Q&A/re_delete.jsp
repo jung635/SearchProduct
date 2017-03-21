@@ -16,25 +16,23 @@ int num = board_num;
 String pageNum = (String)request.getParameter("pageNum");
 String name = request.getParameter("name");
 if(sessionId==null){%>
-<script>
-alert('로그인을 해주세요');
-location.href="../member/clientLoginForm.jsp"
-</script>
-
+	<script>
+	alert('로그인을 해주세요');
+	location.href="../member/clientLoginForm.jsp"
+	</script>
 <%}else if(sessionId.equals(name)==false){%>
-<script>
-alert('글쓴이가 아닙니다');
-history.back();
-</script>
+	<script>
+	alert('글쓴이가 아닙니다');
+	history.back();
+	</script>
 <%}else{
-
 BoardDAO bdao = new BoardDAO();
 bdao.deletereBoard(board_num, renum);
 %>
-<script>
-alert('삭제되었습니다');
-location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
-</script>
-<%} %>
+	<script>
+	alert('삭제되었습니다');
+	location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
+	</script>
+<%}%>
 </body>
 </html>

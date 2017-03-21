@@ -20,7 +20,7 @@
 
  </script>
  <![endif]-->
-  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+ <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
  <script type="text/javascript">
  var authMailClicked=false;
  var authCheckChecked=false;
@@ -36,7 +36,6 @@
 	 var url = "mailPro.jsp?email="+email+"&authNum="+authnum;
 	 window.open(url,'sendmail',"height=400 width=400");
 }
-
  //이메일 인증 체크
 function authCheck(){
  	authCheckChecked=true;
@@ -47,14 +46,7 @@ function authCheck(){
 	}else{
 		alert('인증실패!'); 
 		authNumCheck=false;
-
 	}  
-/* 	if(authCheckChecked==true){
-		alert(authNumCheck);
-	}else{
-		alert("hi2");
-	} */
-	
 }
  
  //아이디 중복 체크
@@ -66,7 +58,6 @@ function authCheck(){
  }
  
  function submitCheck(){
-	
 	 	//////아이디 체크
 	 	if(document.fr.id.value==""){
 	 		alert("아이디를 입력해 주세요!");
@@ -84,8 +75,7 @@ function authCheck(){
 			alert("중복된 아이디는 사용 할 수 없습니다");
 			document.fr.id.focus();
 			return false;
-		} 
-	 	
+		} 	
 	 	//////비밀번호 유형 체크
 	 	if(document.fr.pass.value==""){
 	 		alert("비밀번호를 입력해 주세요!");
@@ -151,20 +141,17 @@ function authCheck(){
 	 	if(document.fr.pass.value==document.fr.pass2.value){
 	 		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치합니다";
 	 	}else{
-	 		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치하지 않습니다.";
-	 	
+	 		document.getElementById("passdbCheckDisplay").innerHTML="비밀번호가 일치하지 않습니다."; 	
 	 }	
 	 }
 
 	//비밀번호 유형 체크 디스플레이
 	 function passFormCheck(){
-	 	var pwd=document.fr.pass.value;
-	 	
+	 	var pwd=document.fr.pass.value;	
 	 	if(!pass_reg.test(pwd)){
 	 		document.getElementById("passCheckDisplay").innerHTML="비밀번호는 영어대, 소문자, 숫자, 특수문자 조합 10-20자리로 구성해주세요.";	
 	 	}else{
-	 		document.getElementById("passCheckDisplay").innerHTML="OK!";	
-	 		
+	 		document.getElementById("passCheckDisplay").innerHTML="OK!";	 		
 	 	}
 	 }
 
@@ -179,6 +166,7 @@ function authCheck(){
 	 		}
 	 	
 	 }
+	
 	//우편번호 검색
 	 function sample6_execDaumPostcode() {
 		   new daum.Postcode({
@@ -249,6 +237,7 @@ function authCheck(){
 <form action="storeJoinPro.jsp" id="join" name="fr" onsubmit="return submitCheck()">
 <input type="hidden" name="idDubOk">
 <input type="hidden" name="type" value="store">
+
 <fieldset>
 <legend>Basic Info</legend>
 <label>User ID</label>
@@ -270,8 +259,6 @@ function authCheck(){
 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 <label></label>
 <input type="text" name="address" id="address" placeholder="주소"><br>
-
-
 
 <div class="clear"></div>
 <div id="buttons">

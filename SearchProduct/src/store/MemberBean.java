@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class MemberBean {
 	private String name, id, pass, email, address, phone, postcode, type;
+	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
 
 	public String getType() {
 		return type;
@@ -20,8 +21,6 @@ public class MemberBean {
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
-
-	private Timestamp reg_date = new Timestamp(System.currentTimeMillis());
 
 	public String getName() {
 		return name;

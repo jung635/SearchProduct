@@ -41,22 +41,18 @@ int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
 NewsDAO ndao = new NewsDAO();
 CommentBean cb = null;
-//조회수증가 readcount 1증가 update readcount=readcount+1
-//메서드 호출 updateReadcount(num)
 ndao.updateReadcount(num);
 NewsBean nb = ndao.getDetail(num);
 %>
-
 <table border="1" id="news_table">
-<tr>
-<td>제목</td><td colspan="3"><%=nb.getSubject() %></td>
-<td>글번호</td><td><%=nb.getNum() %></td>
-</tr>
-<tr>
-<td style="height: 300px;">내용 </td><td colspan="5"><%=nb.getContent() %></td>
-</tr>
+	<tr>
+		<td>제목</td><td colspan="3"><%=nb.getSubject() %></td>
+		<td>글번호</td><td><%=nb.getNum() %></td>
+	</tr>
+	<tr>
+		<td style="height: 300px;">내용 </td><td colspan="5"><%=nb.getContent() %></td>
+	</tr>
 </table>
-
 <%
 try{
 if(type.equals("admin")){ %>
@@ -66,7 +62,6 @@ if(type.equals("admin")){ %>
 <input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%=pageNum%>'">
 </div> 
 <%}}catch(Exception e){%>
-
 <%} %>
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>

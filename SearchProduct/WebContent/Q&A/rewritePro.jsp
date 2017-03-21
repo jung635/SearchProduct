@@ -16,26 +16,19 @@ DAO"%>
 int num = Integer.parseInt(request.getParameter("num"));
 String pageNum = (String)request.getParameter("pageNum");
 String id=(String)session.getAttribute("id");
-
 if(id==null){%>
 	<script>
 	alert('로그인을 해주세요');
 	location.href="../member/clientLoginForm.jsp"
 	</script>
-	
 <%}else{
-
 BoardDAO bdao = new BoardDAO();
 bdao.insertreBoard(cb);
 bdao.updateMinusReadcount(num);
 %>
-<script>
-location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
-</script>
+	<script>
+	location.href="content.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
+	</script>
 <%}%>
-
-
-
-
 </body>
 </html>

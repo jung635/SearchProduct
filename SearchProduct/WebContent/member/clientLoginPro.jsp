@@ -29,9 +29,6 @@ if(check==1){
 	alert('아이디를 다시 확인해 주세요.');
 	history.back();
 	</script>
-<%}
-
-%>
-
+<%}%>
 </body>
 </html>
