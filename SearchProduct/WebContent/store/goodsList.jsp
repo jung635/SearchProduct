@@ -34,12 +34,16 @@
 
 </head>
 <body>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
 <%request.setCharacterEncoding("utf-8"); 
 String sessionId=(String)session.getAttribute("id");
 GoodsDAO gdao = new GoodsDAO();
 List<Object> list = new ArrayList<Object>();
 list=gdao.goodsList(sessionId);%>
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 서브페이지 메인이미지 -->
 <div id="sub_img"></div>

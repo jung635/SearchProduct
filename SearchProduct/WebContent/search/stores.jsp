@@ -38,7 +38,11 @@ function check(){
 
 </head>
 <body>
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 들어가는곳 -->
 <div class="clear"></div>

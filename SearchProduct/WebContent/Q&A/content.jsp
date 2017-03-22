@@ -62,6 +62,9 @@ BoardBean bb = bdao.getDetail(num);
 
 </head>
 <body>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
 <div id="wrap">
 <jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
@@ -84,24 +87,20 @@ BoardBean bb = bdao.getDetail(num);
 <td>제목</td><td colspan="5"><%=bb.getSubject() %></td>
 </tr>
 <tr>
-<td style="height: 300px;">내용 </td><td colspan="5">
+<td style="height: 300px;">내용 </td>
+<td colspan="5">
 <%=bb.getContent() %>
-</td>
-</tr>
-<tr>
-<td>첨부파일 </td><td colspan="5"><%
-if(bb.getFile()==null){
-%>
-	첨부파일 없음
+<%if(bb.getFile()==null){ %>
+
 <%}else{ %>
-	<div>
-	<a href="../boardPic/<%=bb.getFile() %>" style="float: right">파일열기</a><br>
-	<a href="file_down.jsp?file_name=<%=bb.getFile() %>" style="float: right">파일다운</a><br>
-	<img src="../boardPic/<%=bb.getFile() %>" width="100px" height="100px">
-	</div>
+<div style="margin: 22px; position:relative;">
+<img src="../boardPic/<%=bb.getFile() %>" style="max-width: 350px;">
+<a href="../boardPic/<%=bb.getFile() %>" style="position: absolute; right: 0;bottom: 0;">파일열기</a>
+	<a href="file_down.jsp?file_name=<%=bb.getFile() %>" style="position:absolute; right: 55px;bottom: 0;">파일다운</a>
+</div>
+<%} %>
 </td>
 </tr>
-<%} %>
 </table>
 <!-- 글내용 -->
 

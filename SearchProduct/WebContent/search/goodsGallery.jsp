@@ -31,6 +31,7 @@
 
 </head>
 <body>
+
 <%request.setCharacterEncoding("utf-8");
 String address=request.getParameter("address");
 String storeId=request.getParameter("storeId");

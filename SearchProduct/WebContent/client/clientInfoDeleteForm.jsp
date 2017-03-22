@@ -28,6 +28,9 @@
  <![endif]--> 
  </head>
 <body>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
 <%request.setCharacterEncoding("utf-8");
 String id=(String)session.getAttribute("id");
 MemberDAO mdao = new MemberDAO();

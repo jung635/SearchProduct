@@ -44,6 +44,9 @@ function imageOn(path, count){
 </script>
 </head>
 <body>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
 <%request.setCharacterEncoding("utf-8"); 
 String sessionId=(String)session.getAttribute("id");
 
@@ -70,8 +73,8 @@ list=gdao.hotgoodsList();
 </div>
 <div class="clear"></div>
 <div style="margin-top: 50px;">
-	<table id="hot_table">
-	<tr><th>Rank</th><th>상품사진</th><th>상품이름</th><th>가격</th><th>스토어 주소</th></tr>
+	<table id="hot_table" style="width:80%">
+	<tr><th>Rank</th><th>상품사진</th><th>상품이름</th><th>가격</th><th>스토어 이름</th><th>주소</th></tr>
  	<%for(int i=0; i<list.size();i++){
  	GoodsBean gb = (GoodsBean)list.get(i);
  	StoreBean sb = sdao.storeSearch(gb.getId());
@@ -84,6 +87,7 @@ list=gdao.hotgoodsList();
 	</td>
 	<td><%=gb.getProduct() %></td>
  	<td> <%=gb.getPrice() %></td>
+ 	<td> <%=sb.getName()%></td>
  	<td> <%=sb.getAddress()%></td>
  	<td style="text-align: right">
  	<input type = "button" value="스토어 방문" onclick="location.href='../search/storeSearchMain.jsp?storeId=<%=gb.getId()%>&address=<%=sb.getAddress()%>'">

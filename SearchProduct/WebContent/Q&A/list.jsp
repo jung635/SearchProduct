@@ -26,6 +26,9 @@
  <![endif]-->
 </head>
 <body>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
 <%
 BoardDAO bdao = new BoardDAO();
 
@@ -115,7 +118,7 @@ if(count!=0){
 		<%}else{%>
 		<a href="list.jsp?pageNum=<%=i %>">[<%=i %>]</a>&nbsp;
 	<%}}%>
-	<%if(endPage<=pageCount){ %>
+	<%if(endPage>=pageCount){ %>
 		[다음]
 	<%}else{ %>
 		<a href="list.jsp?pageNum=<%=startPage+pageBlock %>">[다음]</a>&nbsp;

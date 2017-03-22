@@ -511,9 +511,10 @@ public class BoardDAO {
 
 		try {
 			con = getConnection();
-			sql = "select max(re_seq) from comment where renum=?;";
+			sql = "select max(re_seq) from comment where renum=? and board_num=?;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, cb.getRenum());
+			pstmt.setInt(2, cb.getBoard_num());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				max = rs.getInt(1) + 1;

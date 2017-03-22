@@ -26,6 +26,9 @@
  <![endif]-->
 </head>
 <body>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
 <%request.setCharacterEncoding("utf-8"); 
 String search = request.getParameter("search");
 
@@ -101,6 +104,7 @@ if(count!=0){
 	//이전
 	//1...10
 	//다음
+	
 	if(endPage > pageCount){
 		endPage=pageCount;
 	}
@@ -115,7 +119,7 @@ if(count!=0){
 		<%}else{%>
 			<a href="qa_search.jsp?pageNum=<%=i %>&search=<%=search%>">[<%=i %>]</a>&nbsp;
 	<%}}%>
-	<%if(endPage<pageCount){ %>
+	<%if(endPage>=pageCount){ %>
 	[다음]
 	<%}else{ %>
 		<a href="qa_search.jsp?pageNum=<%=startPage+pageBlock %>&search=<%=search%>">[다음]</a>&nbsp;

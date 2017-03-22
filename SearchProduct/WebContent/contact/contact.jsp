@@ -23,6 +23,9 @@
  <![endif]-->
 </head>
 <body>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
 <div id="fb-root"></div>
 <script>
 	(function(d, s, id) {

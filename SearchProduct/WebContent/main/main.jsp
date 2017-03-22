@@ -135,7 +135,7 @@ goodslist=gdao.hotgoodsList();%>
 <div class="clear"></div>
 <div style="margin-bottom: 45px;">
 	<table id="hot_table">
-	<tr><th>Rank</th><th>상품사진</th><th>상품이름</th><th>가격</th></tr>
+	<tr><th>Rank</th><th>상품사진</th><th>상품이름</th><th>가격</th><th>스토어 이름</th><th>주소</th></tr>
  	<%for(int i=0; i<goodslist.size();i++){
  	GoodsBean gb = (GoodsBean)goodslist.get(i);
  	StoreBean sb = sdao.storeSearch(gb.getId());
@@ -150,6 +150,7 @@ goodslist=gdao.hotgoodsList();%>
  		</td>
  		<td><%=gb.getProduct() %></td>
  		<td> <%=gb.getPrice() %></td>
+ 		<td> <%=sb.getName()%></td>
  		<td> <%=sb.getAddress()%></td>
  		<td style="text-align: right">
  		<input type = "button" value="스토어 방문" onclick="location.href='../search/storeSearchMain.jsp?storeId=<%=gb.getId()%>&address=<%=sb.getAddress()%>'">

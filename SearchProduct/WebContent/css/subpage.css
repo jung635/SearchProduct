@@ -135,6 +135,14 @@ article table#notice td {
 article table#notice td.left {
 	text-align: left;
 }
+article table#notice a{
+	text-decoration: none;
+		color: black;
+}
+article table#notice a:VISITED{
+	color: black;
+	
+}
 /*글자정렬 left*/
 article th.tno {
 	width: 50px;
@@ -392,14 +400,16 @@ repeat-x center center*/
 
 .border_table {
 	margin: auto;
-	width: 500px;
+	width: 650px;
 	margin-top: 100px;
 	border-collapse: collapse;
 }
 
 .border_table td {
 	text-align: center;
-	border: 1px solid;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	padding: 10px;
 }
 
 .border_table tr {
@@ -441,16 +451,4 @@ repeat-x center center*/
 
 #map_view {
 	margin-top: 30px;
-}
-
-#hot_table {
-	margin: auto;
-	border-collapse: collapse;
-	width: 71%;
-}
-
-#hot_table td {
-	margin: auto;
-	border-top: 1px double;
-	border-bottom: 1px solid;
 }

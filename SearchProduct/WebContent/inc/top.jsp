@@ -10,7 +10,7 @@ if(id==null||type==null){%>
 <div id="login"><a href="../member/clientLoginForm.jsp">login</a> | <a href="../member/clientJoinForm.jsp">join</a></div>
 <div class="clear"></div>
 <!-- 로고들어가는 곳 -->
-<div id="logo"><a href="../main/main.jsp"><img src="../images/logo.gif" width="265" height="62" alt="Fun Web"></a></div>
+<div id="logo"><a href="../main/main.jsp"><img src="../images/logo2.png" width="265" height="62" alt="Fun Web"></a></div>
 <!-- 로고들어가는 곳 -->
 <div class="nav_container">
   <a href="../hot/hotlist.jsp">HOT</a>
@@ -34,7 +34,7 @@ if(type.equals("client")||type.equals("admin")){
 <div id="login"><%=id %>님 환영합니다! | <a href="../member/logout.jsp">logout</a></div>
 <div class="clear"></div>
 <!-- 로고들어가는 곳 -->
-<div id="logo"><a href="../main/main.jsp"><img src="../images/logo.gif" width="265" height="62" alt="Fun Web"></a></div>
+<div id="logo"><a href="../main/main.jsp"><img src="../images/logo2.png" width="265" alt="Fun Web"></a></div>
 <!-- 로고들어가는 곳 -->
 <div class="nav_container">
   <a href="../hot/hotlist.jsp">HOT</a>
@@ -56,7 +56,7 @@ if(type.equals("client")||type.equals("admin")){
 <div id="login"><%=id %>님 환영합니다! | <a href="../member/logout.jsp">logout</a></div>
 <div class="clear"></div>
 <!-- 로고들어가는 곳 -->
-<div id="logo"><a href="../main/main.jsp"><img src="../images/logo.gif" width="265" height="62" alt="Fun Web"></a></div>
+<div id="logo"><a href="../main/main.jsp"><img src="../images/logo2.png" width="265" height="62" alt="Fun Web"></a></div>
 <!-- 로고들어가는 곳 -->
 <div class="nav_container">
   <a href="../store/storeMain.jsp">STORE HOME</a>

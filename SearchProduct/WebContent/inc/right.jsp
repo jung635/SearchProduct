@@ -163,7 +163,12 @@ GoodsDAO gdao = new GoodsDAO();
 List<Object> list = new ArrayList<Object>();
 list=gdao.mygoodsList(id);
 if(id==null){%>
-	로그인을 해주세요
+<div id="welcome_top">
+	<span>로그인을 해주세요</span>
+</div>
+<div id="user_img">
+<img src="../images/user_none.png" width="100px">
+</div>
 <%}else{%>
 <div id="welcome_top">
 <span><%=id %>님의 메뉴</span>
@@ -176,7 +181,7 @@ if(id==null){%>
 <div id="visit">
 <h1 style="text-align: center;line-height: 30px;">최근 방문한 스토어 리스트</h1>
 *방문을 원할 시 이름을 클릭하세요
-	<table id="visit_table" style="margin-top: 27px;">	
+	<table id="visit_table" style="margin: 27px auto 0 auto;">	
 		<tr><th>이름</th><th>스토어 주소</th></tr>
  	<%
  	int count=0;
@@ -194,12 +199,17 @@ if(id==null){%>
  			<td><a href="../search/storeSearchMain.jsp?storeId=<%=sb.getName()%>&address=<%=sb.getAddress()%>"><%=sb.getName() %></a></td>
  			<td><%=sb.getAddress() %></td>
  		</tr>
- 		<%}}
- 		if(count>4){
- 			break;
- 			}//end count break 5개 출력
+ 		<%}//end if equals
+ 			}//end for idnum
+ 		%>
+ 			<%if(count>4){
+ 				break;
+ 			}//end count 4 break
  		}//end for cookies
- 	}//end if cookie null%>
+ 	}//end if cookie null
+ 	if(count==0){%>
+ 	<tr><td colspan="2">방문한 목록이 없습니다</td></tr>
+ 	<%} %>
 
 	</table>
 </div>
@@ -211,21 +221,35 @@ if(id==null){%>
 *상품위에 마우스를 올리시면 크게볼 수 있습니다.<br>
 	<table id="mygoods_table" style="margin: auto; padding-top: 23px;">	
 		<tr><th>상품 사진</th><th>상품 이름</th><th>상품 가격</th></tr>
- 	<%for(int i=0; i<5;i++){
- 	MygoodsBean mgb = (MygoodsBean)list.get(i);
- 	StoreBean sb = sdao.storeSearch(mgb.getGoods_id());
- 	%>
+ 	<%try{if(list==null){%>
+ 	<%}}catch(Exception e){
+	}%>
+	<%
+	if(list.size()==0){%>
+		<tr><td colspan="4">찜한 상품이 없습니다.</td></tr>
+	<%}else{
+		int block = 0;
+		if(list.size()<5){
+			block=list.size();
+		}else{
+			block=5;
+		}
+		for(int i=0; i<block;i++){
+ 		MygoodsBean mgb = (MygoodsBean)list.get(i);
+ 		StoreBean sb = sdao.storeSearch(mgb.getGoods_id());%>
  		<tr><td><img src="../upload/<%=mgb.getPic()%>" height="20px" width="20px" onmouseover="imageOn_r('../upload/<%=mgb.getPic()%>', <%=i%>)" onmouseout="imageOut_r(<%=i%>)">
- 			<div id="up_r<%=i %>" style="position:absolute; width:30%; left:40px; display:none; z-index: 50;">
-			<img id="upImg_r<%=i %>" src="" width="100%" height="100%" style="max-width: 300px;z-index: 100;"/></div>
- 			</td>
- 			<td><%=mgb.getProduct() %></td>
- 			<td><%=mgb.getPrice() %></td>
- 			<td>
- 			<a href="../search/storeSearchMain.jsp?storeId=<%=mgb.getGoods_id()%>&address=<%=sb.getAddress()%>">>>visit</a>
- 			</td>
- 		</tr>
-	<%}}%>
+ 				<div id="up_r<%=i %>" style="position:absolute; width:30%; left:40px; display:none; z-index: 50;">
+				<img id="upImg_r<%=i %>" src="" width="100%" height="100%" style="max-width: 300px;z-index: 100;"/></div>
+ 				</td>
+ 				<td><%=mgb.getProduct() %></td>
+ 				<td><%=mgb.getPrice() %></td>
+ 				<td>
+ 					<a href="../search/storeSearchMain.jsp?storeId=<%=mgb.getGoods_id()%>&address=<%=sb.getAddress()%>">>>visit</a>
+ 				</td>
+ 		</tr>	
+ 	<%}//end for
+		}//end if
+}//end if(session)%>
 	</table>	
 </div>
 </div>

@@ -74,10 +74,10 @@ for(int i=0; i<list.size(); i++){
 		}	
 	}
 	if(open){
-		add_list.add(result_ad);
-		result_ad="";
+	add_list.add(result_ad);
+	result_ad="";
 	}else if(!open){
-		result_ad="";
+	result_ad="";
 	}%>
    //address2[<%=i%>]='<%=list.get(i)%>';
    <%}

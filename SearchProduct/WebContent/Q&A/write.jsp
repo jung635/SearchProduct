@@ -22,9 +22,21 @@
  </script>
  <![endif]-->
 </head>
+<script type="text/javascript">
+	function check(){
+		if(document.fr.subject.value==""){
+			alert("제목을 입력해 주세요");
+			document.fr.subject.focus();
+			return false;
+		}
+	}
+</script>
 <body>
-
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <!-- 메인이미지 -->
 <div id="sub_img_center"></div>
@@ -37,9 +49,10 @@ if(id==null){%>
 	<script>
 	alert('로그인을 해주세요');
 	location.href="../member/clientLoginForm.jsp"
+	
 	</script>
 <%}%>
-<form action="writePro.jsp" name="fr"  enctype="multipart/form-data" method="post">
+<form action="writePro.jsp" name="fr"  enctype="multipart/form-data" method="post" onsubmit="return check()">
 <input type="hidden" name="name" value="<%=id%>">
 <input type="hidden" name="pass" value="<%=pass%>">
 <table class="write_table">

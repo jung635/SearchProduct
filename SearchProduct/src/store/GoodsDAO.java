@@ -154,6 +154,12 @@ public class GoodsDAO {
 			pstmt.setString(1, storeId);
 			pstmt.setString(2, product);
 			pstmt.executeUpdate();
+			
+			sql = "delete from mygoods where goods_id=? and product=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, storeId);
+			pstmt.setString(2, product);
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("DB연결 실패" + e);
 		} finally {

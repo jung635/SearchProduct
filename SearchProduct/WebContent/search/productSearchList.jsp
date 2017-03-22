@@ -43,7 +43,11 @@ function imageOut(count){
 </script>
 </head>
 <body>
-<div id="wrap"><jsp:include page="../inc/snsbar.jsp"/>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
+<div id="wrap">
+<jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 
 <!-- 본문 들어가는 곳 -->
@@ -108,7 +112,6 @@ if(count!=0){
 	int pageBlock=10;
 	int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
 	int endPage = startPage+pageBlock-1;
-	System.out.println(pageCount);
 	if(endPage > pageCount){
 		endPage=pageCount;
 	}

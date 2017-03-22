@@ -36,6 +36,9 @@
 
 </head>
 <body>
+<!-- 오른쪽 슬라이더 -->
+<jsp:include page="../inc/right.jsp"/>
+<!-- 오른쪽 슬라이더 -->
 <div id="wrap">
 <jsp:include page="../inc/snsbar.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
@@ -77,7 +80,11 @@ if(id==null){%>
 <h1>찜 리스트</h1>
 </article>
 	<table border="1" class="center_table">	
- 	<%for(int i=0; i<list.size();i++){
+ 	<%
+ 	if(list.size()==0){%>
+ 		<tr><td>찜한 상품이 없습니다</td></tr>
+ 	<%}else{
+ 	for(int i=0; i<list.size();i++){
  	MygoodsBean mgb = (MygoodsBean)list.get(i);
  	StoreBean sb = sdao.storeSearch(mgb.getGoods_id());
  	if(i==0||i%4==0){%>
@@ -92,7 +99,7 @@ if(id==null){%>
 	<%
 	if(i%4==3){%>
 	</tr>
-	<%}} %>
+	<%}}}%>
 	</table>
 <!-- 본문내용 -->
 <!-- 본문 들어가는 곳 -->

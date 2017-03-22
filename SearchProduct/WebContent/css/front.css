@@ -249,7 +249,8 @@ article#front {
 #hot_table {
 	margin: auto;
 	border-collapse: collapse;
-	width: 71%;
+	width: 88%;
+	text-align: center;
 }
 
 #hot_table td {
