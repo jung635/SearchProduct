@@ -18,10 +18,18 @@ String id = request.getParameter("id");
 String pass = request.getParameter("pass");
 String product = request.getParameter("product");
 String pic = request.getParameter("pic");
-String realpath = "D:\\workspace_jsp2\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\SearchProduct\\upload\\"+pic;
+String con_file = request.getParameter("con_file");
+String realpath = "D:\\workspace_jsp2\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\SearchProduct\\upload\\"+pic;
+String realpath_con = "D:\\workspace_jsp2\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\SearchProduct\\upload\\"+con_file;
 File file = new File(realpath);
+File file_con = new File(realpath_con);
 //원파일 삭제
 if(file.delete()){
+	System.out.println("성공");
+}else{
+	System.out.println("실패");
+}
+if(file_con.delete()){
 	System.out.println("성공");
 }else{
 	System.out.println("실패");

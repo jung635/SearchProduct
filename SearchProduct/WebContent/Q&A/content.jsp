@@ -94,7 +94,7 @@ BoardBean bb = bdao.getDetail(num);
 
 <%}else{ %>
 <div style="margin: 22px; position:relative;">
-<img src="../boardPic/<%=bb.getFile() %>" style="max-width: 350px;">
+<img src="../boardPic/<%=bb.getFile() %>" style="max-width: 350px; margin-bottom: 25px;">
 <a href="../boardPic/<%=bb.getFile() %>" style="position: absolute; right: 0;bottom: 0;">파일열기</a>
 	<a href="file_down.jsp?file_name=<%=bb.getFile() %>" style="position:absolute; right: 55px;bottom: 0;">파일다운</a>
 </div>

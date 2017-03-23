@@ -62,7 +62,7 @@ int end=0;
 <!-- 메인이미지 -->
 <!-- 게시판 -->
 <article id="qa_list">
-<h1>Q&A</h1>
+<h1>BOARD</h1>
 <table id="notice">
 <tr><th class="tno">No.</th>
     <th class="ttitle">Title</th>
@@ -73,9 +73,10 @@ int end=0;
 <tr><td colspan="4">글이 없습니다</td><td>
    <%}else{
 	for(int i=0; i<list.size(); i++){
-		BoardBean bb = (BoardBean)list.get(i);%>
+		BoardBean bb = (BoardBean)list.get(i);
+		int comment_count=bdao.getCommentCount(bb.getNum());%>
 <tr><td><%=bb.getNum() %></td><td>
-<a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %></a></td>
+<a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %> [<%=comment_count %>]</a></td>
 <td><%=bb.getName() %></td><td><%=bb.getDate() %></td><td><%=bb.getReadcount() %></td>
 </tr>
 <%}}%>  

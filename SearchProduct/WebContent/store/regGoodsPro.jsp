@@ -23,9 +23,11 @@ String price = multi.getParameter("price");
 GoodsBean gb = new GoodsBean();
 gb.setId(multi.getParameter("id"));
 gb.setPic(multi.getFilesystemName("file"));
+gb.setCon_file(multi.getFilesystemName("con_file"));
 try{
 gb.setPrice(Integer.parseInt(price));
 gb.setProduct(multi.getParameter("product"));
+gb.setContent(multi.getParameter("content"));
 
 GoodsDAO gdao = new GoodsDAO();
 gdao.insertGoods(id,gb);

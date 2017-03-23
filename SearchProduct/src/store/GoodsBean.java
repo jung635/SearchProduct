@@ -2,7 +2,8 @@ package store;
 
 public class GoodsBean {
 
-	String product, id, pic;
+	String product, id, pic, con_file, content;
+
 	int price, hot;
 
 	public int getHot() {
@@ -43,6 +44,22 @@ public class GoodsBean {
 
 	public void setPic(String pic) {
 		this.pic = pic;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getCon_file() {
+		return con_file;
+	}
+
+	public void setCon_file(String con_file) {
+		this.con_file = con_file;
 	}
 
 }

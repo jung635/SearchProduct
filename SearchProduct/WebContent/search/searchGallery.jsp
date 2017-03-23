@@ -30,17 +30,16 @@
 
 
 </head>
-
 <body>
 
 <%request.setCharacterEncoding("utf-8");
+System.out.println("test");
+String search = request.getParameter("search");
 String address=request.getParameter("address");
 String storeId=request.getParameter("storeId");
 GoodsDAO gdao = new GoodsDAO();
 List<Object> list = new ArrayList<Object>();
-list=gdao.goodsList(storeId);%>
-
-
+list=gdao.searchGoodsInstore(storeId,search);%>
 <!-- 본문 들어가는 곳 -->
 <article>
 <h1>상품 목록</h1>
@@ -62,10 +61,10 @@ list=gdao.goodsList(storeId);%>
 	</tr>
 	<%}}%> 
 </table>
-<!-- <form name="fr">
+<form name="fr">
 <input type="text" name="search">
 <input type="button" id="search_btn" value="search" onclick='searchFun()'>
-</form> -->
+</form>
 <!-- 본문 들어가는 곳 -->
 </body>
 </html>

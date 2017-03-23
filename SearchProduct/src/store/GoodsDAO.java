@@ -37,6 +37,8 @@ public class GoodsDAO {
 				gb.setProduct(rs.getString("product"));
 				gb.setPrice(rs.getInt("price"));
 				gb.setPic(rs.getString("pic"));
+				gb.setContent(rs.getString("content"));
+				gb.setCon_file(rs.getString("con_file"));
 				list.add(gb);
 			}
 		} catch (Exception e) {
@@ -112,13 +114,16 @@ public class GoodsDAO {
 		String sql = "";
 		try {
 			con = getConnection();
-			sql = "update goods set product=?, price=?, pic=? where product=? and id=?";
+			sql = "update goods set product=?, price=?, pic=?, con_file=?, content=? where product=? and id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, gb.getProduct());
 			pstmt.setInt(2, gb.getPrice());
 			pstmt.setString(3, gb.getPic());
-			pstmt.setString(4, ori_product);
-			pstmt.setString(5, gb.getId());
+			pstmt.setString(4, gb.getCon_file());
+			pstmt.setString(5, gb.getContent());
+			pstmt.setString(6, ori_product);
+			pstmt.setString(7, gb.getId());
+			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("DB연결 실패" + e);
@@ -190,12 +195,14 @@ public class GoodsDAO {
 
 		try {
 			con = getConnection();
-			sql = "insert into goods(product, price, id, pic) values(?,?,?,?);";
+			sql = "insert into goods(product, price, id, pic, content, con_file) values(?,?,?,?,?,?);";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, gb.getProduct());
 			pstmt.setInt(2, gb.getPrice());
 			pstmt.setString(3, id);
 			pstmt.setString(4, gb.getPic());
+			pstmt.setString(5, gb.getContent());
+			pstmt.setString(6, gb.getCon_file());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -310,6 +317,8 @@ public class GoodsDAO {
 				gb.setPic(rs.getString("pic"));
 				gb.setPrice(rs.getInt("price"));
 				gb.setProduct(rs.getString("product"));
+				gb.setCon_file(rs.getString("con_file"));
+				gb.setContent(rs.getString("content"));
 			}
 		} catch (Exception e) {
 			System.out.println("DB연결 실패" + e);
@@ -359,12 +368,6 @@ public class GoodsDAO {
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				/*
-				 * gb = new GoodsBean(); gb.setId(rs.getString("id"));
-				 * gb.setPic(rs.getString("pic"));
-				 * gb.setPrice(rs.getInt("price"));
-				 * gb.setProduct(rs.getString("product"));
-				 */
 				check = true;
 			} else {
 
@@ -402,6 +405,63 @@ public class GoodsDAO {
 		return check;
 
 	}
+	//글자가 포함된 물건 찾기(스토어내에서)
+		public List<Object> searchGoodsInstore(String storeId, String product) {
+			// 2단계 디비연결 => Connection con 객체 저장
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "";
+			ResultSet rs = null;
+			GoodsBean gb = null;
+			List<Object> list = new ArrayList<Object>();
+			try {
+				con = getConnection();
+				// hot 개수 올리기
+
+				// 특정 물건 찾기
+				sql = "select * from goods where product like ? and id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + product + "%");
+				pstmt.setString(2, storeId);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					gb = new GoodsBean();
+					gb.setId(rs.getString("id"));
+					gb.setPic(rs.getString("pic"));
+					gb.setPrice(rs.getInt("price"));
+					gb.setProduct(rs.getString("product"));
+					gb.setCon_file(rs.getString("con_file"));
+					gb.setContent(rs.getString("content"));
+					list.add(gb);
+				}
+			} catch (Exception e) {
+				System.out.println("DB연결 실패" + e);
+			} finally {
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return list;
+		}
+		
 
 	// 인기상품 리스트
 	public List<Object> hotgoodsList() {

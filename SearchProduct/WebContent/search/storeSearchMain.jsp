@@ -26,7 +26,7 @@
 
  </script>
  <![endif]--> 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	
 
@@ -50,6 +50,26 @@
 		xhttp.open("GET", "goodsGallery.jsp?storeId="+storeId+"&address="+address, true);
 		xhttp.send();
 		}
+		
+	
+/* 		$(document).ready(function(){
+			//search = $("#search_input").text();
+			$('#search_btn').click(function(){
+			alert("클릭이벤트2");
+			});
+		}); */
+/* 		function searchFun(){
+			var search=document.fr.search.value;
+			alert(search);
+			 var xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+				    if (this.readyState == 4 && this.status == 200) {
+				      document.getElementById("map_view").innerHTML = this.responseText;
+				    }
+				  };
+			xhttp.open("GET", "searchGallery.jsp?storeId="+storeId+"&address="+address+"&search="+search, true);
+			xhttp.send(); 
+		}; */
 	
 	
 	

@@ -90,9 +90,10 @@ if(id==null){%>
  	if(i==0||i%4==0){%>
  	<tr>
  	<%}%>
- 	<td><img src="../upload/<%=mgb.getPic()%>" height="80px" width="80px"><br>
+ 	<td>
+ 	<a href="../search/proDetail.jsp?storeId=<%=mgb.getGoods_id()%>&product=<%=mgb.getProduct()%>"><img src="../upload/<%=mgb.getPic()%>" height="80px" width="80px"></a><br>
  	<hr>
- 	상품명: <%=mgb.getProduct() %><br>
+ 	상품명: <a href="../search/proDetail.jsp?storeId=<%=mgb.getGoods_id()%>&product=<%=mgb.getProduct()%>"><%=mgb.getProduct() %></a><br>
  	가격: <%=mgb.getPrice() %><br>
  	<input type = "button" value="스토어 방문" onclick="location.href='../search/storeSearchMain.jsp?storeId=<%=mgb.getGoods_id()%>&address=<%=sb.getAddress()%>'"><br>
  	<input type = "button" value="찜해제" onclick="location.href='deleteMygoods.jsp?id=<%=mgb.getId()%>&product=<%=mgb.getProduct()%>&goods_id=<%=mgb.getGoods_id()%>'">

@@ -81,6 +81,8 @@ function check(){
 <%request.setCharacterEncoding("utf-8");
 String product = request.getParameter("product");
 String pic = request.getParameter("pic");
+String con_file = request.getParameter("con_file");
+String content = request.getParameter("content");
 int price = Integer.parseInt(request.getParameter("price"));
 %>
 <div id="wrap">
@@ -106,6 +108,7 @@ int price = Integer.parseInt(request.getParameter("price"));
 <input type="hidden" name="dubOk">
 <input type="hidden" name="ori_product" value="<%=product%>">
 <input type="hidden" name="ori_pic" value="<%=pic %>">
+<input type="hidden" name="ori_con_file" value="<%=con_file %>">
 <table class="table_center" style="margin: auto;">
 <tr>
 <td>상품 이름</td>
@@ -119,9 +122,17 @@ int price = Integer.parseInt(request.getParameter("price"));
 <td>파일</td><td> <input type="file" name="file"></td>
 </tr>
 <tr>
+<td>내용</td>
+<td>
+<textarea rows="10" cols="30" name="content"><%=content %></textarea>
+</td>
+</tr>
+<tr>
+<td>내용 파일</td><td> <input type="file" name="con_file"></td>
+</tr>
+<tr>
 <td colspan="2" >
 <input type="button" value="취소" onclick="history.back()" style="float: right;">
-<input type="button" value="삭제" onclick="location.href='recheckGoodsDelete.jsp?product=<%=product%>&price=<%=price%>'" style="float: right;">
 <input type="submit" value="수정" style="float: right;">
 
 </td>

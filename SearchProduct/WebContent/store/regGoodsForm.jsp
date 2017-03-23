@@ -112,6 +112,15 @@ function check(){
 <td>파일</td><td> <input type="file" name="file"></td>
 </tr>
 <tr>
+<td>내용</td>
+<td>
+<textarea rows="10" cols="30" name="content"></textarea>
+</td>
+</tr>
+<tr>
+<td>내용 파일</td><td> <input type="file" name="con_file"></td>
+</tr>
+<tr>
 <td colspan="2" >
 <input type="button" value="취소" onclick="history.back()"  style="float: right;">
 <input type="submit" value="등록"  style="float: right;">

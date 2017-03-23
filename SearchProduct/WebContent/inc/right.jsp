@@ -1,3 +1,6 @@
+<%@page import="java.util.StringTokenizer"%>
+<%@page import="java.net.URLDecoder"%>
+<%@page import="store.GoodsBean"%>
 <%@page import="store.StoreBean"%>
 <%@page import="store.MygoodsBean"%>
 <%@page import="java.util.List"%>
@@ -24,6 +27,7 @@
     right: 0;
     background-color:  #7ED2FF;
     overflow-x: hidden;
+    overflow-y: hidden;
     transition: 0.5s;
     padding-top: 10px;
 }
@@ -63,6 +67,7 @@ height: 50px;
 background-color: #9cf1ff;
 right:0;
 border-radius: 19px 0px 0px 18px;
+z-index: 1;
 }
 
 #open_ck{
@@ -88,23 +93,26 @@ margin-top: 30px;
 margin-bottom: 30px;
 }
 
-#mygoods{
-margin-top: 30px;
-margin-bottom: 30px;
-}
+
 
 #user_img{
 text-align: center;
 margin-top: 38px;
 }
-#mygoods_table a{
+
+
+#visit_table a{
 color: black;
 font-size: 1em;
 padding: 0px;
 text-align: center;
 }
-
-#visit_table a{
+#visit_pro{
+width: 252px;
+margin: 29px auto 0 auto;
+text-align: center;
+}
+#visit_pro a{
 color: black;
 font-size: 1em;
 padding: 0px;
@@ -160,8 +168,6 @@ StoreDAO sdao = new StoreDAO();
 MemberDAO mdao = new MemberDAO();
 MemberBean mb = mdao.infoMember(id);
 GoodsDAO gdao = new GoodsDAO();
-List<Object> list = new ArrayList<Object>();
-list=gdao.mygoodsList(id);
 if(id==null){%>
 <div id="welcome_top">
 	<span>로그인을 해주세요</span>
@@ -179,7 +185,7 @@ if(id==null){%>
 
 <!-- 최근 방문 스토어 -->
 <div id="visit">
-<h1 style="text-align: center;line-height: 30px;">최근 방문한 스토어 리스트</h1>
+<h1 style="text-align: center;line-height: 30px;">최근 방문한 스토어</h1>
 *방문을 원할 시 이름을 클릭하세요
 	<table id="visit_table" style="margin: 27px auto 0 auto;">	
 		<tr><th>이름</th><th>스토어 주소</th></tr>
@@ -202,7 +208,7 @@ if(id==null){%>
  		<%}//end if equals
  			}//end for idnum
  		%>
- 			<%if(count>4){
+ 			<%if(count>6){
  				break;
  			}//end count 4 break
  		}//end for cookies
@@ -214,45 +220,76 @@ if(id==null){%>
 	</table>
 </div>
 <!-- 최근 방문 스토어 -->
+<!-- 최근 본 상품 -->
+<div id="visit">
+<h1 style="text-align: center;line-height: 30px;">최근 본 상품</h1>
+*상품위에 마우스를 올리시면 크게볼 수 있습니다
+	<table id="visit_pro">	
+		<tr><th>상품사진</th><th>이름</th><th>가격</th></tr>
+ 	<%
+ 	String cookie_pro = request.getHeader("Cookie");
+ 	if(cookie!=null){
+ 	Cookie[] cookies = request.getCookies(); //쿠키를 받아온다.
+ 	for(int i=0; i<cookies.length;i++){	
+ 		String cookieName = URLDecoder.decode(cookies[i].getName());
+ 		for(int idnum=0; idnum<allId.size(); idnum++){
+ 			List<Object> goods_list=gdao.goodsList(allId.get(idnum));
+ 			List<String> allPro_list = new ArrayList<String>();
+ 			for(int j=0; j<goods_list.size(); j++){
+ 				//System.out.println(allId.get(idnum));
+ 				GoodsBean allPro = (GoodsBean)goods_list.get(j);
+ 				allPro_list.add(allPro.getProduct());
+ 				//System.out.println(allPro.getProduct());
+ 			}//end for j
+ 			for(int pronum=0; pronum<allPro_list.size(); pronum++){
+ 			//System.out.println(allPro_list.get(pronum));
+ 			String idPro=allId.get(idnum)+"/"+allPro_list.get(pronum);
+ 			//System.out.println(idPro);
+ 			if(cookieName.equals(idPro)){
+ 				//System.out.println("test");
+ 				count++;
+ 				
+ 				List<String> idPro_list = new ArrayList<String>();
+ 				/////System.out.println(idPro);
+ 				StringTokenizer idPro_token = new StringTokenizer(idPro,"/");
+ 				while(idPro_token.hasMoreTokens()){
+ 					idPro_list.add(idPro_token.nextToken());
+ 				}
+ 				GoodsBean result_gb=gdao.searchGoods(idPro_list.get(0), idPro_list.get(1));
+ 				StoreBean sb_add = sdao.storeSearch(idPro_list.get(0));
+ 				//sb = sdao.storeSearch(cookies[i].getValue());%>
+ 		<tr>
+ 			<!--  -->
+ 			<td>
+ 			<a href="../search/proDetail.jsp?storeId=<%=result_gb.getId()%>&product=<%=result_gb.getProduct()%>"><img src="../upload/<%= result_gb.getPic()%>" height="20px" width="20px" onmouseover="imageOn_r('../upload/<%=result_gb.getPic()%>', <%=i%>)" onmouseout="imageOut_r(<%=i%>)"></a>
+ 			<div id="up_r<%=i %>" style="position:absolute; width:80%; left:40px; display:none; z-index: 50;">
+			<img id="upImg_r<%=i %>" src="" width="100%" height="100%" style="max-width: 300px; max-height: 250px; z-index: 100;"/></div>
+ 			</td>
+ 			<td><a href="../search/proDetail.jsp?storeId=<%=result_gb.getId()%>&product=<%=result_gb.getProduct()%>"><%= result_gb.getProduct()%></a></td>
+ 			<td><%= result_gb.getPrice()%></td>
+ 			<td><a href="../search/storeSearchMain.jsp?storeId=<%=result_gb.getId()%>&address=<%=sb_add.getAddress()%>">>>visit</a></td>
+ 			
+ 		</tr>
+ 		<%}//end if equals
+ 			}//end for pronum
+ 			}//end for idnum
+ 		%>
+ 			<%if(count>6){
+ 				break;
+ 			}//end count 4 break
+ 		}//end for cookies
+ 	}//end if cookie null
+ 	if(count==0){%>
+ 	<tr><td colspan="4">최근 본 상품이 없습니다.</td></tr>
+ 	<%} //end if count
+ 	
+ 	}//end if(session)%>
 
-<!-- 찜 리스트 -->
-<div id="mygoods">
-<h1 style="text-align: center;line-height: 30px;">찜 리스트</h1>
-*상품위에 마우스를 올리시면 크게볼 수 있습니다.<br>
-	<table id="mygoods_table" style="margin: auto; padding-top: 23px;">	
-		<tr><th>상품 사진</th><th>상품 이름</th><th>상품 가격</th></tr>
- 	<%try{if(list==null){%>
- 	<%}}catch(Exception e){
-	}%>
-	<%
-	if(list.size()==0){%>
-		<tr><td colspan="4">찜한 상품이 없습니다.</td></tr>
-	<%}else{
-		int block = 0;
-		if(list.size()<5){
-			block=list.size();
-		}else{
-			block=5;
-		}
-		for(int i=0; i<block;i++){
- 		MygoodsBean mgb = (MygoodsBean)list.get(i);
- 		StoreBean sb = sdao.storeSearch(mgb.getGoods_id());%>
- 		<tr><td><img src="../upload/<%=mgb.getPic()%>" height="20px" width="20px" onmouseover="imageOn_r('../upload/<%=mgb.getPic()%>', <%=i%>)" onmouseout="imageOut_r(<%=i%>)">
- 				<div id="up_r<%=i %>" style="position:absolute; width:30%; left:40px; display:none; z-index: 50;">
-				<img id="upImg_r<%=i %>" src="" width="100%" height="100%" style="max-width: 300px;z-index: 100;"/></div>
- 				</td>
- 				<td><%=mgb.getProduct() %></td>
- 				<td><%=mgb.getPrice() %></td>
- 				<td>
- 					<a href="../search/storeSearchMain.jsp?storeId=<%=mgb.getGoods_id()%>&address=<%=sb.getAddress()%>">>>visit</a>
- 				</td>
- 		</tr>	
- 	<%}//end for
-		}//end if
-}//end if(session)%>
-	</table>	
+	</table>
 </div>
+<!-- 최근 본 상품 -->
+
+
 </div>
-<!-- 찜 리스트 -->
 </body>
 </html>

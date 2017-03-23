@@ -22,8 +22,11 @@ String id=(String)session.getAttribute("id");
 //String pass = multi.getParameter("pass");
 String ori_product=multi.getParameter("ori_product");
 String ori_pic = multi.getParameter("ori_pic");
+String ori_con_file = multi.getParameter("ori_con_file");
 String pic = multi.getFilesystemName("file");
+String con_file = multi.getFilesystemName("con_file");
 String rfp = realfilePath+'\\'+ori_pic;
+String rfp_con = realfilePath+'\\'+ori_con_file;
 //파일 업로드 안할 시 원 파일 사용
 GoodsBean gb = new GoodsBean();
 if(pic==null){
@@ -38,7 +41,20 @@ if(pic==null){
 		System.out.println("실패");
 	}
 }
+if(con_file==null){
+	gb.setCon_file(ori_con_file);
+}else{
+	gb.setCon_file(con_file);
+	//원파일 삭제
+	File file_con = new File(rfp_con);
+	if(file_con.delete()){
+		System.out.println("성공");
+	}else{
+		System.out.println("실패");
+	}
+}
 gb.setId(id);
+gb.setContent(multi.getParameter("content"));
 gb.setPrice(Integer.parseInt(multi.getParameter("price")));
 gb.setProduct(multi.getParameter("product"));
 GoodsDAO gdao = new GoodsDAO();

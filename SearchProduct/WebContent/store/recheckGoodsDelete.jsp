@@ -41,6 +41,8 @@ String id=(String)session.getAttribute("id");
 String pass=(String)session.getAttribute("pass");
 String product = request.getParameter("product");
 String pic = request.getParameter("pic");
+String con_file = request.getParameter("con_file");
+String content = request.getParameter("content");
 %>
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
@@ -60,6 +62,7 @@ String pic = request.getParameter("pic");
 <form action="goodsDeletePro.jsp" id="join">
 <input type="hidden" name="product" value="<%=product%>">
 <input type="hidden" name="pic" value="<%=pic%>">
+<input type="hidden" name="con_file" value="<%=con_file%>">
 <fieldset>
 <legend>Login Info</legend>
 <label>User ID</label>

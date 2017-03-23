@@ -67,12 +67,14 @@ list=gdao.goodsList(sessionId);%>
  	if(i==0||i%4==0){%>
  	<tr>
  	<%}%>
- 		<td><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"><br>
+ 		<td>
+ 		<a href="../search/proDetail.jsp?storeId=<%=sessionId%>&product=<%=gb.getProduct()%>">
+ 		<img src="../upload/<%=gb.getPic()%>" height="80px" width="80px"></a><br>
  		<hr>
  		상품명: <%=gb.getProduct() %><br>
  		가격: <%=gb.getPrice() %><br>
- 		<input type = "button" value="수정" onclick="location.href='goodsUpdate.jsp?product=<%=gb.getProduct()%>&price=<%=gb.getPrice()%>&pic=<%=gb.getPic()%>'"><br>
- 		<input type = "button" value="삭제" onclick="location.href='recheckGoodsDelete.jsp?product=<%=gb.getProduct()%>&pic=<%=gb.getPic()%>'">
+ 		<input type = "button" value="수정" onclick="location.href='goodsUpdate.jsp?product=<%=gb.getProduct()%>&price=<%=gb.getPrice()%>&pic=<%=gb.getPic()%>&con_file=<%=gb.getCon_file()%>&content=<%=gb.getContent()%>'"><br>
+ 		<input type = "button" value="삭제" onclick="location.href='recheckGoodsDelete.jsp?product=<%=gb.getProduct()%>&pic=<%=gb.getPic()%>&con_file=<%=gb.getCon_file()%>&pic=<%=gb.getContent()%>'">
  		</td>
 	<%if(i%4==3){%>
 	</tr>

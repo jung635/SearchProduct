@@ -88,12 +88,12 @@ List<Object> name_list = new ArrayList<Object>();
 	%>
  	<tr style="position: relative;">
  		<td>
- 			<img src="../upload/<%=gb.getPic()%>" height="80px" width="80px" onmouseover="imageOn('../upload/<%=gb.getPic()%>', <%=i%>)" onmouseout="imageOut(<%=i%>)">
+ 			<a href="proDetail.jsp?storeId=<%=gb.getId()%>&product=<%=gb.getProduct()%>"><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px" onmouseover="imageOn('../upload/<%=gb.getPic()%>', <%=i%>)" onmouseout="imageOut(<%=i%>)"></a>
 			<div id="up<%=i %>" style="position:absolute; width:30%; left:100px; bottom:-100px; display:none; z-index: 50;">
 			<img id="upImg<%=i %>" src="" width="100%" height="100%" style="max-width: 300px;z-index: 100;"/>
 			</div>
  		</td>
-		<td><%=gb.getProduct() %></td>
+		<td><a href="proDetail.jsp?storeId=<%=gb.getId()%>&product=<%=gb.getProduct()%>"><%=gb.getProduct() %></a></td>
 		<td><a href="storeSearchMain.jsp?&address=<%=sb.getAddress() %>&storeId=<%=sb.getId() %>" id="ad_href"><%=sb.getName() %></a></td>
 		<td><%=sb.getAddress() %></td>
 		<td><input type="button" value="위치보기" onclick="map('<%=sb.getAddress()%>')"></td>

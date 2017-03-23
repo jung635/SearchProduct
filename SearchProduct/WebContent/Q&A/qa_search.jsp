@@ -64,7 +64,7 @@ int end=0;
 <!-- 메인이미지 -->
 <!-- 게시판 -->
 <article id="qa_list">
-<h1>Q&A</h1>
+<h1>BOARD</h1>
 <table id="notice">
 <tr><th class="tno">No.</th>
     <th class="ttitle">Title</th>
