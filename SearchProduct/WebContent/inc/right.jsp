@@ -195,7 +195,7 @@ if(id==null){%>
  	String cookie = request.getHeader("Cookie");
  	if(cookie!=null){
  	Cookie[] cookies = request.getCookies(); //쿠키를 받아온다.
- 	for(int i=0; i<cookies.length;i++){	
+ 	for(int i=cookies.length-1; i>=0;i--){	
  		String cookieName = cookies[i].getName();
  		for(int idnum=0; idnum<allId.size(); idnum++){
  			if(cookieName.equals(allId.get(idnum))){
@@ -208,7 +208,7 @@ if(id==null){%>
  		<%}//end if equals
  			}//end for idnum
  		%>
- 			<%if(count>6){
+ 			<%if(count>5){
  				break;
  			}//end count 4 break
  		}//end for cookies
@@ -231,7 +231,7 @@ if(id==null){%>
  	String cookie_pro = request.getHeader("Cookie");
  	if(cookie!=null){
  	Cookie[] cookies = request.getCookies(); //쿠키를 받아온다.
- 	for(int i=0; i<cookies.length;i++){	
+ 	for(int i=cookies.length-1; i>=0;i--){	
  		String cookieName = URLDecoder.decode(cookies[i].getName());
  		for(int idnum=0; idnum<allId.size(); idnum++){
  			List<Object> goods_list=gdao.goodsList(allId.get(idnum));
@@ -249,7 +249,9 @@ if(id==null){%>
  			if(cookieName.equals(idPro)){
  				//System.out.println("test");
  				count_pro++;
- 				
+ 				if(count_pro>5){
+ 	 				break;
+ 	 			}//end count 4 break
  				List<String> idPro_list = new ArrayList<String>();
  				/////System.out.println(idPro);
  				StringTokenizer idPro_token = new StringTokenizer(idPro,"/");
@@ -275,12 +277,10 @@ if(id==null){%>
  			}//end for pronum
  			}//end for idnum
  		%>
- 			<%if(count>6){
- 				break;
- 			}//end count 4 break
+ 			<%
  		}//end for cookies
  	}//end if cookie null
- 	if(count==0){%>
+ 	if(count_pro==0){%>
  	<tr><td colspan="4">최근 본 상품이 없습니다.</td></tr>
  	<%} //end if count
  	

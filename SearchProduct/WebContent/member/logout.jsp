@@ -25,7 +25,7 @@ List<String> allId = sdao.searchAllId();
 String cookie = request.getHeader("Cookie");
 	if(cookie!=null){
 		Cookie[] cookies = request.getCookies(); //쿠키를 받아온다.
-	 	for(int i=0; i<cookies.length;i++){	
+	 	for(int i=cookies.length-1; i>=0;i--){	
 	 		String cookieName = cookies[i].getName();
 	 		for(int idnum=0; idnum<allId.size(); idnum++){
 	 			if(cookieName.equals(allId.get(idnum))){
@@ -39,7 +39,7 @@ String cookie = request.getHeader("Cookie");
 String cookie_pro = request.getHeader("Cookie");
 	if(cookie_pro!=null){
 		Cookie[] cookies = request.getCookies(); //쿠키를 받아온다.
-	 	for(int i=0; i<cookies.length;i++){	
+	 	for(int i=cookies.length-1; i>=0;i--){	
 	 		String cookieName = URLDecoder.decode(cookies[i].getName());//쿠키이름
 			List<String> allPro_list = new ArrayList<String>();
 			for(int idnum=0; idnum<allId.size(); idnum++){
