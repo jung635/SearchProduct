@@ -123,8 +123,18 @@ public class GoodsDAO {
 			pstmt.setString(5, gb.getContent());
 			pstmt.setString(6, ori_product);
 			pstmt.setString(7, gb.getId());
-			
 			pstmt.executeUpdate();
+			
+			sql = "update mygoods set product=?, price=?, pic=?, goods_id=? where product=? and goods_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, gb.getProduct());
+			pstmt.setInt(2, gb.getPrice());
+			pstmt.setString(3, gb.getPic());
+			pstmt.setString(4, gb.getId());
+			pstmt.setString(5, ori_product);
+			pstmt.setString(6, gb.getId());
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("DB연결 실패" + e);
 		} finally {

@@ -202,7 +202,7 @@ if(id==null){%>
  				count++;
  				StoreBean sb = sdao.storeSearch(cookies[i].getValue());%>
  		<tr>
- 			<td><a href="../search/storeSearchMain.jsp?storeId=<%=sb.getName()%>&address=<%=sb.getAddress()%>"><%=sb.getName() %></a></td>
+ 			<td><a href="../search/storeSearchMain.jsp?storeId=<%=sb.getId()%>&address=<%=sb.getAddress()%>"><%=sb.getName() %></a></td>
  			<td><%=sb.getAddress() %></td>
  		</tr>
  		<%}//end if equals
@@ -227,6 +227,7 @@ if(id==null){%>
 	<table id="visit_pro">	
 		<tr><th>상품사진</th><th>이름</th><th>가격</th></tr>
  	<%
+ 	int count_pro=0;
  	String cookie_pro = request.getHeader("Cookie");
  	if(cookie!=null){
  	Cookie[] cookies = request.getCookies(); //쿠키를 받아온다.
@@ -247,7 +248,7 @@ if(id==null){%>
  			//System.out.println(idPro);
  			if(cookieName.equals(idPro)){
  				//System.out.println("test");
- 				count++;
+ 				count_pro++;
  				
  				List<String> idPro_list = new ArrayList<String>();
  				/////System.out.println(idPro);

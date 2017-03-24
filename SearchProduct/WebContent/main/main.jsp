@@ -144,7 +144,7 @@ goodslist=gdao.hotgoodsList();%>
  		<td><%=i+1 %></td>
  		<td>
  			<a href="../search/proDetail.jsp?storeId=<%=gb.getId()%>&product=<%=gb.getProduct()%>"><img src="../upload/<%=gb.getPic()%>" height="80px" width="80px" onmouseover="imageOn('../upload/<%=gb.getPic()%>', <%=i%>)" onmouseout="imageOut(<%=i%>)"></a>
-			<div id="up<%=i %>" style="position:absolute; width:30%; left:25%; display:none; z-index: 50;">
+			<div id="up<%=i %>" style="position:absolute; max-width:300px; left:35%;display:none; z-index: 50;">
 			<img id="upImg<%=i %>" src="" width="100%" height="100%" style="max-width: 300px;z-index: 100;"/>
 			</div>
  		</td>

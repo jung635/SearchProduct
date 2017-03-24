@@ -127,7 +127,7 @@ for(int i=0; i<list.size(); i++){
 function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 16,
+    zoom: 13,
     center: {lat: -34.397, lng: 150.644}
   });
   //내위치 찾기
@@ -142,7 +142,30 @@ function initMap() {
 	 geocoder.geocode({'address':address}, function(results, status){
 		if(status === google.maps.GeocoderStatus.OK){
 			results.map(function(result){
-				map.setCenter(result.geometry.location);
+				
+				//map.setCenter(result.geometry.location);
+				
+				if (navigator.geolocation) {
+				      navigator.geolocation.getCurrentPosition(function(position) {
+				        var pos = {
+				          lat: position.coords.latitude,
+				          lng: position.coords.longitude
+				        };
+
+				        infoWindow.setPosition(pos);
+				        infoWindow.setContent('Location found.');
+				        map.setCenter(pos);
+				      }, function() {
+				        handleLocationError(true, infoWindow);
+				        pos=result.geometry.location;
+				        map.setCenter(pos);
+				      });
+				    } else {
+				      // Browser doesn't support Geolocation
+				      handleLocationError(false, infoWindow);
+				      pos=result.geometry.location;
+				      map.setCenter(pos);
+				    } 
 				var marker = new google.maps.Marker({
 					map:map,
 					position: result.geometry.location,
@@ -156,6 +179,27 @@ function initMap() {
 		}
 	 });
   });
+  
+
+/*   if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Location found.');
+        map.setCenter(pos);
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+      pos={lat:37,lng:126};
+      map.setCenter(pos);
+    } */
 }
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);

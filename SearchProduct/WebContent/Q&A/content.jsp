@@ -90,7 +90,7 @@ BoardBean bb = bdao.getDetail(num);
 <td style="height: 300px;">내용 </td>
 <td colspan="5">
 <%=bb.getContent() %>
-<%if(bb.getFile()==null){ %>
+<%if(bb.getFile()==null||bb.getFile().equals("null")){ %>
 
 <%}else{ %>
 <div style="margin: 22px; position:relative;">
@@ -133,7 +133,7 @@ BoardBean bb = bdao.getDetail(num);
 	function re_reply(renum){
 	var id='<%=id%>';
 		var text = document.getElementById('re_re_text'+renum).value;
-	if(id==null){
+	if(id=="null"){
 		alert('로그인을 해주세요');
 		location.href="../member/clientLoginForm.jsp"
 	}else if(text==""){
