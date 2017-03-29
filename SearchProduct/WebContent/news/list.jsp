@@ -54,7 +54,7 @@ int end=0;
 <!-- 게시판 -->
 <!-- 게시판 list -->
 <article id="qa_list">
-<h1>Q&A</h1>
+<h1>NEWS</h1>
 <table id="notice">
 	<tr><th class="tno">No.</th>
    	 <th class="ttitle">Title</th>

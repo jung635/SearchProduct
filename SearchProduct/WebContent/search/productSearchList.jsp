@@ -127,7 +127,7 @@ if(count!=0){
 		ad_list.add(sb.getAddress());
 		name_list.add(sb.getName());
 	} %>
-	<div id="map_view" class="text_center">
+	<div id="map_view_wrap" class="text_center">
 	<embed type="text/html" src="multiple_map.jsp?ad_list=<%=ad_list %>&name_list=<%=name_list %>" id ="map_view"  height="400px" width="500px">
 	</div>
 	<script>
